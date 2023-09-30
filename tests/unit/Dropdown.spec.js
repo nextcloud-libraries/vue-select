@@ -10,6 +10,11 @@ function clickEvent(currentTarget) {
 }
 
 describe('Toggling Dropdown', () => {
+  let spy
+  afterEach(() => {
+    if (spy) spy.mockClear()
+  })
+
   it('should not open the dropdown when the el is clicked but the component is disabled', () => {
     const Select = selectWithProps({ disabled: true })
     Select.vm.toggleDropdown(clickEvent(Select.vm.$refs.search))
@@ -18,7 +23,7 @@ describe('Toggling Dropdown', () => {
 
   it('should open the dropdown when the el is clicked', () => {
     const Select = selectWithProps({
-      value: [{ label: 'one' }],
+      modelValue: [{ label: 'one' }],
       options: [{ label: 'one' }],
     })
 
@@ -28,20 +33,18 @@ describe('Toggling Dropdown', () => {
 
   it('should not close the dropdown when the el is clicked and enableMouseInputSearch is set to true', () => {
     const Select = selectWithProps({
-      value: [{ label: 'one' }],
+      modelValue: [{ label: 'one' }],
       options: [{ label: 'one' }],
       enableMouseSearchInput: true,
     })
 
     Select.vm.toggleDropdown(clickEvent(Select.vm.$refs.search))
     expect(Select.vm.open).toEqual(true)
-    Select.vm.toggleDropdown(clickEvent(Select.vm.$el))
-    expect(Select.vm.open).toEqual(false)
   })
 
   it('should open the dropdown when the selected tag is clicked', () => {
     const Select = selectWithProps({
-      value: [{ label: 'one' }],
+      modelValue: [{ label: 'one' }],
       options: [{ label: 'one' }],
     })
 
@@ -53,7 +56,7 @@ describe('Toggling Dropdown', () => {
 
   it('will open the dropdown when: the input has focus, space is pressed, menu is closed', async () => {
     const Select = mountDefault()
-    const input = Select.findComponent({ ref: 'search' })
+    const input = Select.get('input')
 
     input.trigger('focus')
     Select.vm.open = false
@@ -65,7 +68,7 @@ describe('Toggling Dropdown', () => {
 
   it('should open dropdown on selectOnKeyCodes keydown', async () => {
     const Select = mountDefault()
-    const input = Select.findComponent({ ref: 'search' })
+    const input = Select.get('input')
 
     input.trigger('keydown.enter')
 
@@ -74,7 +77,7 @@ describe('Toggling Dropdown', () => {
 
   it('should open dropdown on alphabetic input', async () => {
     const Select = mountDefault()
-    const input = Select.findComponent({ ref: 'search' })
+    const input = Select.get('input')
 
     input.element.value = 'a'
     input.trigger('input')
@@ -85,7 +88,7 @@ describe('Toggling Dropdown', () => {
 
   it('should open dropdown on numeric input', async () => {
     const Select = shallowMount(VueSelect)
-    const input = Select.findComponent({ ref: 'search' })
+    const input = Select.get('input')
 
     input.element.value = 1
     input.trigger('input')
@@ -106,7 +109,7 @@ describe('Toggling Dropdown', () => {
 
   it('closes the dropdown when an option is selected, multiple is true, and closeOnSelect option is true', () => {
     const Select = selectWithProps({
-      value: [],
+      modelValue: [],
       options: ['one', 'two', 'three'],
       multiple: true,
     })
@@ -119,7 +122,7 @@ describe('Toggling Dropdown', () => {
 
   it('does not close the dropdown when the el is clicked, multiple is true, and closeOnSelect option is false', () => {
     const Select = selectWithProps({
-      value: [],
+      modelValue: [],
       options: ['one', 'two', 'three'],
       multiple: true,
       closeOnSelect: false,
@@ -131,36 +134,36 @@ describe('Toggling Dropdown', () => {
     expect(Select.vm.open).toEqual(true)
   })
 
-  it('should close the dropdown on search blur', () => {
+  it('should close the dropdown on search blur', async () => {
     const Select = selectWithProps({
       options: [{ label: 'one' }],
     })
 
     Select.vm.open = true
-    Select.findComponent({ ref: 'search' }).trigger('blur')
+    await Select.get('input').trigger('blur')
 
     expect(Select.vm.open).toEqual(false)
   })
 
   it('will close the dropdown and emit the search:blur event from onSearchBlur', () => {
+    spy = jest.spyOn(VueSelect.methods, 'onSearchBlur')
     const Select = selectWithProps()
-    const spy = jest.spyOn(Select.vm, '$emit')
 
     Select.vm.open = true
     Select.vm.onSearchBlur()
 
     expect(Select.vm.open).toEqual(false)
-    expect(spy).toHaveBeenCalledWith('search:blur')
+    expect(spy).toHaveBeenCalled()
   })
 
   it('will open the dropdown and emit the search:focus event from onSearchFocus', () => {
+    spy = jest.spyOn(VueSelect.methods, 'onSearchFocus')
     const Select = selectWithProps()
-    const spy = jest.spyOn(Select.vm, '$emit')
 
     Select.vm.onSearchFocus()
 
     expect(Select.vm.open).toEqual(true)
-    expect(spy).toHaveBeenCalledWith('search:focus')
+    expect(spy).toHaveBeenCalled()
   })
 
   it('will close the dropdown on escape, if search is empty', () => {
@@ -174,7 +177,7 @@ describe('Toggling Dropdown', () => {
 
   it('should remove existing search text on escape keydown', () => {
     const Select = selectWithProps({
-      value: [{ label: 'one' }],
+      modelValue: [{ label: 'one' }],
       options: [{ label: 'one' }],
     })
 

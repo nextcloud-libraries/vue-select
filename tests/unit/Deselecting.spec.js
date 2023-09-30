@@ -7,13 +7,13 @@ describe('Removing values', () => {
     await Select.vm.$nextTick()
 
     Select.find('.vs__deselect').trigger('mousedown')
-    expect(Select.emitted().input).toEqual([[[]]])
+    expect(Select.emitted()['update:modelValue']).toEqual([[[]]])
     expect(Select.vm.selectedValue).toEqual([])
   })
 
   it('should not remove tag when close icon is clicked and component is disabled', () => {
     const Select = selectWithProps({
-      value: ['one'],
+      modelValue: ['one'],
       options: ['one', 'two', 'three'],
       multiple: true,
       disabled: true,
@@ -33,7 +33,7 @@ describe('Removing values', () => {
 
     Select.find('.vs__search').trigger('keydown.backspace')
 
-    expect(Select.emitted().input).toEqual([[['one']]])
+    expect(Select.emitted()['update:modelValue']).toEqual([[['one']]])
     expect(Select.vm.selectedValue).toEqual(['one'])
   })
 
@@ -48,25 +48,24 @@ describe('Removing values', () => {
     expect(Select.vm.selectedValue).toEqual([])
   })
 
-  it('will not emit input event if value has not changed with backspace', () => {
+  it('will not emit update:modelValue event if value has not changed with backspace', () => {
     const Select = mountDefault()
     Select.vm.$data._value = 'one'
+    Select.get('input').trigger('keydown.backspace')
+    expect(Select.emitted()['update:modelValue'].length).toBe(1)
 
-    Select.findComponent({ ref: 'search' }).trigger('keydown.backspace')
-    expect(Select.emitted().input.length).toBe(1)
-
-    Select.findComponent({ ref: 'search' }).trigger('keydown.backspace')
-    Select.findComponent({ ref: 'search' }).trigger('keydown.backspace')
-    expect(Select.emitted().input.length).toBe(1)
+    Select.get('input').trigger('keydown.backspace')
+    Select.get('input').trigger('keydown.backspace')
+    expect(Select.emitted()['update:modelValue'].length).toBe(1)
   })
 
   it('should deselect a selected option when clicked and deselectFromDropdown is true', async () => {
     const Select = selectWithProps({
-      value: 'one',
+      modelValue: 'one',
       options: ['one', 'two', 'three'],
       deselectFromDropdown: true,
     })
-    const deselect = spyOn(Select.vm, 'deselect')
+    const deselect = jest.spyOn(Select.vm, 'deselect')
 
     Select.vm.open = true
     await Select.vm.$nextTick()
@@ -79,12 +78,12 @@ describe('Removing values', () => {
 
   it('should not deselect a selected option when clicked if clearable is false', async () => {
     const Select = selectWithProps({
-      value: 'one',
+      modelValue: 'one',
       options: ['one', 'two', 'three'],
       clearable: false,
       deselectFromDropdown: true,
     })
-    const deselect = spyOn(Select.vm, 'deselect')
+    const deselect = jest.spyOn(Select.vm, 'deselect')
 
     Select.vm.open = true
     await Select.vm.$nextTick()
@@ -97,11 +96,11 @@ describe('Removing values', () => {
 
   it('should not deselect a selected option when clicked if deselectFromDropdown is false', async () => {
     const Select = selectWithProps({
-      value: 'one',
+      modelValue: 'one',
       options: ['one', 'two', 'three'],
       deselectFromDropdown: false,
     })
-    const deselect = spyOn(Select.vm, 'deselect')
+    const deselect = jest.spyOn(Select.vm, 'deselect')
 
     Select.vm.open = true
     await Select.vm.$nextTick()
@@ -113,44 +112,46 @@ describe('Removing values', () => {
   })
 
   it('should return focus to the search input after keyboard deselect', () => {
-    const Select = selectWithProps({
+    const Select = mountDefault({
       multiple: true,
       options: ['one', 'two', 'three'],
-      value: ['one'],
+      modelValue: ['one'],
+    }, {
+      attachTo: document.body,
     })
 
-    const deselect = Select.findComponent({ ref: 'deselectButtons' })
+    const deselect = Select.find('.vs__deselect')
     deselect.trigger('keydown.enter')
 
-    const input = Select.findComponent({ ref: 'search' })
+    const input = Select.get('input')
     expect(document.activeElement).toEqual(input.element)
   })
 
   it('should return focus to the next deselect after keyboard deselect', () => {
-    const Select = selectWithProps({
+    const Select = mountDefault({
       multiple: true,
       options: ['one', 'two', 'three'],
-      value: ['one', 'two'],
+      modelValue: ['one', 'two'],
+    }, {
+      attachTo: document.body,
     })
 
-    const [deselect, nextDeselect] = Select.findAllComponents({
-      ref: 'deselectButtons',
-    }).wrappers
+    const [deselect, nextDeselect] = Select.findAll('.vs__deselect')
 
     deselect.trigger('keydown.enter')
     expect(document.activeElement).toEqual(nextDeselect.element)
   })
 
   it('should return focus to the previous deselect after keyboard deselect', () => {
-    const Select = selectWithProps({
+    const Select = mountDefault({
       multiple: true,
       options: ['one', 'two', 'three'],
-      value: ['one', 'two'],
+      modelValue: ['one', 'two'],
+    }, {
+      attachTo: document.body,
     })
 
-    const [prevDeselect, deselect] = Select.findAllComponents({
-      ref: 'deselectButtons',
-    }).wrappers
+    const [prevDeselect, deselect] = Select.findAll('.vs__deselect')
 
     deselect.trigger('keydown.enter')
     expect(document.activeElement).toEqual(prevDeselect.element)
@@ -160,7 +161,7 @@ describe('Removing values', () => {
     it('should be displayed on single select when value is selected', () => {
       const Select = selectWithProps({
         options: ['foo', 'bar'],
-        value: 'foo',
+        modelValue: 'foo',
       })
 
       expect(Select.vm.showClearButton).toEqual(true)
@@ -169,7 +170,7 @@ describe('Removing values', () => {
     it('should not be displayed on multiple select', () => {
       const Select = selectWithProps({
         options: ['foo', 'bar'],
-        value: 'foo',
+        modelValue: 'foo',
         multiple: true,
       })
 
@@ -185,32 +186,35 @@ describe('Removing values', () => {
       expect(Select.vm.selectedValue).toEqual(['foo'])
       Select.find('button.vs__clear').trigger('click')
 
-      expect(Select.emitted().input).toEqual([[null]])
+      expect(Select.emitted()['update:modelValue']).toEqual([[null]])
       expect(Select.vm.selectedValue).toEqual([])
     })
 
     it('should be disabled when component is disabled', () => {
       const Select = selectWithProps({
         options: ['foo', 'bar'],
-        value: 'foo',
+        modelValue: 'foo',
         disabled: true,
       })
 
-      expect(Select.find('button.vs__clear').attributes().disabled).toEqual(
-        'disabled'
-      )
+      expect(
+        Select.find('button.vs__clear').attributes().disabled
+      ).toBeDefined()
     })
 
     it('should return focus to the search input after clear', () => {
-      const Select = selectWithProps({
-        options: ['foo', 'bar'],
-        value: 'foo',
-      })
+      const Select = mountDefault(
+        {
+          options: ['foo', 'bar'],
+          modelValue: 'foo',
+        }, {
+          attachTo: document.body,
+        })
 
-      const clear = Select.findComponent({ ref: 'clearButton' })
+      const clear = Select.find({ ref: 'clearButton' })
       clear.trigger('click')
 
-      const input = Select.findComponent({ ref: 'search' })
+      const input = Select.get('input')
       expect(document.activeElement).toEqual(input.element)
     })
   })

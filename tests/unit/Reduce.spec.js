@@ -1,12 +1,21 @@
 import { mount, shallowMount } from '@vue/test-utils'
 import VueSelect from '../../src/components/Select'
+import { mountDefault } from '../helpers.js'
 
 describe('When reduce prop is defined', () => {
+  it('determines when a reducer has been supplied', async () => {
+    let Select = mountDefault()
+    expect(Select.vm.isReducingValues).toBeFalsy()
+
+    await Select.setProps({ reduce: () => {} })
+    expect(Select.vm.isReducingValues).toBeTruthy()
+  })
+
   it('can accept an array of objects and pre-selected value (single)', () => {
     const Select = shallowMount(VueSelect, {
-      propsData: {
+      props: {
         reduce: (option) => option.value,
-        value: 'foo',
+        modelValue: 'foo',
         options: [{ label: 'This is Foo', value: 'foo' }],
       },
     })
@@ -17,9 +26,9 @@ describe('When reduce prop is defined', () => {
 
   it('can determine if an object is pre-selected', () => {
     const Select = shallowMount(VueSelect, {
-      propsData: {
+      props: {
         reduce: (option) => option.id,
-        value: 'foo',
+        modelValue: 'foo',
         options: [
           {
             id: 'foo',
@@ -39,7 +48,7 @@ describe('When reduce prop is defined', () => {
 
   it('can determine if an object is selected after its been chosen', () => {
     const Select = shallowMount(VueSelect, {
-      propsData: {
+      props: {
         reduce: (option) => option.id,
         options: [{ id: 'foo', label: 'FooBar' }],
       },
@@ -57,10 +66,10 @@ describe('When reduce prop is defined', () => {
 
   it('can accept an array of objects and pre-selected values (multiple)', () => {
     const Select = shallowMount(VueSelect, {
-      propsData: {
+      props: {
         multiple: true,
         reduce: (option) => option.value,
-        value: ['foo'],
+        modelValue: ['foo'],
         options: [
           { label: 'This is Foo', value: 'foo' },
           { label: 'This is Bar', value: 'bar' },
@@ -75,7 +84,7 @@ describe('When reduce prop is defined', () => {
 
   it('can deselect a pre-selected object', () => {
     const Select = shallowMount(VueSelect, {
-      propsData: {
+      props: {
         multiple: true,
         reduce: (option) => option.value,
         options: [
@@ -93,7 +102,7 @@ describe('When reduce prop is defined', () => {
 
   it('can deselect an option when multiple is false', () => {
     const Select = shallowMount(VueSelect, {
-      propsData: {
+      props: {
         reduce: (option) => option.value,
         options: [
           { label: 'This is Foo', value: 'foo' },
@@ -137,24 +146,24 @@ describe('When reduce prop is defined', () => {
         />
       `,
     })
-    const Select = Parent.vm.$children[0]
+    const Select = Parent.getComponent({ name: 'v-select' })
 
-    expect(Select.value).toEqual('foo')
-    expect(Select.selectedValue).toEqual([
+    expect(Select.vm.modelValue).toEqual('foo')
+    expect(Select.vm.selectedValue).toEqual([
       { label: 'This is Foo', value: 'foo' },
     ])
 
-    Select.select({ label: 'This is Bar', value: 'bar' })
-    await Select.$nextTick()
+    Select.vm.select({ label: 'This is Bar', value: 'bar' })
+    await Select.vm.$nextTick()
     expect(Parent.vm.value).toEqual('bar')
-    expect(Select.selectedValue).toEqual([
+    expect(Select.vm.selectedValue).toEqual([
       { label: 'This is Bar', value: 'bar' },
     ])
 
     // Parent denies to set baz
-    Select.select({ label: 'This is Baz', value: 'baz' })
-    await Select.$nextTick()
-    expect(Select.selectedValue).toEqual([
+    Select.vm.select({ label: 'This is Baz', value: 'baz' })
+    await Select.vm.$nextTick()
+    expect(Select.vm.selectedValue).toEqual([
       { label: 'This is Bar', value: 'bar' },
     ])
     expect(Parent.vm.value).toEqual('bar')
@@ -162,10 +171,10 @@ describe('When reduce prop is defined', () => {
 
   it('can generate labels using a custom label key', () => {
     const Select = shallowMount(VueSelect, {
-      propsData: {
+      props: {
         multiple: true,
         reduce: (option) => option.value,
-        value: ['CA'],
+        modelValue: ['CA'],
         label: 'name',
         options: [
           { value: 'CA', name: 'Canada' },
@@ -180,7 +189,7 @@ describe('When reduce prop is defined', () => {
   it('can find the original option within this.options', () => {
     const optionToFind = { id: 1, label: 'Foo' }
     const Select = shallowMount(VueSelect, {
-      propsData: {
+      props: {
         reduce: (option) => option.id,
         options: [optionToFind, { id: 2, label: 'Bar' }],
       },
@@ -195,10 +204,10 @@ describe('When reduce prop is defined', () => {
   it('can work with falsey values', () => {
     const option = { value: 0, label: 'No' }
     const Select = shallowMount(VueSelect, {
-      propsData: {
+      props: {
         reduce: (option) => option.value,
         options: [option, { value: 1, label: 'Yes' }],
-        value: 0,
+        modelValue: 0,
       },
     })
 
@@ -209,10 +218,10 @@ describe('When reduce prop is defined', () => {
   it('works with null values', () => {
     const option = { value: null, label: 'No' }
     const Select = shallowMount(VueSelect, {
-      propsData: {
+      props: {
         reduce: (option) => option.value,
         options: [option, { value: 1, label: 'Yes' }],
-        value: null,
+        modelValue: null,
       },
     })
 
@@ -224,9 +233,9 @@ describe('When reduce prop is defined', () => {
     it('can determine if an object is pre-selected', () => {
       const nestedOption = { value: { nested: true }, label: 'foo' }
       const Select = shallowMount(VueSelect, {
-        propsData: {
+        props: {
           reduce: (option) => option.value,
-          value: {
+          modelValue: {
             nested: true,
           },
           options: [nestedOption],
@@ -239,7 +248,7 @@ describe('When reduce prop is defined', () => {
     it('can determine if an object is selected after it is chosen', () => {
       const nestedOption = { value: { nested: true }, label: 'foo' }
       const Select = shallowMount(VueSelect, {
-        propsData: {
+        props: {
           reduce: (option) => option.value,
           options: [nestedOption],
         },
@@ -253,14 +262,14 @@ describe('When reduce prop is defined', () => {
   it('reacts correctly when value property changes', async () => {
     const optionToChangeTo = { id: 1, label: 'Foo' }
     const Select = shallowMount(VueSelect, {
-      propsData: {
-        value: 2,
+      props: {
+        modelValue: 2,
         reduce: (option) => option.id,
         options: [optionToChangeTo, { id: 2, label: 'Bar' }],
       },
     })
 
-    Select.setProps({ value: optionToChangeTo.id })
+    Select.setProps({ modelValue: optionToChangeTo.id })
     await Select.vm.$nextTick()
 
     expect(Select.vm.selectedValue).toEqual([optionToChangeTo])
@@ -281,21 +290,22 @@ describe('When reduce prop is defined', () => {
         `,
         components: { 'v-select': VueSelect },
       })
-      const Select = Parent.vm.$children[0]
+      const Select = Parent.getComponent({ name: 'v-select' })
 
       //  When
-      Select.$refs.search.focus()
-      await Select.$nextTick()
+      await Select.get('input').trigger('focus')
 
-      Select.search = 'hello'
-      await Select.$nextTick()
+      Select.vm.search = 'hello'
+      await Select.vm.$nextTick()
 
-      Select.typeAheadSelect()
-      await Select.$nextTick()
+      Select.vm.typeAheadSelect()
+      await Select.vm.$nextTick()
 
       //  Then
-      expect(Select.selectedValue).toEqual([{ label: 'hello', value: -1 }])
-      expect(Select.$refs.selectedOptions.textContent.trim()).toEqual('hello')
+      expect(Select.vm.selectedValue).toEqual([{ label: 'hello', value: -1 }])
+      expect(Select.vm.$refs.selectedOptions.textContent.trim()).toEqual(
+        'hello'
+      )
       expect(Parent.vm.selected).toEqual(-1)
     })
   })
