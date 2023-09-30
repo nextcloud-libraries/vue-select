@@ -21,7 +21,7 @@ describe('Search Slot Scope', () => {
     })
 
     it("adds the active descendant attribute when there's a typeahead value and an open dropdown", async () => {
-      const Select = mountDefault({ value: 'three' }, ['one', 'two', 'three'])
+      const Select = mountDefault({ modelValue: 'three' }, ['one', 'two', 'three'])
 
       Select.vm.open = true
       Select.vm.typeAheadPointer = 1
@@ -98,7 +98,7 @@ describe('Option List', () => {
     await Select.vm.$nextTick()
 
     expect(
-      Select.findComponent({ ref: 'dropdownMenu' }).attributes()[
+      Select.find('.vs__dropdown-menu').attributes()[
         'aria-multiselectable'
       ]
     ).toEqual(undefined)
@@ -111,7 +111,7 @@ describe('Option List', () => {
     await Select.vm.$nextTick()
 
     expect(
-      Select.findComponent({ ref: 'dropdownMenu' }).attributes()[
+      Select.find('.vs__dropdown-menu').attributes()[
         'aria-multiselectable'
       ]
     ).toEqual('true')
@@ -119,14 +119,14 @@ describe('Option List', () => {
 
   it('selected attribute should be true if selected, false otherwise', async () => {
     const Select = mountDefault({
-      value: 'two',
+      modelValue: 'two',
     })
 
     Select.vm.open = true
     await Select.vm.$nextTick()
 
     expect(
-      Select.findAll('.vs__dropdown-option').wrappers.map(
+      Select.findAll('.vs__dropdown-option').map(
         (option) => option.attributes()['aria-selected']
       )
     ).toStrictEqual(['false', 'true', 'false'])
@@ -135,14 +135,14 @@ describe('Option List', () => {
   it('selected attribute should be true on all selected options when multiple is true, false otherwise', async () => {
     const Select = mountDefault({
       multiple: true,
-      value: ['one', 'two'],
+      modelValue: ['one', 'two'],
     })
 
     Select.vm.open = true
     await Select.vm.$nextTick()
 
     expect(
-      Select.findAll('.vs__dropdown-option').wrappers.map(
+      Select.findAll('.vs__dropdown-option').map(
         (option) => option.attributes()['aria-selected']
       )
     ).toStrictEqual(['true', 'true', 'false'])

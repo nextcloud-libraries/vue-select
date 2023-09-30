@@ -33,7 +33,7 @@
             </slot>
             <button
               v-if="multiple"
-              ref="deselectButtons"
+              :ref="el => deselectButtons[index] = el"
               :disabled="disabled"
               type="button"
               class="vs__deselect"
@@ -105,7 +105,7 @@
         class="vs__dropdown-menu"
         role="listbox"
         :aria-label="ariaLabelListbox"
-        :aria-multiselectable="multiple"
+        :aria-multiselectable="multiple ? 'true' : null"
         tabindex="-1"
         @mousedown.prevent="onMousedown"
         @mouseup="onMouseUp"
@@ -171,15 +171,33 @@ export default {
 
   mixins: [pointerScroll, typeAheadPointer, ajax],
 
+  emits: [
+    'open',
+    'close',
+    'update:modelValue',
+    'search',
+    'search:compositionstart',
+    'search:compositionend',
+    'search:keydown',
+    'search:blur',
+    'search:focus',
+    'search:input',
+    'option:created',
+    'option:selecting',
+    'option:selected',
+    'option:deselecting',
+    'option:deselected',
+  ],
+
   props: {
     /**
      * Contains the currently selected value. Very similar to a
      * `value` attribute on an <input>. You can listen for changes
      * with the 'input' event.
-     * @type {Object||String||null}
+     * @type {Object|String|Array|null}
      */
     // eslint-disable-next-line vue/require-default-prop,vue/require-prop-types
-    value: {},
+    modelValue: {},
 
     /**
      * An object with any custom components that you'd like to overwrite
@@ -763,21 +781,23 @@ export default {
       isKeyboardNavigation: false,
       pushedTags: [],
       // eslint-disable-next-line vue/no-reserved-keys
-      _value: [], // Internal value managed by Vue Select if no `value` prop is passed
+      _value: [], // Internal value managed by Vue Select if no `modelValue` prop is passed
+      deselectButtons: [],
     }
   },
 
   computed: {
+    isReducingValues() {
+      return this.$props.reduce !== this.$options.props.reduce.default
+    },
+
     /**
      * Determine if the component needs to
      * track the state of values internally.
      * @return {boolean}
      */
     isTrackingValues() {
-      return (
-        typeof this.value === 'undefined' ||
-        this.$options.propsData.hasOwnProperty('reduce')
-      )
+      return typeof this.modelValue === 'undefined' || this.isReducingValues
     },
 
     /**
@@ -785,7 +805,7 @@ export default {
      * @return {Array}
      */
     selectedValue() {
-      let value = this.value
+      let value = this.modelValue
       if (this.isTrackingValues) {
         // Vue select has to manage value internally
         value = this.$data._value
@@ -814,7 +834,7 @@ export default {
      * @returns {HTMLInputElement}
      */
     searchEl() {
-      return !!this.$scopedSlots['search']
+      return !!this.$slots['search']
         ? this.$refs.selectedOptions.querySelector(
             this.searchInputQuerySelector
           )
@@ -822,7 +842,7 @@ export default {
     },
 
     /**
-     * The object to be bound to the $slots.search scoped slot.
+     * The object to be bound to the $slots.search slot.
      * @returns {Object}
      */
     scope() {
@@ -1023,8 +1043,8 @@ export default {
         this.clearSelection()
       }
 
-      if (this.value && this.isTrackingValues) {
-        this.setInternalValueFromOptions(this.value)
+      if (this.modelValue && this.isTrackingValues) {
+        this.setInternalValueFromOptions(this.modelValue)
       }
     },
 
@@ -1032,7 +1052,7 @@ export default {
      * Make sure to update internal
      * value if prop changes outside
      */
-    value: {
+    modelValue: {
       immediate: true,
       handler(val) {
         if (this.isTrackingValues) {
@@ -1063,8 +1083,6 @@ export default {
 
   created() {
     this.mutableLoading = this.loading
-
-    this.$on('option:created', this.pushTag)
   },
 
   methods: {
@@ -1094,7 +1112,9 @@ export default {
       this.$emit('option:selecting', option)
       if (!this.isOptionSelected(option)) {
         if (this.taggable && !this.optionExists(option)) {
+          /* @TODO: could we use v-model instead of push-tags? */
           this.$emit('option:created', option)
+          this.pushTag(option)
         }
         if (this.multiple) {
           option = this.selectedValue.concat(option)
@@ -1140,8 +1160,8 @@ export default {
        * $nextTick cannot be used as the tests will fail even after using
        * $nextTick in the tests as well
        */
-      const nextDeselect = this.$refs.deselectButtons?.[index + 1]
-      const prevDeselect = this.$refs.deselectButtons?.[index - 1]
+      const nextDeselect = this.deselectButtons?.[index + 1]
+      const prevDeselect = this.deselectButtons?.[index - 1]
       const deselectToFocus = nextDeselect ?? prevDeselect
       if (deselectToFocus) {
         deselectToFocus.focus()
@@ -1186,7 +1206,7 @@ export default {
      * @param value
      */
     updateValue(value) {
-      if (typeof this.value === 'undefined') {
+      if (typeof this.modelValue === 'undefined') {
         // Vue select has to manage value
         this.$data._value = value
       }
@@ -1199,7 +1219,7 @@ export default {
         }
       }
 
-      this.$emit('input', value)
+      this.$emit('update:modelValue', value)
     },
 
     /**
@@ -1216,7 +1236,7 @@ export default {
       //  don't react to click on deselect/clear buttons,
       //  they dropdown state will be set in their click handlers
       const ignoredButtons = [
-        ...(this.$refs['deselectButtons'] || []),
+        ...(this.deselectButtons || []),
         ...([this.$refs['clearButton']] || []),
       ]
 

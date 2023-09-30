@@ -7,7 +7,7 @@ import Vue from 'vue'
 describe('Moving the Typeahead Pointer', () => {
   it('should set the pointer to zero when the filteredOptions watcher is called', async () => {
     const Select = shallowMount(VueSelect, {
-      propsData: { options: ['one', 'two', 'three'] },
+      props: { options: ['one', 'two', 'three'] },
       sync: false,
     })
 
@@ -23,7 +23,7 @@ describe('Moving the Typeahead Pointer', () => {
     Select.vm.open = true
     Select.vm.typeAheadPointer = 1
 
-    Select.findComponent({ ref: 'search' }).trigger('keydown.up')
+    Select.get('input').trigger('keydown.up')
 
     expect(Select.vm.typeAheadPointer).toEqual(0)
   })
@@ -34,7 +34,7 @@ describe('Moving the Typeahead Pointer', () => {
     Select.vm.open = true
     Select.vm.typeAheadPointer = 1
 
-    Select.findComponent({ ref: 'search' }).trigger('keydown.down')
+    Select.get('input').trigger('keydown.down')
 
     expect(Select.vm.typeAheadPointer).toEqual(2)
   })
@@ -49,13 +49,13 @@ describe('Moving the Typeahead Pointer', () => {
 
   it('will set the pointer to the selected option when opening', async () => {
     const Select = shallowMount(VueSelect, {
-      propsData: {
-        value: 'three',
+      props: {
+        modelValue: 'three',
         options: ['one', 'two', 'three'],
       },
     })
 
-    Select.findComponent({ ref: 'search' }).trigger('focus')
+    Select.get('input').trigger('focus')
     await Select.vm.$nextTick()
 
     expect(Select.vm.typeAheadPointer).toEqual(2)
@@ -63,8 +63,8 @@ describe('Moving the Typeahead Pointer', () => {
 
   it('will set the pointer to the reduced selected option when opening', async () => {
     const Select = shallowMount(VueSelect, {
-      propsData: {
-        value: 3,
+      props: {
+        modelValue: 3,
         reduce: ({ value }) => value,
         options: [
           { label: 'one', value: 1 },
@@ -74,7 +74,7 @@ describe('Moving the Typeahead Pointer', () => {
       },
     })
 
-    Select.findComponent({ ref: 'search' }).trigger('focus')
+    Select.get('input').trigger('focus')
     await Select.vm.$nextTick()
 
     expect(Select.vm.typeAheadPointer).toEqual(2)
@@ -86,7 +86,7 @@ it('should not move the pointer visually up the list on up arrow keyUp when drop
 
   Select.vm.typeAheadPointer = 1
 
-  Select.findComponent({ ref: 'search' }).trigger('keydown.up')
+  Select.get('input').trigger('keydown.up')
 
   expect(Select.vm.typeAheadPointer).toEqual(1)
 })
@@ -96,7 +96,7 @@ it('should not move the pointer visually down the list on down arrow keyUp when 
 
   Select.vm.typeAheadPointer = 1
 
-  Select.findComponent({ ref: 'search' }).trigger('keydown.down')
+  Select.get('input').trigger('keydown.down')
 
   expect(Select.vm.typeAheadPointer).toEqual(1)
 })
