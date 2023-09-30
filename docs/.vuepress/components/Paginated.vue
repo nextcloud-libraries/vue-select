@@ -1,5 +1,9 @@
 <template>
-  <v-select :options="paginated" :filterable="false" @search="onSearch">
+  <v-select
+    :options="paginated"
+    :filterable="false"
+    @search="(query) => (search = query)"
+  >
     <li slot="list-footer" class="pagination">
       <button :disabled="!hasPrevPage" @click="offset -= limit">Prev</button>
       <button :disabled="!hasNextPage" @click="offset += limit">Next</button>
