@@ -10,13 +10,13 @@ jobs:
           node-version: 12
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Test with Coverage
-        run: yarn test --coverage --coverageReporters=lcov
+        run: npm run test --coverage --coverageReporters=lcov
 
       - name: ESLint
-        run: yarn eslint
+        run: npm run eslint
 
       - name: Report Coverage
         uses: coverallsapp/github-action@master
@@ -33,15 +33,15 @@ jobs:
 
       - name: Install dependencies
         run: |
-          yarn install --frozen-lockfile
+          npm ci
           cd docs
-          yarn install --frozen-lockfile
+          npm ci
 
       - name: Build Dist
-        run: yarn build
+        run: npm run build
 
       - name: Bundlewatch
         run: npx bundlewatch
 
       - name: Build Docs
-        run: yarn build:docs
+        run: npm run build:docs
