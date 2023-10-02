@@ -8,7 +8,7 @@ module.exports = {
   extends: [
     'plugin:prettier/recommended',
     'plugin:vue/recommended',
-    'prettier/vue',
+    'prettier',
   ],
   ignorePatterns: [
     '!.*.js',
