@@ -23,13 +23,13 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Test with Coverage
-        run: yarn test
+        run: npm run test
 
       - name: Build
-        run: yarn build
+        run: npm run build
 
       - name: Release
         env:
