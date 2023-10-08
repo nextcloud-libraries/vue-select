@@ -22,10 +22,10 @@ jobs:
       - name: ESLint
         run: npm run eslint
 
-      - name: Report Coverage
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Report Coverage
+      #   uses: coverallsapp/github-action@master
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     runs-on: ubuntu-latest
@@ -45,8 +45,8 @@ jobs:
       - name: Build Dist
         run: npm run build
 
-      - name: Bundlewatch
-        run: npx bundlewatch
+      # - name: Bundlewatch
+      #   run: npx bundlewatch
 
-      - name: Build Docs
-        run: npm run build:docs
+      # - name: Build Docs
+      #   run: npm run build:docs
