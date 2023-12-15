@@ -61,6 +61,16 @@ describe('UID', () => {
   })
 })
 
+describe('Selected Options Wrapper', () => {
+  it('toggle with mouse', () => {
+    const Select = mountDefault()
+    Select.findComponent({ ref: 'selectedOptions' }).trigger('mousedown')
+    expect(Select.vm.open).toEqual(true)
+    Select.findComponent({ ref: 'selectedOptions' }).trigger('mousedown')
+    expect(Select.vm.open).toEqual(false)
+  })
+})
+
 describe('Open Indicator', () => {
   it('hidden from keyboard navigation', () => {
     const Select = mountDefault()
