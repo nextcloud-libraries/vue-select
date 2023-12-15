@@ -32,6 +32,21 @@ describe('Search Slot Scope', () => {
       ).toEqual(`vs${Select.vm.uid}__option-2`)
     })
   })
+
+  describe('aria-expanded', () => {
+    it('expanded attribute should reflect dropdown open state', async () => {
+      const Select = mountDefault()
+      const input = Select.findComponent({ ref: 'search' })
+
+      expect(Select.vm.open).toEqual(false)
+      expect(input.attributes('aria-expanded')).toEqual('false')
+
+      Select.vm.open = true
+      await Select.vm.$nextTick()
+      expect(Select.vm.open).toEqual(true)
+      expect(input.attributes('aria-expanded')).toEqual('true')
+    })
+  })
 })
 
 describe('UID', () => {
