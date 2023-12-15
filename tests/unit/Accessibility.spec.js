@@ -46,6 +46,25 @@ describe('UID', () => {
   })
 })
 
+describe('Open Indicator', () => {
+  it('hidden from keyboard navigation', () => {
+    const Select = mountDefault()
+    expect(
+      Select.findComponent({ ref: 'openIndicatorButton' }).attributes(
+        'tabindex'
+      )
+    ).toEqual('-1')
+  })
+
+  it('toggle with mouse', () => {
+    const Select = mountDefault()
+    Select.findComponent({ ref: 'openIndicatorButton' }).trigger('mousedown')
+    expect(Select.vm.open).toEqual(true)
+    Select.findComponent({ ref: 'openIndicatorButton' }).trigger('mousedown')
+    expect(Select.vm.open).toEqual(false)
+  })
+})
+
 describe('Option List', () => {
   it('multiselectable attribute should not be present by default', async () => {
     const Select = mountDefault()
