@@ -29,7 +29,7 @@ describe('Search Slot Scope', () => {
 
       expect(
         Select.vm.scope.search.attributes['aria-activedescendant']
-      ).toEqual(`vs${Select.vm.uid}__option-2`)
+      ).toEqual(`vs-${Select.vm.uid}__option-2`)
     })
   })
 

@@ -77,8 +77,8 @@
           class="vs__open-indicator-button"
           type="button"
           tabindex="-1"
-          :aria-labelledby="`vs${uid}__listbox`"
-          :aria-controls="`vs${uid}__listbox`"
+          :aria-labelledby="`vs-${uid}__listbox`"
+          :aria-controls="`vs-${uid}__listbox`"
           :aria-expanded="dropdownOpen.toString()"
           @mousedown="toggleDropdown"
         >
@@ -98,9 +98,9 @@
     <transition :name="transition">
       <ul
         v-if="dropdownOpen"
-        :id="`vs${uid}__listbox`"
+        :id="`vs-${uid}__listbox`"
         ref="dropdownMenu"
-        :key="`vs${uid}__listbox`"
+        :key="`vs-${uid}__listbox`"
         v-append-to-body
         class="vs__dropdown-menu"
         role="listbox"
@@ -113,7 +113,7 @@
         <slot name="list-header" v-bind="scope.listHeader" />
         <li
           v-for="(option, index) in filteredOptions"
-          :id="`vs${uid}__option-${index}`"
+          :id="`vs-${uid}__option-${index}`"
           :key="getOptionKey(option)"
           role="option"
           class="vs__dropdown-option"
@@ -142,7 +142,7 @@
       </ul>
       <ul
         v-else
-        :id="`vs${uid}__listbox`"
+        :id="`vs-${uid}__listbox`"
         role="listbox"
         :aria-label="ariaLabelListbox"
         style="display: none; visibility: hidden"
@@ -843,8 +843,8 @@ export default {
             role: 'combobox',
             'aria-autocomplete': 'list',
             'aria-label': this.ariaLabelCombobox,
-            'aria-controls': `vs${this.uid}__listbox`,
-            'aria-owns': `vs${this.uid}__listbox`,
+            'aria-controls': `vs-${this.uid}__listbox`,
+            'aria-owns': `vs-${this.uid}__listbox`,
             'aria-expanded': this.dropdownOpen.toString(),
             ref: 'search',
             type: 'search',
@@ -852,7 +852,7 @@ export default {
             value: this.search,
             ...(this.dropdownOpen && this.filteredOptions[this.typeAheadPointer]
               ? {
-                  'aria-activedescendant': `vs${this.uid}__option-${this.typeAheadPointer}`,
+                  'aria-activedescendant': `vs-${this.uid}__option-${this.typeAheadPointer}`,
                 }
               : {}),
           },
