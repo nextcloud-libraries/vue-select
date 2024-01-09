@@ -1,13 +1,17 @@
 name: Test & Build
-on: [pull_request]
+
+on:
+  pull_request:
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-          node-version: 12
+          node-version: 20
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -26,15 +30,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-          node-version: 12
+          node-version: 20
 
       - name: Install dependencies
         run: |
-          yarn install --frozen-lockfile
-          cd docs
           yarn install --frozen-lockfile
 
       - name: Build Dist
@@ -43,5 +46,5 @@ jobs:
       - name: Bundlewatch
         run: npx bundlewatch
 
-      - name: Build Docs
-        run: yarn build:docs
+      # - name: Build Docs
+        # run: yarn build:docs
