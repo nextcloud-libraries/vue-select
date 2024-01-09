@@ -85,6 +85,9 @@
     "webpack-dev-server": "^4.7.4",
     "webpack-merge": "^5.8.0"
   },
+  "engines": {
+    "node": "^20.0.0"
+  },
   "jest": {
     "moduleFileExtensions": [
       "js",
