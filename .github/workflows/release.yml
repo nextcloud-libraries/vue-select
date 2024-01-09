@@ -1,16 +1,26 @@
 name: Release
+
 on:
   push:
     branches:
       - master
+
 jobs:
   release:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
+
+    # semantic-release required permissions https://github.com/semantic-release/github#github-authentication
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-          node-version: 12
+          node-version: 20
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -23,6 +33,6 @@ jobs:
 
       - name: Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
