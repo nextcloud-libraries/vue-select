@@ -32,17 +32,61 @@ describe('Search Slot Scope', () => {
       ).toEqual(`vs${Select.vm.uid}__option-2`)
     })
   })
+
+  describe('aria-expanded', () => {
+    it('expanded attribute should reflect dropdown open state', async () => {
+      const Select = mountDefault()
+      const input = Select.findComponent({ ref: 'search' })
+
+      expect(Select.vm.open).toEqual(false)
+      expect(input.attributes('aria-expanded')).toEqual('false')
+
+      Select.vm.open = true
+      await Select.vm.$nextTick()
+      expect(Select.vm.open).toEqual(true)
+      expect(input.attributes('aria-expanded')).toEqual('true')
+    })
+  })
 })
 
 describe('UID', () => {
   it('works with strings', () => {
     const Select = mountDefault({ uid: 'hello' })
-    expect(Select.find('#vshello__combobox').exists()).toBeTruthy()
+    expect(Select.find('#v-select-hello').exists()).toBeTruthy()
   })
 
   it('works with numbers', () => {
     const Select = mountDefault({ uid: 2 })
-    expect(Select.find('#vs2__combobox').exists()).toBeTruthy()
+    expect(Select.find('#v-select-2').exists()).toBeTruthy()
+  })
+})
+
+describe('Selected Options Wrapper', () => {
+  it('toggle with mouse', () => {
+    const Select = mountDefault()
+    Select.findComponent({ ref: 'selectedOptions' }).trigger('mousedown')
+    expect(Select.vm.open).toEqual(true)
+    Select.findComponent({ ref: 'selectedOptions' }).trigger('mousedown')
+    expect(Select.vm.open).toEqual(false)
+  })
+})
+
+describe('Open Indicator', () => {
+  it('hidden from keyboard navigation', () => {
+    const Select = mountDefault()
+    expect(
+      Select.findComponent({ ref: 'openIndicatorButton' }).attributes(
+        'tabindex'
+      )
+    ).toEqual('-1')
+  })
+
+  it('toggle with mouse', () => {
+    const Select = mountDefault()
+    Select.findComponent({ ref: 'openIndicatorButton' }).trigger('mousedown')
+    expect(Select.vm.open).toEqual(true)
+    Select.findComponent({ ref: 'openIndicatorButton' }).trigger('mousedown')
+    expect(Select.vm.open).toEqual(false)
   })
 })
 

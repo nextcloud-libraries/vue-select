@@ -3,19 +3,19 @@
 </style>
 
 <template>
-  <div :dir="dir" class="v-select" :class="stateClasses">
+  <div
+    :id="`v-select-${uid}`"
+    :dir="dir"
+    class="v-select"
+    :class="stateClasses"
+  >
     <slot name="header" v-bind="scope.header" />
-    <div
-      :id="`vs${uid}__combobox`"
-      ref="toggle"
-      class="vs__dropdown-toggle"
-      role="combobox"
-      :aria-expanded="dropdownOpen.toString()"
-      :aria-owns="`vs${uid}__listbox`"
-      :aria-label="ariaLabelCombobox"
-      @mousedown="toggleDropdown($event)"
-    >
-      <div ref="selectedOptions" class="vs__selected-options">
+    <div ref="toggle" class="vs__dropdown-toggle">
+      <div
+        ref="selectedOptions"
+        class="vs__selected-options"
+        @mousedown="toggleDropdown"
+      >
         <slot
           v-for="(option, index) in selectedValue"
           name="selected-option-container"
@@ -70,13 +70,25 @@
           <component :is="childComponents.Deselect" />
         </button>
 
-        <slot name="open-indicator" v-bind="scope.openIndicator">
-          <component
-            :is="childComponents.OpenIndicator"
-            v-if="!noDrop"
-            v-bind="scope.openIndicator.attributes"
-          />
-        </slot>
+        <!-- tabindex -1 is used to remove it from the tab sequence as tabbing to the input combobox opens the dropdown -->
+        <button
+          v-if="!noDrop"
+          ref="openIndicatorButton"
+          class="vs__open-indicator-button"
+          type="button"
+          tabindex="-1"
+          :aria-labelledby="`vs${uid}__listbox`"
+          :aria-controls="`vs${uid}__listbox`"
+          :aria-expanded="dropdownOpen.toString()"
+          @mousedown="toggleDropdown"
+        >
+          <slot name="open-indicator" v-bind="scope.openIndicator">
+            <component
+              :is="childComponents.OpenIndicator"
+              v-bind="scope.openIndicator.attributes"
+            />
+          </slot>
+        </button>
 
         <slot name="spinner" v-bind="scope.spinner">
           <div v-show="mutableLoading" class="vs__spinner">Loading...</div>
@@ -92,6 +104,7 @@
         v-append-to-body
         class="vs__dropdown-menu"
         role="listbox"
+        :aria-label="ariaLabelListbox"
         :aria-multiselectable="multiple"
         tabindex="-1"
         @mousedown.prevent="onMousedown"
@@ -131,6 +144,7 @@
         v-else
         :id="`vs${uid}__listbox`"
         role="listbox"
+        :aria-label="ariaLabelListbox"
         style="display: none; visibility: hidden"
       ></ul>
     </transition>
@@ -303,6 +317,16 @@ export default {
     ariaLabelCombobox: {
       type: String,
       default: 'Search for options',
+    },
+
+    /**
+     * Allows to customize the `aria-label` set on the listbox element.
+     * @type {String}
+     * @default 'Options'
+     */
+    ariaLabelListbox: {
+      type: String,
+      default: 'Options',
     },
 
     /**
@@ -811,14 +835,17 @@ export default {
       return {
         search: {
           attributes: {
+            id: this.inputId,
             disabled: this.disabled,
             placeholder: this.searchPlaceholder,
             tabindex: this.tabindex,
             readonly: !this.searchable,
-            id: this.inputId,
+            role: 'combobox',
             'aria-autocomplete': 'list',
-            'aria-labelledby': `vs${this.uid}__combobox`,
+            'aria-label': this.ariaLabelCombobox,
             'aria-controls': `vs${this.uid}__listbox`,
+            'aria-owns': `vs${this.uid}__listbox`,
+            'aria-expanded': this.dropdownOpen.toString(),
             ref: 'search',
             type: 'search',
             autocomplete: this.autocomplete,
