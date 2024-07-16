@@ -20,6 +20,11 @@ developer experience, and customization.
 - Customizable with slots and SCSS variables
 - Zero dependencies
 
+## Project status
+
+This package was originally forked from [vue-select](https://github.com/sagalbot/vue-select) to implement required accessibility related improvements.
+And now is kept activly maintained by Nextcloud.
+
 ## Documentation
 
 Complete documentation and examples available at https://vue-select.org.
@@ -27,13 +32,6 @@ Complete documentation and examples available at https://vue-select.org.
 - **[API Documentation](https://vue-select.org)**
 - **[Vue 2 CodePen Template](https://codepen.io/pen?template=VwdrdzG)**
 - **[Vue 3 CodePen Template](https://codepen.io/pen?template=NpwrQO)**
-
-## Sponsors :tada:
-
-It takes a lot of effort to maintain this project. If it has saved you development time, please consider [sponsoring the project](https://github.com/sponsors/sagalbot)
-with GitHub sponsors!
-
-Huge thanks to the [sponsors](https://github.com/sponsors/sagalbot) and [contributors](https://github.com/sagalbot/vue-select/graphs/contributors) that make Vue Select possible!
 
 ## Get started
 
@@ -105,4 +103,4 @@ You can also include vue-select directly in the browser. Check out the
 
 ## License
 
-[MIT](https://github.com/sagalbot/vue-select/blob/master/LICENSE.md)
+[MIT](https://github.com/nextcloud-deps/vue-select/blob/master/LICENSE.md)
