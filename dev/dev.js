@@ -2,5 +2,5 @@ import { createApp, h } from 'vue'
 import Dev from './Dev.vue'
 
 createApp({
-  render: () => h(Dev),
+	render: () => h(Dev),
 }).mount('#app')

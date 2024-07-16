@@ -1,8 +1,5 @@
 {
-	"extends": [
-		"@nextcloud",
-		"prettier"
-	],
+	"extends": ["@nextcloud", "prettier"],
 	"ignorePatterns": [
 		"!.*.js",
 		"!docs/.vuepress",

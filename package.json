@@ -31,7 +31,7 @@
     "build:preview": "cd docs && npm run build",
     "commit": "git-cz",
     "format": "prettier -c .",
-    "format:fix": "prettier -w tests src",
+    "format:fix": "prettier -w tests src .",
     "lint": "eslint '{{src,tests}/**/*,*}.{js,ts,jsx,tsx,vue}'",
     "lint:fix": "npm run lint -- --fix",
     "semantic-release": "semantic-release",
