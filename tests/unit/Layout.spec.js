@@ -1,5 +1,7 @@
 import { shallowMount } from '@vue/test-utils'
-import VueSelect from '../../src/components/Select'
+import { describe, expect, it, vi } from 'vitest'
+
+import VueSelect from '../../src/components/Select.vue'
 
 describe('Single value options', () => {
   it('should reset the search input on focus lost', () => {

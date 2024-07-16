@@ -1,6 +1,9 @@
 import { mount, shallowMount } from '@vue/test-utils'
-import VueSelect from '../../src/components/Select'
+import { describe, expect, it } from 'vitest'
+import { nextTick } from 'vue'
 import { mountDefault } from '../helpers.js'
+
+import VueSelect from '../../src/components/Select.vue'
 
 describe('When reduce prop is defined', () => {
   it('determines when a reducer has been supplied', async () => {
@@ -154,7 +157,7 @@ describe('When reduce prop is defined', () => {
     ])
 
     Select.vm.select({ label: 'This is Bar', value: 'bar' })
-    await Select.vm.$nextTick()
+    await nextTick()
     expect(Parent.vm.value).toEqual('bar')
     expect(Select.vm.selectedValue).toEqual([
       { label: 'This is Bar', value: 'bar' },
@@ -162,7 +165,7 @@ describe('When reduce prop is defined', () => {
 
     // Parent denies to set baz
     Select.vm.select({ label: 'This is Baz', value: 'baz' })
-    await Select.vm.$nextTick()
+    await nextTick()
     expect(Select.vm.selectedValue).toEqual([
       { label: 'This is Bar', value: 'bar' },
     ])
@@ -270,7 +273,7 @@ describe('When reduce prop is defined', () => {
     })
 
     Select.setProps({ modelValue: optionToChangeTo.id })
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(Select.vm.selectedValue).toEqual([optionToChangeTo])
   })
@@ -296,10 +299,10 @@ describe('When reduce prop is defined', () => {
       await Select.get('input').trigger('focus')
 
       Select.vm.search = 'hello'
-      await Select.vm.$nextTick()
+      await nextTick()
 
       Select.vm.typeAheadSelect()
-      await Select.vm.$nextTick()
+      await nextTick()
 
       //  Then
       expect(Select.vm.selectedValue).toEqual([{ label: 'hello', value: -1 }])

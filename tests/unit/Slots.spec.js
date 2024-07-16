@@ -1,5 +1,6 @@
-import { h } from 'vue'
-import { mountDefault } from '../helpers'
+import { describe, expect, it, test, vi } from 'vitest'
+import { h, nextTick } from 'vue'
+import { mountDefault } from '../helpers.js'
 
 describe('Scoped Slots', () => {
   it('receives an option object to the selected-option-container slot', () => {
@@ -62,13 +63,13 @@ describe('Scoped Slots', () => {
     )
 
     Select.vm.open = true
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(Select.get('.vs__dropdown-menu').text()).toEqual('onetwothree')
   })
 
   it('noOptions slot receives the current search text', async () => {
-    const noOptions = jest.fn()
+    const noOptions = vi.fn()
     const Select = mountDefault(
       {},
       {
@@ -78,7 +79,7 @@ describe('Scoped Slots', () => {
 
     Select.vm.search = 'something not there'
     Select.vm.open = true
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(noOptions).toHaveBeenCalledWith({
       loading: false,
@@ -88,14 +89,14 @@ describe('Scoped Slots', () => {
   })
 
   test('header slot props', async () => {
-    const header = jest.fn()
+    const header = vi.fn()
     const Select = mountDefault(
       {},
       {
         slots: { header: header },
       }
     )
-    await Select.vm.$nextTick()
+    await nextTick()
     expect(Object.keys(header.mock.calls[0][0])).toEqual([
       'search',
       'loading',
@@ -106,14 +107,14 @@ describe('Scoped Slots', () => {
   })
 
   test('footer slot props', async () => {
-    const footer = jest.fn()
+    const footer = vi.fn()
     const Select = mountDefault(
       {},
       {
         slots: { footer: footer },
       }
     )
-    await Select.vm.$nextTick()
+    await nextTick()
     expect(Object.keys(footer.mock.calls[0][0])).toEqual([
       'search',
       'loading',
@@ -124,7 +125,7 @@ describe('Scoped Slots', () => {
   })
 
   test('list-header slot props', async () => {
-    const header = jest.fn()
+    const header = vi.fn()
     const Select = mountDefault(
       {},
       {
@@ -132,7 +133,7 @@ describe('Scoped Slots', () => {
       }
     )
     Select.vm.open = true
-    await Select.vm.$nextTick()
+    await nextTick()
     expect(Object.keys(header.mock.calls[0][0])).toEqual([
       'search',
       'loading',
@@ -142,7 +143,7 @@ describe('Scoped Slots', () => {
   })
 
   test('list-footer slot props', async () => {
-    const footer = jest.fn()
+    const footer = vi.fn()
     const Select = mountDefault(
       {},
       {
@@ -150,7 +151,7 @@ describe('Scoped Slots', () => {
       }
     )
     Select.vm.open = true
-    await Select.vm.$nextTick()
+    await nextTick()
     expect(Object.keys(footer.mock.calls[0][0])).toEqual([
       'search',
       'loading',

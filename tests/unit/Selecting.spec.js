@@ -1,7 +1,10 @@
 import { mount, shallowMount } from '@vue/test-utils'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { nextTick } from 'vue'
+import { mountDefault } from '../helpers.js'
+
 import VueSelect from '../../src/components/Select.vue'
-import typeAheadPointer from '../../src/mixins/typeAheadPointer'
-import { mountDefault } from '../helpers'
+import typeAheadPointer from '../../src/mixins/typeAheadPointer.js'
 
 describe('VS - Selecting Values', () => {
   let defaultProps
@@ -57,7 +60,7 @@ describe('VS - Selecting Values', () => {
   })
 
   it('can select an option on tab', () => {
-    spy = jest.spyOn(typeAheadPointer.methods, 'typeAheadSelect')
+    spy = vi.spyOn(typeAheadPointer.methods, 'typeAheadSelect')
     const Select = shallowMount(VueSelect, {
       props: {
         selectOnTab: true,
@@ -227,10 +230,10 @@ describe('VS - Selecting Values', () => {
     expect(Select.vm.optionExists(false)).toBeTruthy()
 
     Select.vm.open = true
-    await Select.vm.$nextTick()
+    await nextTick()
 
     Select.find('.vs__dropdown-option').trigger('click')
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(Select.vm.selectedValue).toEqual([false])
   })

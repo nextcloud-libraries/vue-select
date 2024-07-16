@@ -1,6 +1,9 @@
-import { selectWithProps } from '../helpers'
 import { shallowMount } from '@vue/test-utils'
-import vSelect from '../../src/components/Select'
+import { describe, expect, it } from 'vitest'
+import { nextTick } from 'vue'
+import { selectWithProps } from '../helpers.js'
+
+import vSelect from '../../src/components/Select.vue'
 
 describe('Asynchronous Loading', () => {
   it('can toggle the loading class', () => {
@@ -17,7 +20,7 @@ describe('Asynchronous Loading', () => {
     const Select = selectWithProps()
 
     Select.vm.search = 'foo'
-    await Select.vm.$nextTick()
+    await nextTick()
 
     const events = Select.emitted('search')
 
@@ -29,9 +32,9 @@ describe('Asynchronous Loading', () => {
     const Select = selectWithProps()
 
     Select.vm.search = 'foo'
-    await Select.vm.$nextTick()
+    await nextTick()
     Select.vm.search = ''
-    await Select.vm.$nextTick()
+    await nextTick()
 
     const events = Select.emitted('search')
 
@@ -50,7 +53,7 @@ describe('Asynchronous Loading', () => {
 
     Select.vm.mutableLoading = true
     Select.vm.search = 'foo'
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(Select.vm.mutableLoading).toEqual(false)
   })
@@ -58,7 +61,7 @@ describe('Asynchronous Loading', () => {
   it('will sync mutable loading with the loading prop', async () => {
     const Select = selectWithProps({ loading: false })
     Select.setProps({ loading: true })
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(Select.vm.mutableLoading).toEqual(true)
   })

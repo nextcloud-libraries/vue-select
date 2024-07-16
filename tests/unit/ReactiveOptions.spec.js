@@ -1,6 +1,9 @@
-import { mount, shallowMount } from '@vue/test-utils'
-import VueSelect from '../../src/components/Select'
-import { mountDefault } from '../helpers'
+import { shallowMount } from '@vue/test-utils'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import { nextTick } from 'vue'
+import { mountDefault } from '../helpers.js'
+
+import VueSelect from '../../src/components/Select.vue'
 
 describe('Reset on options change', () => {
   it('should not reset the selected value by default when the options property changes', async () => {
@@ -21,7 +24,7 @@ describe('Reset on options change', () => {
     })
 
     it('will yell at you if resetOnOptionsChange is not a function or boolean', () => {
-      spy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+      spy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
       mountDefault({ resetOnOptionsChange: 1 })
       expect(spy.mock.calls[0][0]).toContain(
@@ -45,7 +48,7 @@ describe('Reset on options change', () => {
     })
 
     it('should receive the new options, old options, and current value', async () => {
-      let resetOnOptionsChange = jest.fn((option) => option)
+      let resetOnOptionsChange = vi.fn((option) => option)
       const Select = mountDefault({
         resetOnOptionsChange,
         options: ['bear'],
@@ -53,7 +56,7 @@ describe('Reset on options change', () => {
       })
 
       await Select.setProps({ options: ['lake', 'kite'] })
-      await Select.vm.$nextTick()
+      await nextTick()
 
       expect(resetOnOptionsChange).toHaveBeenCalledTimes(1)
       expect(resetOnOptionsChange).toHaveBeenCalledWith(
@@ -65,7 +68,7 @@ describe('Reset on options change', () => {
 
     it('should allow resetOnOptionsChange to be a function that returns true', async () => {
       let resetOnOptionsChange = () => true
-      spy = jest.spyOn(VueSelect.methods, 'clearSelection')
+      spy = vi.spyOn(VueSelect.methods, 'clearSelection')
       const Select = shallowMount(VueSelect, {
         props: { resetOnOptionsChange, options: ['one'], modelValue: 'one' },
       })
@@ -77,7 +80,7 @@ describe('Reset on options change', () => {
 
     it('should allow resetOnOptionsChange to be a function that returns false', () => {
       let resetOnOptionsChange = () => false
-      spy = jest.spyOn(VueSelect.methods, 'clearSelection')
+      spy = vi.spyOn(VueSelect.methods, 'clearSelection')
       const Select = shallowMount(VueSelect, {
         props: { resetOnOptionsChange, options: ['one'], modelValue: 'one' },
       })
@@ -92,7 +95,7 @@ describe('Reset on options change', () => {
       const Select = shallowMount(VueSelect, {
         props: { resetOnOptionsChange, options: ['one'], modelValue: 'one' },
       })
-      const spy = jest.spyOn(Select.vm, 'clearSelection')
+      const spy = vi.spyOn(Select.vm, 'clearSelection')
 
       await Select.setProps({ options: ['one', 'two'] })
 
@@ -136,7 +139,7 @@ describe('Reset on options change', () => {
 
   it('clearSearchOnBlur returns false when multiple is true', async () => {
     const Select = mountDefault({})
-    let clearSearchOnBlur = jest.spyOn(Select.vm.$.props, 'clearSearchOnBlur')
+    let clearSearchOnBlur = vi.spyOn(Select.vm.$.props, 'clearSearchOnBlur')
     await Select.get('input').trigger('click')
     Select.vm.search = 'one'
     await Select.get('input').trigger('blur')
@@ -150,7 +153,7 @@ describe('Reset on options change', () => {
   })
 
   it('clearSearchOnBlur accepts a function', async () => {
-    let clearSearchOnBlur = jest.fn(() => false)
+    let clearSearchOnBlur = vi.fn(() => false)
     const Select = mountDefault({ clearSearchOnBlur })
 
     await Select.get('input').trigger('click')

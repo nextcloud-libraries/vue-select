@@ -1,4 +1,6 @@
-import { mountDefault } from '../helpers'
+import { describe, expect, it } from 'vitest'
+import { nextTick } from 'vue'
+import { mountDefault } from '../helpers.js'
 
 describe('Search Slot Scope', () => {
   /**
@@ -9,14 +11,14 @@ describe('Search Slot Scope', () => {
       const Select = mountDefault()
 
       expect(
-        Select.vm.scope.search.attributes['aria-activedescendant']
+        Select.vm.scope.search?.attributes['aria-activedescendant']
       ).toEqual(undefined)
 
       Select.vm.open = true
-      await Select.vm.$nextTick()
+      await nextTick()
 
       expect(
-        Select.vm.scope.search.attributes['aria-activedescendant']
+        Select.vm.scope.search?.attributes['aria-activedescendant']
       ).toEqual(undefined)
     })
 
@@ -25,7 +27,7 @@ describe('Search Slot Scope', () => {
 
       Select.vm.open = true
       Select.vm.typeAheadPointer = 1
-      await Select.vm.$nextTick()
+      await nextTick()
 
       expect(
         Select.vm.scope.search.attributes['aria-activedescendant']
@@ -36,13 +38,13 @@ describe('Search Slot Scope', () => {
   describe('aria-expanded', () => {
     it('expanded attribute should reflect dropdown open state', async () => {
       const Select = mountDefault()
-      const input = Select.findComponent({ ref: 'search' })
-
       expect(Select.vm.open).toEqual(false)
+
+      const input = Select.get({ ref: 'search' })
       expect(input.attributes('aria-expanded')).toEqual('false')
 
       Select.vm.open = true
-      await Select.vm.$nextTick()
+      await nextTick()
       expect(Select.vm.open).toEqual(true)
       expect(input.attributes('aria-expanded')).toEqual('true')
     })
@@ -62,11 +64,14 @@ describe('UID', () => {
 })
 
 describe('Selected Options Wrapper', () => {
-  it('toggle with mouse', () => {
+  it('toggle with mouse', async () => {
     const Select = mountDefault()
-    Select.findComponent({ ref: 'selectedOptions' }).trigger('mousedown')
+    const selectedOptions = Select.get({ ref: 'selectedOptions' })
+    
+    await selectedOptions.trigger('mousedown')
     expect(Select.vm.open).toEqual(true)
-    Select.findComponent({ ref: 'selectedOptions' }).trigger('mousedown')
+
+    await selectedOptions.trigger('mousedown')
     expect(Select.vm.open).toEqual(false)
   })
 })
@@ -74,18 +79,18 @@ describe('Selected Options Wrapper', () => {
 describe('Open Indicator', () => {
   it('hidden from keyboard navigation', () => {
     const Select = mountDefault()
-    expect(
-      Select.findComponent({ ref: 'openIndicatorButton' }).attributes(
-        'tabindex'
-      )
-    ).toEqual('-1')
+    const button = Select.get({ ref: 'openIndicatorButton' })
+
+    expect(button.attributes('tabindex')).toEqual('-1')
   })
 
-  it('toggle with mouse', () => {
+  it('toggle with mouse', async () => {
     const Select = mountDefault()
-    Select.findComponent({ ref: 'openIndicatorButton' }).trigger('mousedown')
+    const button = Select.get({ ref: 'openIndicatorButton' })
+
+    await button.trigger('mousedown')
     expect(Select.vm.open).toEqual(true)
-    Select.findComponent({ ref: 'openIndicatorButton' }).trigger('mousedown')
+    await button.trigger('mousedown')
     expect(Select.vm.open).toEqual(false)
   })
 })
@@ -95,7 +100,7 @@ describe('Option List', () => {
     const Select = mountDefault()
 
     Select.vm.open = true
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(
       Select.find('.vs__dropdown-menu').attributes()[
@@ -108,7 +113,7 @@ describe('Option List', () => {
     const Select = mountDefault({ multiple: true })
 
     Select.vm.open = true
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(
       Select.find('.vs__dropdown-menu').attributes()[
@@ -123,7 +128,7 @@ describe('Option List', () => {
     })
 
     Select.vm.open = true
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(
       Select.findAll('.vs__dropdown-option').map(
@@ -139,7 +144,7 @@ describe('Option List', () => {
     })
 
     Select.vm.open = true
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(
       Select.findAll('.vs__dropdown-option').map(
