@@ -1,0 +1,19 @@
+{
+	"extends": ["@nextcloud", "prettier"],
+	"ignorePatterns": [
+		"!.*.js",
+		"!docs/.vuepress",
+		"docs/.vuepress/dist",
+		"node_modules",
+		"dist",
+		"coverage"
+	],
+	"overrides": [
+		{
+			"files": ["**/*.vue"],
+			"rules": {
+				"vue/first-attribute-linebreak": "off"
+			}
+		}
+	]
+}

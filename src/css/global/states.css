@@ -10,20 +10,21 @@
  */
 
 :root {
-    --vs-disabled-bg: var(--vs-state-disabled-bg);
-    --vs-disabled-color: var(--vs-state-disabled-color);
-    --vs-disabled-cursor: var(--vs-state-disabled-cursor);
+	--vs-disabled-bg: var(--vs-state-disabled-bg);
+	--vs-disabled-color: var(--vs-state-disabled-color);
+	--vs-disabled-cursor: var(--vs-state-disabled-cursor);
 }
 
 .vs--disabled {
-    .vs__dropdown-toggle,
-    .vs__clear,
-    .vs__search,
-    .vs__selected,
-    .vs__open-indicator {
-        cursor: var(--vs-disabled-cursor);
-        background-color: var(--vs-disabled-bg);
-    }
+	.vs__dropdown-toggle,
+	.vs__clear,
+	.vs__search,
+	.vs__selected,
+	.vs__open-indicator-button,
+	.vs__open-indicator {
+		cursor: var(--vs-disabled-cursor);
+		background-color: var(--vs-disabled-bg);
+	}
 }
 
 /*
@@ -35,21 +36,21 @@
  */
 
 .v-select[dir='rtl'] {
-    .vs__actions {
-        padding: 0 3px 0 6px;
-    }
+	.vs__actions {
+		padding: 0 3px 0 6px;
+	}
 
-    .vs__clear {
-        margin-left: 6px;
-        margin-right: 0;
-    }
+	.vs__clear {
+		margin-left: 6px;
+		margin-right: 0;
+	}
 
-    .vs__deselect {
-        margin-left: 0;
-        margin-right: 2px;
-    }
+	.vs__deselect {
+		margin-left: 0;
+		margin-right: 2px;
+	}
 
-    .vs__dropdown-menu {
-        text-align: right;
-    }
+	.vs__dropdown-menu {
+		text-align: right;
+	}
 }

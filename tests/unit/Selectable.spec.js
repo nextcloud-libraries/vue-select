@@ -1,76 +1,76 @@
-import { searchSubmit, selectWithProps } from '../helpers'
+import { describe, expect, it } from 'vitest'
+import { nextTick } from 'vue'
+import { searchSubmit, selectWithProps } from '../helpers.js'
 
 describe('Selectable prop', () => {
-  it('should select selectable option if clicked', async () => {
-    const Select = selectWithProps({
-      options: ['one', 'two', 'three'],
-      selectable: (option) => option === 'one',
-    })
+	it('should select selectable option if clicked', async () => {
+		const Select = selectWithProps({
+			options: ['one', 'two', 'three'],
+			selectable: (option) => option === 'one',
+		})
 
-    Select.vm.$data.open = true
-    await Select.vm.$nextTick()
+		Select.vm.open = true
+		await nextTick()
 
-    Select.find('.vs__dropdown-menu li:first-child').trigger('click')
+		await Select.find('.vs__dropdown-menu li:first-child').trigger('click')
 
-    await Select.vm.$nextTick()
-    expect(Select.vm.selectedValue).toEqual(['one'])
-  })
+		expect(Select.vm.selectedValue).toEqual(['one'])
+	})
 
-  it('should not select not selectable option if clicked', async () => {
-    const Select = selectWithProps({
-      options: ['one', 'two', 'three'],
-      selectable: (option) => option === 'one',
-    })
+	it('should not select not selectable option if clicked', async () => {
+		const Select = selectWithProps({
+			options: ['one', 'two', 'three'],
+			selectable: (option) => option === 'one',
+		})
 
-    Select.vm.$data.open = true
-    await Select.vm.$nextTick()
+		Select.vm.open = true
+		await nextTick()
 
-    Select.find('.vs__dropdown-menu li:last-child').trigger('click')
-    await Select.vm.$nextTick()
+		await Select.find('.vs__dropdown-menu li:last-child').trigger('click')
 
-    expect(Select.vm.selectedValue).toEqual([])
-  })
+		expect(Select.vm.selectedValue).toEqual([])
+	})
 
-  it('should skip non-selectable option on down arrow keyDown', () => {
-    const Select = selectWithProps({
-      options: ['one', 'two', 'three'],
-      selectable: (option) => option !== 'two',
-    })
+	it('should skip non-selectable option on down arrow keyDown', async () => {
+		const Select = selectWithProps({
+			options: ['one', 'two', 'three'],
+			selectable: (option) => option !== 'two',
+		})
 
-    Select.vm.open = true
-    Select.vm.typeAheadPointer = 1
+		Select.vm.open = true
+		Select.vm.typeAheadPointer = 1
 
-    Select.findComponent({ ref: 'search' }).trigger('keydown.down')
+		await Select.get('input').trigger('keydown.down')
 
-    expect(Select.vm.typeAheadPointer).toEqual(2)
-  })
+		expect(Select.vm.typeAheadPointer).toEqual(2)
+	})
 
-  it('should skip non-selectable option on up arrow keyDown', () => {
-    const Select = selectWithProps({
-      options: ['one', 'two', 'three'],
-      selectable: (option) => option !== 'two',
-    })
+	it('should skip non-selectable option on up arrow keyDown', async () => {
+		const Select = selectWithProps({
+			options: ['one', 'two', 'three'],
+			selectable: (option) => option !== 'two',
+		})
 
-    Select.vm.open = true
-    Select.vm.typeAheadPointer = 2
+		Select.vm.open = true
+		Select.vm.typeAheadPointer = 2
 
-    Select.findComponent({ ref: 'search' }).trigger('keydown.up')
+		await Select.get('input').trigger('keydown.up')
 
-    expect(Select.vm.typeAheadPointer).toEqual(0)
-  })
+		expect(Select.vm.typeAheadPointer).toEqual(0)
+	})
 
-  it('should not let the user select an unselectable option with return', async () => {
-    const Select = selectWithProps({
-      options: ['one', 'two'],
-      multiple: true,
-      selectable: (option) => option !== 'two',
-    })
+	it('should not let the user select an unselectable option with return', async () => {
+		const Select = selectWithProps({
+			options: ['one', 'two'],
+			multiple: true,
+			selectable: (option) => option !== 'two',
+		})
 
-    // this sets the typeAheadPointer to 0
-    await searchSubmit(Select, 'one')
-    expect(Select.vm.selectedValue).toEqual(['one'])
+		// this sets the typeAheadPointer to 0
+		await searchSubmit(Select, 'one')
+		expect(Select.vm.selectedValue).toEqual(['one'])
 
-    await searchSubmit(Select, 'two')
-    expect(Select.vm.selectedValue).toEqual(['one'])
-  })
+		await searchSubmit(Select, 'two')
+		expect(Select.vm.selectedValue).toEqual(['one'])
+	})
 })

@@ -1,34 +1,29 @@
 export default {
-  inserted(el, bindings, { context }) {
-    if (context.appendToBody) {
-      document.body.appendChild(el)
+	mounted(el, { instance }) {
+		if (instance.appendToBody) {
+			document.body.appendChild(el)
 
-      const {
-        height,
-        top,
-        left,
-        width,
-      } = context.$refs.toggle.getBoundingClientRect()
+			const { height, top, left, width } =
+				instance.$refs.toggle.getBoundingClientRect()
 
-      let scrollX = window.scrollX || window.pageXOffset
-      let scrollY = window.scrollY || window.pageYOffset
+			const scrollX = window.scrollX || window.pageXOffset
+			const scrollY = window.scrollY || window.pageYOffset
+			el.unbindPosition = instance.calculatePosition(el, instance, {
+				width: width + 'px',
+				left: scrollX + left + 'px',
+				top: scrollY + top + height + 'px',
+			})
+		}
+	},
 
-      el.unbindPosition = context.calculatePosition(el, context, {
-        width: width + 'px',
-        left: scrollX + left + 'px',
-        top: scrollY + top + height + 'px',
-      })
-    }
-  },
-
-  unbind(el, bindings, { context }) {
-    if (context.appendToBody) {
-      if (el.unbindPosition && typeof el.unbindPosition === 'function') {
-        el.unbindPosition()
-      }
-      if (el.parentNode) {
-        el.parentNode.removeChild(el)
-      }
-    }
-  },
+	unmounted(el, { instance }) {
+		if (instance.appendToBody) {
+			if (el.unbindPosition && typeof el.unbindPosition === 'function') {
+				el.unbindPosition()
+			}
+			if (el.parentNode) {
+				el.parentNode.removeChild(el)
+			}
+		}
+	},
 }

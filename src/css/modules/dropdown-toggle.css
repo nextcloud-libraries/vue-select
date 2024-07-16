@@ -11,40 +11,40 @@
  */
 
 .vs__dropdown-toggle {
-    appearance: none;
-    display: flex;
-    padding: 0 0 4px 0;
-    background: var(--vs-search-input-bg);
-    border: var(--vs-border-width) var(--vs-border-style) var(--vs-border-color);
-    border-radius: var(--vs-border-radius);
-    white-space: normal;
+	appearance: none;
+	display: flex;
+	padding: 0 0 4px 0;
+	background: var(--vs-search-input-bg);
+	border: var(--vs-border-width) var(--vs-border-style) var(--vs-border-color);
+	border-radius: var(--vs-border-radius);
+	white-space: normal;
 }
 
 .vs__selected-options {
-    display: flex;
-    flex-basis: 100%;
-    flex-grow: 1;
-    flex-wrap: wrap;
-    min-width: 0;
-    padding: 0 2px;
-    position: relative;
+	display: flex;
+	flex-basis: 100%;
+	flex-grow: 1;
+	flex-wrap: wrap;
+	min-width: 0;
+	padding: 0 2px;
+	position: relative;
 }
 
 .vs__actions {
-    display: flex;
-    align-items: center;
-    padding: var(--vs-actions-padding);
+	display: flex;
+	align-items: center;
+	padding: var(--vs-actions-padding);
 }
 
 /* Dropdown Toggle States */
 .vs--searchable .vs__dropdown-toggle {
-    cursor: text;
+	cursor: text;
 }
 .vs--unsearchable .vs__dropdown-toggle {
-    cursor: pointer;
+	cursor: pointer;
 }
 .vs--open .vs__dropdown-toggle {
-    border-bottom-color: transparent;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+	border-bottom-color: transparent;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
 }

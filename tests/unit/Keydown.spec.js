@@ -1,72 +1,81 @@
-import { mountDefault } from '../helpers'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import typeAheadPointer from '../../src/mixins/typeAheadPointer.js'
+import { mountDefault } from '../helpers.js'
 
 describe('Custom Keydown Handlers', () => {
-  it('can use the map-keydown prop to trigger custom behaviour', () => {
-    const onKeyDown = jest.fn()
-    const Select = mountDefault({
-      mapKeydown: (defaults, vm) => ({ ...defaults, 32: onKeyDown }),
-    })
+	let spy
+	afterEach(() => {
+		if (spy) spy.mockClear()
+	})
 
-    Select.findComponent({ ref: 'search' }).trigger('keydown.space')
+	it('can use the map-keydown prop to trigger custom behaviour', async () => {
+		const onKeyDown = vi.fn()
+		const Select = mountDefault({
+			mapKeydown: (defaults, vm) => ({ ...defaults, 32: onKeyDown }),
+		})
 
-    expect(onKeyDown.mock.calls.length).toBe(1)
-  })
+		await Select.get('input').trigger('keydown.space')
 
-  it('selectOnKeyCodes should trigger a selection for custom keycodes', () => {
-    const Select = mountDefault({
-      selectOnKeyCodes: [32],
-    })
+		expect(onKeyDown.mock.calls.length).toBe(1)
+	})
 
-    const spy = jest.spyOn(Select.vm, 'typeAheadSelect')
+	it('selectOnKeyCodes should trigger a selection for custom keycodes', () => {
+		spy = vi.spyOn(typeAheadPointer.methods, 'typeAheadSelect')
 
-    Select.vm.open = true
-    Select.findComponent({ ref: 'search' }).trigger('keydown.space')
+		const Select = mountDefault({
+			selectOnKeyCodes: [32],
+		})
 
-    expect(spy).toHaveBeenCalledTimes(1)
-  })
+		Select.vm.open = true
+		Select.get('input').trigger('keydown.space')
 
-  it('even works when combining selectOnKeyCodes with map-keydown', () => {
-    const onKeyDown = jest.fn()
-    const Select = mountDefault({
-      mapKeydown: (defaults, vm) => ({ ...defaults, 32: onKeyDown }),
-      selectOnKeyCodes: [9],
-    })
+		expect(spy).toHaveBeenCalledTimes(1)
+	})
 
-    const spy = jest.spyOn(Select.vm, 'typeAheadSelect')
+	it('even works when combining selectOnKeyCodes with map-keydown', () => {
+		spy = vi.spyOn(typeAheadPointer.methods, 'typeAheadSelect')
 
-    Select.vm.open = true
-    Select.findComponent({ ref: 'search' }).trigger('keydown.space')
-    expect(onKeyDown.mock.calls.length).toBe(1)
+		const onKeyDown = vi.fn()
+		const Select = mountDefault({
+			mapKeydown: (defaults, vm) => ({ ...defaults, 32: onKeyDown }),
+			selectOnKeyCodes: [9],
+		})
 
-    Select.findComponent({ ref: 'search' }).trigger('keydown.tab')
-    expect(spy).toHaveBeenCalledTimes(1)
-  })
+		Select.vm.open = true
+		Select.get('input').trigger('keydown.space')
+		expect(onKeyDown.mock.calls.length).toBe(1)
 
-  describe('CompositionEvent support', () => {
-    it('will not select a value with enter if the user is composing', () => {
-      const Select = mountDefault()
-      const spy = jest.spyOn(Select.vm, 'typeAheadSelect')
+		Select.get('input').trigger('keydown.tab')
+		expect(spy).toHaveBeenCalledTimes(1)
+	})
 
-      Select.findComponent({ ref: 'search' }).trigger('compositionstart')
-      Select.findComponent({ ref: 'search' }).trigger('keydown.enter')
-      expect(spy).toHaveBeenCalledTimes(0)
+	describe('CompositionEvent support', () => {
+		it('will not select a value with enter if the user is composing', () => {
+			spy = vi.spyOn(typeAheadPointer.methods, 'typeAheadSelect')
 
-      Select.findComponent({ ref: 'search' }).trigger('compositionend')
-      Select.findComponent({ ref: 'search' }).trigger('keydown.enter')
-      expect(spy).toHaveBeenCalledTimes(1)
-    })
+			const Select = mountDefault()
 
-    it('will not select a value with tab if the user is composing', () => {
-      const Select = mountDefault({ selectOnTab: true })
-      const spy = jest.spyOn(Select.vm, 'typeAheadSelect')
+			Select.get('input').trigger('compositionstart')
+			Select.get('input').trigger('keydown.enter')
+			expect(spy).toHaveBeenCalledTimes(0)
 
-      Select.findComponent({ ref: 'search' }).trigger('compositionstart')
-      Select.findComponent({ ref: 'search' }).trigger('keydown.tab')
-      expect(spy).toHaveBeenCalledTimes(0)
+			Select.get('input').trigger('compositionend')
+			Select.get('input').trigger('keydown.enter')
+			expect(spy).toHaveBeenCalledTimes(1)
+		})
 
-      Select.findComponent({ ref: 'search' }).trigger('compositionend')
-      Select.findComponent({ ref: 'search' }).trigger('keydown.tab')
-      expect(spy).toHaveBeenCalledTimes(1)
-    })
-  })
+		it('will not select a value with tab if the user is composing', () => {
+			spy = vi.spyOn(typeAheadPointer.methods, 'typeAheadSelect')
+
+			const Select = mountDefault({ selectOnTab: true })
+
+			Select.get('input').trigger('compositionstart')
+			Select.get('input').trigger('keydown.tab')
+			expect(spy).toHaveBeenCalledTimes(0)
+
+			Select.get('input').trigger('compositionend')
+			Select.get('input').trigger('keydown.tab')
+			expect(spy).toHaveBeenCalledTimes(1)
+		})
+	})
 })

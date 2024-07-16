@@ -1,28 +1,29 @@
-import Vue from 'vue'
-import { selectWithProps } from '../helpers'
+import { describe, expect, it } from 'vitest'
+import { defineComponent, h } from 'vue'
+import { selectWithProps } from '../helpers.js'
 
 describe('Components API', () => {
-  it('swap the Deselect component', () => {
-    const Deselect = Vue.component('Deselect', {
-      render(createElement) {
-        return createElement('button', 'remove')
-      },
-    })
+	it('swap the Deselect component', () => {
+		const Deselect = defineComponent('Deselect', {
+			render() {
+				return h('button', 'remove')
+			},
+		})
 
-    const Select = selectWithProps({ components: { Deselect } })
+		const Select = selectWithProps({ components: { Deselect } })
 
-    expect(Select.findComponent(Deselect)).toBeTruthy()
-  })
+		expect(Select.find(Deselect)).toBeTruthy()
+	})
 
-  it('swap the OpenIndicator component', () => {
-    const OpenIndicator = Vue.component('OpenIndicator', {
-      render(createElement) {
-        return createElement('i', '^')
-      },
-    })
+	it('swap the OpenIndicator component', () => {
+		const OpenIndicator = defineComponent('OpenIndicator', {
+			render() {
+				return h('i', '^')
+			},
+		})
 
-    const Select = selectWithProps({ components: { OpenIndicator } })
+		const Select = selectWithProps({ components: { OpenIndicator } })
 
-    expect(Select.findComponent(OpenIndicator)).toBeTruthy()
-  })
+		expect(Select.find(OpenIndicator)).toBeTruthy()
+	})
 })

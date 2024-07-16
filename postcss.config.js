@@ -1,10 +1,11 @@
-module.exports = {
-  plugins: [
-    require('postcss-import'),
-    require('autoprefixer'),
-    require('postcss-nested'),
-    require('cssnano')({
-      preset: 'default',
-    }),
-  ],
+import autoprefixer from 'autoprefixer'
+import cssnanoPlugin from 'cssnano'
+
+export default {
+	plugins: [
+		autoprefixer,
+		cssnanoPlugin({
+			preset: 'default',
+		}),
+	],
 }

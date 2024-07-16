@@ -9,7 +9,6 @@ module.exports = {
         title: 'Community',
         collapsable: false,
         children: [
-          ['sponsors', 'Sponsors 🎉'],
           ['contributors', 'Contributors'],
         ],
       },

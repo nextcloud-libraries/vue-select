@@ -2,7 +2,7 @@
 node_modules
 
 # local env files
-.env
+.env*
 .env.local
 .env.*.local
 
@@ -24,7 +24,6 @@ yarn-error.log*
 coverage
 dist
 test/unit/coverage
-package-lock.json
 dev/dist
 docs/.vuepress/dist
 .netlify
