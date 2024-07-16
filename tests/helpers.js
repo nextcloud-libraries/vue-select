@@ -1,12 +1,12 @@
 import { shallowMount } from '@vue/test-utils'
-import VueSelect from '../src/components/Select.vue'
 import { createApp } from 'vue'
+import VueSelect from '../src/components/Select.vue'
 
 /**
  * Trigger a submit event on the search
  * input with a provided search text.
  *
- * @param Wrapper {Wrapper<Vue>}
+ * @param {import('@vue/test-utils').VueWrapper} Wrapper
  * @param searchText
  */
 export const searchSubmit = async (Wrapper, searchText = false) => {
@@ -24,7 +24,7 @@ export const searchSubmit = async (Wrapper, searchText = false) => {
 
 /**
  * Focus the input, enter some search text, hit return.
- * @param Wrapper {Wrapper<Vue>}
+ * @param {import('@vue/test-utils').VueWrapper} Wrapper
  * @param searchText
  * @return {Promise<void>}
  */
@@ -43,7 +43,7 @@ export const selectTag = async (Wrapper, searchText) => {
  * Create a new VueSelect instance with
  * a provided set of props.
  * @param props
- * @returns {Wrapper<Vue>}
+ * @returns {import('@vue/test-utils').VueWrapper}
  */
 export const selectWithProps = (props = {}) => {
   return shallowMount(VueSelect, { props })
@@ -53,7 +53,7 @@ export const selectWithProps = (props = {}) => {
  * Returns a Wrapper with a v-select component.
  * @param props
  * @param options
- * @return {Wrapper<Vue>}
+ * @return {import('@vue/test-utils').VueWrapper}
  */
 export const mountDefault = (props = {}, options = {}) => {
   return shallowMount(VueSelect, {

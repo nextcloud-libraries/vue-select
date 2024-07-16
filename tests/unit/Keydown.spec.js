@@ -1,6 +1,6 @@
-import { DOMWrapper } from '@vue/test-utils'
-import typeAheadPointer from '../../src/mixins/typeAheadPointer'
-import { mountDefault } from '../helpers'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import typeAheadPointer from '../../src/mixins/typeAheadPointer.js'
+import { mountDefault } from '../helpers.js'
 
 describe('Custom Keydown Handlers', () => {
   let spy
@@ -9,7 +9,7 @@ describe('Custom Keydown Handlers', () => {
   })
 
   it('can use the map-keydown prop to trigger custom behaviour', async () => {
-    const onKeyDown = jest.fn()
+    const onKeyDown = vi.fn()
     const Select = mountDefault({
       mapKeydown: (defaults, vm) => ({ ...defaults, 32: onKeyDown }),
     })
@@ -20,7 +20,7 @@ describe('Custom Keydown Handlers', () => {
   })
 
   it('selectOnKeyCodes should trigger a selection for custom keycodes', () => {
-    spy = jest.spyOn(typeAheadPointer.methods, 'typeAheadSelect')
+    spy = vi.spyOn(typeAheadPointer.methods, 'typeAheadSelect')
 
     const Select = mountDefault({
       selectOnKeyCodes: [32],
@@ -33,9 +33,9 @@ describe('Custom Keydown Handlers', () => {
   })
 
   it('even works when combining selectOnKeyCodes with map-keydown', () => {
-    spy = jest.spyOn(typeAheadPointer.methods, 'typeAheadSelect')
+    spy = vi.spyOn(typeAheadPointer.methods, 'typeAheadSelect')
 
-    const onKeyDown = jest.fn()
+    const onKeyDown = vi.fn()
     const Select = mountDefault({
       mapKeydown: (defaults, vm) => ({ ...defaults, 32: onKeyDown }),
       selectOnKeyCodes: [9],
@@ -51,7 +51,7 @@ describe('Custom Keydown Handlers', () => {
 
   describe('CompositionEvent support', () => {
     it('will not select a value with enter if the user is composing', () => {
-      spy = jest.spyOn(typeAheadPointer.methods, 'typeAheadSelect')
+      spy = vi.spyOn(typeAheadPointer.methods, 'typeAheadSelect')
 
       const Select = mountDefault()
 
@@ -65,7 +65,7 @@ describe('Custom Keydown Handlers', () => {
     })
 
     it('will not select a value with tab if the user is composing', () => {
-      spy = jest.spyOn(typeAheadPointer.methods, 'typeAheadSelect')
+      spy = vi.spyOn(typeAheadPointer.methods, 'typeAheadSelect')
 
       const Select = mountDefault({ selectOnTab: true })
 

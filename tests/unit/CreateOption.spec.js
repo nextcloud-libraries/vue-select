@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest'
 import { selectTag, selectWithProps } from '../helpers'
 
 describe('CreateOption When Tagging Is Enabled', () => {

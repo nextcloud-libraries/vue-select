@@ -1,10 +1,12 @@
+import { describe, expect, it, vi } from 'vitest'
 import { mountDefault, selectWithProps } from '../helpers'
+import { nextTick } from 'vue'
 
 describe('Removing values', () => {
   it('can remove the given tag when its close icon is clicked', async () => {
     const Select = selectWithProps({ multiple: true })
     Select.vm.$data._value = 'one'
-    await Select.vm.$nextTick()
+    await nextTick()
 
     Select.find('.vs__deselect').trigger('mousedown')
     expect(Select.emitted()['update:modelValue']).toEqual([[[]]])
@@ -65,13 +67,13 @@ describe('Removing values', () => {
       options: ['one', 'two', 'three'],
       deselectFromDropdown: true,
     })
-    const deselect = jest.spyOn(Select.vm, 'deselect')
+    const deselect = vi.spyOn(Select.vm, 'deselect')
 
     Select.vm.open = true
-    await Select.vm.$nextTick()
+    await nextTick()
 
     Select.find('.vs__dropdown-option--selected').trigger('click')
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(deselect).toHaveBeenCalledWith('one')
   })
@@ -83,13 +85,13 @@ describe('Removing values', () => {
       clearable: false,
       deselectFromDropdown: true,
     })
-    const deselect = jest.spyOn(Select.vm, 'deselect')
+    const deselect = vi.spyOn(Select.vm, 'deselect')
 
     Select.vm.open = true
-    await Select.vm.$nextTick()
+    await nextTick()
 
     Select.find('.vs__dropdown-option--selected').trigger('click')
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(deselect).not.toHaveBeenCalledWith('one')
   })
@@ -100,13 +102,13 @@ describe('Removing values', () => {
       options: ['one', 'two', 'three'],
       deselectFromDropdown: false,
     })
-    const deselect = jest.spyOn(Select.vm, 'deselect')
+    const deselect = vi.spyOn(Select.vm, 'deselect')
 
     Select.vm.open = true
-    await Select.vm.$nextTick()
+    await nextTick()
 
     Select.find('.vs__dropdown-option--selected').trigger('click')
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(deselect).not.toHaveBeenCalledWith('one')
   })

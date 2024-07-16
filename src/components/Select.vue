@@ -1251,6 +1251,7 @@ export default {
       }
 
       if (this.open && targetIsNotSearch) {
+        this.open = false
         this.searchEl.blur()
       } else if (!this.disabled) {
         this.open = true

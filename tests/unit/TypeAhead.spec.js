@@ -1,8 +1,9 @@
 import { shallowMount } from '@vue/test-utils'
-import VueSelect from '../../src/components/Select'
-import { mountDefault, mountWithoutTestUtils } from '../helpers'
-import typeAheadMixin from '../../src/mixins/typeAheadPointer'
-import Vue from 'vue'
+import { describe, expect, it } from 'vitest'
+import { nextTick } from 'vue'
+import { mountDefault } from '../helpers'
+
+import VueSelect from '../../src/components/Select.vue'
 
 describe('Moving the Typeahead Pointer', () => {
   it('should set the pointer to zero when the filteredOptions watcher is called', async () => {
@@ -13,7 +14,7 @@ describe('Moving the Typeahead Pointer', () => {
 
     Select.vm.search = 'one'
 
-    await Select.vm.$nextTick()
+    await nextTick()
     expect(Select.vm.typeAheadPointer).toEqual(0)
   })
 
@@ -56,7 +57,7 @@ describe('Moving the Typeahead Pointer', () => {
     })
 
     Select.get('input').trigger('focus')
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(Select.vm.typeAheadPointer).toEqual(2)
   })
@@ -75,7 +76,7 @@ describe('Moving the Typeahead Pointer', () => {
     })
 
     Select.get('input').trigger('focus')
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(Select.vm.typeAheadPointer).toEqual(2)
   })

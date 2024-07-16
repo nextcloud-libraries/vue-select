@@ -1,4 +1,6 @@
-import { searchSubmit, selectWithProps } from '../helpers'
+import { describe, expect, it } from 'vitest'
+import { nextTick } from 'vue'
+import { searchSubmit, selectWithProps } from '../helpers.js'
 
 describe('Selectable prop', () => {
   it('should select selectable option if clicked', async () => {
@@ -8,7 +10,7 @@ describe('Selectable prop', () => {
     })
 
     Select.vm.open = true
-    await Select.vm.$nextTick()
+    await nextTick()
 
     await Select.find('.vs__dropdown-menu li:first-child').trigger('click')
 
@@ -22,7 +24,7 @@ describe('Selectable prop', () => {
     })
 
     Select.vm.open = true
-    await Select.vm.$nextTick()
+    await nextTick()
 
     await Select.find('.vs__dropdown-menu li:last-child').trigger('click')
 

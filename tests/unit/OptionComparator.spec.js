@@ -1,4 +1,6 @@
-import Select from '../../src/components/Select'
+import { describe, expect, it } from 'vitest'
+
+import Select from '../../src/components/Select.vue'
 
 describe('Comparing Options', () => {
   const comparator = Select.methods.optionComparator.bind({

@@ -1,9 +1,12 @@
-import { mountDefault, selectWithProps } from '../helpers'
-import OpenIndicator from '../../src/components/OpenIndicator'
 import { shallowMount } from '@vue/test-utils'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import { mountDefault, selectWithProps } from '../helpers.js'
+import { nextTick } from 'vue'
+
+import OpenIndicator from '../../src/components/OpenIndicator.vue'
 import VueSelect from '../../src/components/Select.vue'
 
-const preventDefault = jest.fn()
+const preventDefault = vi.fn()
 
 function clickEvent(currentTarget) {
   return { currentTarget, preventDefault }
@@ -81,7 +84,7 @@ describe('Toggling Dropdown', () => {
 
     input.element.value = 'a'
     input.trigger('input')
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(Select.vm.open).toEqual(true)
   })
@@ -92,14 +95,14 @@ describe('Toggling Dropdown', () => {
 
     input.element.value = 1
     input.trigger('input')
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(Select.vm.open).toEqual(true)
   })
 
   it('can close the dropdown when the el is clicked', () => {
     const Select = selectWithProps()
-    const spy = jest.spyOn(Select.vm.$refs.search, 'blur')
+    const spy = vi.spyOn(Select.vm.$refs.search, 'blur')
 
     Select.vm.open = true
     Select.vm.toggleDropdown(clickEvent(Select.vm.$el))
@@ -146,7 +149,7 @@ describe('Toggling Dropdown', () => {
   })
 
   it('will close the dropdown and emit the search:blur event from onSearchBlur', () => {
-    spy = jest.spyOn(VueSelect.methods, 'onSearchBlur')
+    spy = vi.spyOn(VueSelect.methods, 'onSearchBlur')
     const Select = selectWithProps()
 
     Select.vm.open = true
@@ -157,7 +160,7 @@ describe('Toggling Dropdown', () => {
   })
 
   it('will open the dropdown and emit the search:focus event from onSearchFocus', () => {
-    spy = jest.spyOn(VueSelect.methods, 'onSearchFocus')
+    spy = vi.spyOn(VueSelect.methods, 'onSearchFocus')
     const Select = selectWithProps()
 
     Select.vm.onSearchFocus()
@@ -203,7 +206,7 @@ describe('Toggling Dropdown', () => {
     Select.vm.toggleDropdown(clickEvent(Select.vm.$refs.search))
 
     expect(Select.vm.open).toEqual(true)
-    await Select.vm.$nextTick()
+    await nextTick()
 
     expect(Select.find('.vs__dropdown-menu').exists()).toBeFalsy()
     expect(Select.find('.vs__dropdown-option').exists()).toBeFalsy()
