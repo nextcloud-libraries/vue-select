@@ -1,5 +1,3 @@
-<SponsorBanner />
-
 # Vue Select
 
 ![Current Release](https://img.shields.io/github/release/sagalbot/vue-select.svg?style=flat-square)
