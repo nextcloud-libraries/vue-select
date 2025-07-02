@@ -27,4 +27,27 @@ describe('CreateOption When Tagging Is Enabled', () => {
 
     expect(Select.emitted('input')[0]).toEqual([{ name: 'two' }])
   })
+
+  it('omit option when throwing an error', async () => {
+    const Select = selectWithProps({
+      taggable: true,
+      multiple: false,
+      value: null,
+      options: [],
+      label: 'name',
+      createOption: function (value) {
+        if (value.includes('@')) {
+          return { name: value }
+        }
+
+        throw new Error('value does not include an @')
+      },
+    })
+
+    await selectTag(Select, 'bob')
+    expect(Select.emitted('input')).toBeUndefined()
+
+    await selectTag(Select, 'bob@example.org')
+    expect(Select.emitted('input')[0]).toEqual([{ name: 'bob@example.org' }])
+  })
 })
