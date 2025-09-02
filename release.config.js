@@ -1,6 +1,6 @@
-module.exports = {
+export default {
   release: {
-    branch: 'master',
+    branch: 'main',
   },
   plugins: [
     '@semantic-release/npm',
@@ -20,11 +20,11 @@ module.exports = {
             // Default types
             { type: 'feat', section: 'Features' },
             { type: 'fix', section: 'Bug Fixes' },
+            { type: 'perf', section: 'Bug Fixes' },
             { type: 'chore', hidden: true },
             { type: 'docs', hidden: true },
             { type: 'style', hidden: true },
             { type: 'refactor', hidden: true },
-            { type: 'perf', hidden: true },
             { type: 'test', hidden: true },
             // Custom types
             { type: 'enh', section: 'Enhancements' },

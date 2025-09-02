@@ -3,36 +3,14 @@ name: Release
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   release:
     runs-on: ubuntu-latest
 
-    # semantic-release required permissions https://github.com/semantic-release/github#github-authentication
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
+      - uses: googleapis/release-please-action@c2a5a2bd6a758a0937f1ddb1e8950609867ed15c # v4.3.0
         with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Test with Coverage
-        run: yarn test
-
-      - name: Build
-        run: yarn build
-
-      - name: Release
-        env:
-          GH_TOKEN: ${{ github.token }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          release-type: node
