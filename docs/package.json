@@ -1,12 +1,12 @@
 {
   "name": "@nextcloud/vue-select-docs",
-  "private": true,
   "version": "1.0.0",
+  "private": true,
   "license": "MIT",
   "scripts": {
-    "serve": "vuepress dev",
     "build": "vuepress build",
-    "build:preview": "cross-env DEPLOY_PREVIEW=1 vuepress build"
+    "build:preview": "cross-env DEPLOY_PREVIEW=1 vuepress build",
+    "serve": "vuepress dev"
   },
   "devDependencies": {
     "@octokit/graphql": "^8.1.1",

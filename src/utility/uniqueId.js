@@ -1,12 +1,13 @@
-let idCount = 0;
+let idCount = 0
 
 /**
  * Dead simple unique ID implementation.
  * Thanks lodash!
+ *
  * @return {number}
  */
 function uniqueId() {
-  return ++idCount;
+	return ++idCount
 }
 
-export default uniqueId;
+export default uniqueId

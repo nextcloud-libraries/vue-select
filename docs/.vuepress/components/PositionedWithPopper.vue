@@ -1,39 +1,37 @@
 <template>
-  <div>
-    <v-select
-      :options="countries"
-      append-to-body
-      :calculate-position="withPopper"
-    />
+	<div>
+		<v-select
+			:options="countries"
+			appendToBody
+			:calculatePosition="withPopper" />
 
-    <label for="position" style="display: block; margin: 1rem 0">
-      <input
-        id="position"
-        v-model="placement"
-        type="checkbox"
-        true-value="top"
-        false-value="bottom"
-      />
-      Position dropdown above
-    </label>
-  </div>
+		<label for="position" style="display: block; margin: 1rem 0">
+			<input
+				id="position"
+				v-model="placement"
+				type="checkbox"
+				true-value="top"
+				false-value="bottom" />
+			Position dropdown above
+		</label>
+	</div>
 </template>
 
 <script>
-import countries from '../data/countries'
 import { createPopper } from '@popperjs/core'
+import countries from '../data/countries'
 
 export default {
-  data: () => ({ countries, placement: 'top' }),
-  methods: {
-    withPopper(dropdownList, component, { width }) {
-      /**
+	data: () => ({ countries, placement: 'top' }),
+	methods: {
+		withPopper(dropdownList, component, { width }) {
+			/**
        * We need to explicitly define the dropdown width since
        * it is usually inherited from the parent with CSS.
        */
-      dropdownList.style.width = width
+			dropdownList.style.width = width
 
-      /**
+			/**
        * Here we position the dropdownList relative to the $refs.toggle Element.
        *
        * The 'offset' modifier aligns the dropdown so that the $refs.toggle and
@@ -43,36 +41,36 @@ export default {
        * wrapper so that we can set some styles for when the dropdown is placed
        * above.
        */
-      const popper = createPopper(component.$refs.toggle, dropdownList, {
-        placement: this.placement,
-        modifiers: [
-          {
-            name: 'offset',
-            options: {
-              offset: [0, -1],
-            },
-          },
-          {
-            name: 'toggleClass',
-            enabled: true,
-            phase: 'write',
-            fn({ state }) {
-              component.$el.classList.toggle(
-                'drop-up',
-                state.placement === 'top'
-              )
-            },
-          },
-        ],
-      })
+			const popper = createPopper(component.$refs.toggle, dropdownList, {
+				placement: this.placement,
+				modifiers: [
+					{
+						name: 'offset',
+						options: {
+							offset: [0, -1],
+						},
+					},
+					{
+						name: 'toggleClass',
+						enabled: true,
+						phase: 'write',
+						fn({ state }) {
+							component.$el.classList.toggle(
+								'drop-up',
+								state.placement === 'top',
+							)
+						},
+					},
+				],
+			})
 
-      /**
+			/**
        * To prevent memory leaks Popper needs to be destroyed.
        * If you return function, it will be called just before dropdown is removed from DOM.
        */
-      return () => popper.destroy()
-    },
-  },
+			return () => popper.destroy()
+		},
+	},
 }
 </script>
 

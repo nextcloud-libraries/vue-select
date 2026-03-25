@@ -1,5 +1,5 @@
-import ajax from "./ajax.js";
-import pointer from "./typeAheadPointer.js";
-import pointerScroll from "./pointerScroll.js";
+import ajax from './ajax.js'
+import pointerScroll from './pointerScroll.js'
+import pointer from './typeAheadPointer.js'
 
-export default { ajax, pointer, pointerScroll };
+export default { ajax, pointer, pointerScroll }
