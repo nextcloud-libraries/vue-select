@@ -982,9 +982,13 @@ export default {
 				? this.filter(optionList, this.search, this)
 				: optionList
 			if (this.taggable && this.search.length) {
-				const createdOption = this.createOption(this.search)
-				if (!this.optionExists(createdOption)) {
-					options.unshift(createdOption)
+				try {
+					const createdOption = this.createOption(this.search)
+					if (!this.optionExists(createdOption)) {
+						options.unshift(createdOption)
+					}
+				} catch (e) {
+					// omit option on error
 				}
 			}
 			return limitOptions(options)
