@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import countries from '../data/countries'
 import { createPopper } from '@popperjs/core'
+import countries from '../data/countries'
 
 export default {
 	data: () => ({ countries, placement: 'top' }),

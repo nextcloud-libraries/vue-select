@@ -1,9 +1,8 @@
 import { mount, shallowMount } from "@vue/test-utils"
 import { describe, expect, it } from "vitest"
 import { nextTick } from "vue"
-import { mountDefault } from "../helpers.js"
-
 import VueSelect from "../../src/components/Select.vue"
+import { mountDefault } from "../helpers.js"
 
 describe("When reduce prop is defined", () => {
 	it("determines when a reducer has been supplied", async () => {

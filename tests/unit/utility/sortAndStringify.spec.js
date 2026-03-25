@@ -1,5 +1,4 @@
 import { expect, test } from "vitest"
-
 import sortAndStringify from "../../../src/utility/sortAndStringify.js"
 
 test("it will stringify an object", () => {

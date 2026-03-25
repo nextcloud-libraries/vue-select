@@ -137,13 +137,13 @@
 </template>
 
 <script>
+import appendToBody from "../directives/appendToBody.js"
+import ajax from "../mixins/ajax.js"
 import pointerScroll from "../mixins/pointerScroll.js"
 import typeAheadPointer from "../mixins/typeAheadPointer.js"
-import ajax from "../mixins/ajax.js"
-import childComponents from "./childComponents.js"
-import appendToBody from "../directives/appendToBody.js"
 import sortAndStringify from "../utility/sortAndStringify.js"
 import uniqueId from "../utility/uniqueId.js"
+import childComponents from "./childComponents.js"
 
 /**
  * @name VueSelect

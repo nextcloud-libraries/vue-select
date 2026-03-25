@@ -1,10 +1,9 @@
 import { mount, shallowMount } from "@vue/test-utils"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { nextTick } from "vue"
-import { mountDefault } from "../helpers.js"
-
 import VueSelect from "../../src/components/Select.vue"
 import typeAheadPointer from "../../src/mixins/typeAheadPointer.js"
+import { mountDefault } from "../helpers.js"
 
 describe("VS - Selecting Values", () => {
 	let defaultProps

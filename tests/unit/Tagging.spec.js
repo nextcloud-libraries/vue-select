@@ -1,13 +1,12 @@
 import { describe, expect, it, vi } from "vitest"
 import { nextTick } from "vue"
+import VueSelect from "../../src/components/Select.vue"
 import {
 	mountDefault,
 	searchSubmit,
 	selectTag,
 	selectWithProps,
 } from "../helpers.js"
-
-import VueSelect from "../../src/components/Select.vue"
 
 describe("When Tagging Is Enabled", () => {
 	it("can determine if a given option string already exists", () => {

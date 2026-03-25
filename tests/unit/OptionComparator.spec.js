@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest"
-
 import Select from "../../src/components/Select.vue"
 
 describe("Comparing Options", () => {

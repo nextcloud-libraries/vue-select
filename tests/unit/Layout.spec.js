@@ -1,6 +1,5 @@
 import { shallowMount } from "@vue/test-utils"
 import { describe, expect, it } from "vitest"
-
 import VueSelect from "../../src/components/Select.vue"
 
 describe("Single value options", () => {

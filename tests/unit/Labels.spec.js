@@ -1,9 +1,8 @@
 import { mount, shallowMount } from "@vue/test-utils"
 import { describe, expect, it, vi } from "vitest"
 import { nextTick } from "vue"
-import { selectWithProps } from "../helpers.js"
-
 import VueSelect from "../../src/components/Select.vue"
+import { selectWithProps } from "../helpers.js"
 
 describe("Labels", () => {
 	it("can generate labels using a custom label key", () => {

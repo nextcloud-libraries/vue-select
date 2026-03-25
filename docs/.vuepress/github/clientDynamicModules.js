@@ -1,6 +1,6 @@
 require('dotenv').config()
-const axios = require('axios')
 const { graphql } = require('@octokit/graphql')
+const axios = require('axios')
 
 module.exports = async () => ({
 	name: 'constants.js',

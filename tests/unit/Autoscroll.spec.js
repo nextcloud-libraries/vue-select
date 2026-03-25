@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest"
-import { mountDefault } from "../helpers.js"
-import pointerScroll from "../../src/mixins/pointerScroll.js"
 import { nextTick } from "vue"
+import pointerScroll from "../../src/mixins/pointerScroll.js"
+import { mountDefault } from "../helpers.js"
 
 describe("Automatic Scrolling", () => {
 	let spy

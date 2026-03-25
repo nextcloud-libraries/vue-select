@@ -1,10 +1,9 @@
 import { shallowMount } from "@vue/test-utils"
 import { afterEach, describe, expect, it, vi } from "vitest"
-import { mountDefault, selectWithProps } from "../helpers.js"
 import { nextTick } from "vue"
-
 import OpenIndicator from "../../src/components/OpenIndicator.vue"
 import VueSelect from "../../src/components/Select.vue"
+import { mountDefault, selectWithProps } from "../helpers.js"
 
 const preventDefault = vi.fn()
 
