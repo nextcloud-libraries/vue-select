@@ -9,16 +9,16 @@
 
 <script>
 export default {
-  data: () => ({
-    books: [
-      {
-        title: "Old Man's War",
-        author: {
-          firstName: 'John',
-          lastName: 'Scalzi',
-        },
-      },
-    ],
-  }),
+	data: () => ({
+		books: [
+			{
+				title: "Old Man's War",
+				author: {
+					firstName: 'John',
+					lastName: 'Scalzi',
+				},
+			},
+		],
+	}),
 }
 </script>

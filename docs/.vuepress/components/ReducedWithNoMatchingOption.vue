@@ -10,10 +10,10 @@
 
 <script>
 export default {
-  data() {
-    return {
-      selected: 3,
-    }
-  },
+	data() {
+		return {
+			selected: 3,
+		}
+	},
 }
 </script>

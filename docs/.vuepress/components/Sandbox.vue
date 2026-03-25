@@ -232,69 +232,69 @@ import countries from '../data/countryCodes'
 import books from '../data/books'
 
 const defaultConfig = () => ({
-  options: countries,
-  multiple: false,
-  dir: 'ltr',
-  clearable: true,
-  searchable: true,
-  filterable: true,
-  noDrop: false,
-  closeOnSelect: true,
-  disabled: false,
-  selectOntab: false,
-  placeholder: 'Select a Country...',
+	options: countries,
+	multiple: false,
+	dir: 'ltr',
+	clearable: true,
+	searchable: true,
+	filterable: true,
+	noDrop: false,
+	closeOnSelect: true,
+	disabled: false,
+	selectOntab: false,
+	placeholder: 'Select a Country...',
 })
 
 export default {
-  components: { VSelect: vSelect },
-  props: {
-    hideHelp: {
-      type: Boolean,
-      default: false,
-    },
-  },
+	components: { VSelect: vSelect },
+	props: {
+		hideHelp: {
+			type: Boolean,
+			default: false,
+		},
+	},
 
-  data() {
-    return {
-      configuration: defaultConfig(),
-      value: null,
-      ajaxRes: [],
-      people: [],
-      optionDataSet: 'countries',
-      optionDataSets: {
-        countries,
-        books,
-      },
-    }
-  },
+	data() {
+		return {
+			configuration: defaultConfig(),
+			value: null,
+			ajaxRes: [],
+			people: [],
+			optionDataSet: 'countries',
+			optionDataSets: {
+				countries,
+				books,
+			},
+		}
+	},
 
-  methods: {
-    search(search, loading) {
-      loading(true)
-      this.getRepositories(search, loading, this)
-    },
+	methods: {
+		search(search, loading) {
+			loading(true)
+			this.getRepositories(search, loading, this)
+		},
 
-    searchPeople(search, loading) {
-      loading(true)
-      this.getPeople(loading, this)
-    },
+		searchPeople(search, loading) {
+			loading(true)
+			this.getPeople(loading, this)
+		},
 
-    getPeople: debounce((loading, vm) => {
-      vm.$http.get(`https://reqres.in/api/users?per_page=10`).then((res) => {
-        vm.people = res.data.data
-        loading(false)
-      })
-    }, 250),
+		getPeople: debounce((loading, vm) => {
+			vm.$http.get(`https://reqres.in/api/users?per_page=10`).then((res) => {
+				vm.people = res.data.data
+				loading(false)
+			})
+		}, 250),
 
-    getRepositories: debounce((search, loading, vm) => {
-      vm.$http
-        .get(`https://api.github.com/search/repositories?q=${search}`)
-        .then((res) => {
-          vm.ajaxRes = res.data.items
-          loading(false)
-        })
-    }, 250),
-  },
+		getRepositories: debounce((search, loading, vm) => {
+			vm.$http
+				.get(`https://api.github.com/search/repositories?q=${search}`)
+				.then((res) => {
+					vm.ajaxRes = res.data.items
+					loading(false)
+				})
+		}, 250),
+	},
 }
 </script>
 

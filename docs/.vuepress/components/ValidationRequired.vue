@@ -17,16 +17,16 @@
 <script>
 import books from '../data/books'
 export default {
-  data: () => ({
-    books,
-    selected: null,
-  }),
+	data: () => ({
+		books,
+		selected: null,
+	}),
 
-  methods: {
-    onSubmit() {
-      alert('Submitted!')
-    },
-  },
+	methods: {
+		onSubmit() {
+			alert('Submitted!')
+		},
+	},
 }
 </script>
 

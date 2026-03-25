@@ -16,20 +16,20 @@ import Fuse from 'fuse.js'
 import books from '../data/books'
 
 export default {
-  computed: {
-    books: () => books,
-  },
+	computed: {
+		books: () => books,
+	},
 
-  methods: {
-    fuseSearch(options, search) {
-      const fuse = new Fuse(options, {
-        keys: ['title', 'author.firstName', 'author.lastName'],
-        shouldSort: true,
-      })
-      return search.length
-        ? fuse.search(search).map(({ item }) => item)
-        : fuse.list
-    },
-  },
+	methods: {
+		fuseSearch(options, search) {
+			const fuse = new Fuse(options, {
+				keys: ['title', 'author.firstName', 'author.lastName'],
+				shouldSort: true,
+			})
+			return search.length
+				? fuse.search(search).map(({ item }) => item)
+				: fuse.list
+		},
+	},
 }
 </script>

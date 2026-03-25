@@ -9,21 +9,21 @@
 import countries from '../data/countries.js'
 
 export default {
-  data() {
-    return {
-      countries,
-      country: null,
-    }
-  },
+	data() {
+		return {
+			countries,
+			country: null,
+		}
+	},
 
-  methods: {
-    dropdownShouldOpen(VueSelect) {
-      if (this.country !== null) {
-        return VueSelect.open
-      }
+	methods: {
+		dropdownShouldOpen(VueSelect) {
+			if (this.country !== null) {
+				return VueSelect.open
+			}
 
-      return VueSelect.search.length !== 0 && VueSelect.open
-    },
-  },
+			return VueSelect.search.length !== 0 && VueSelect.open
+		},
+	},
 }
 </script>

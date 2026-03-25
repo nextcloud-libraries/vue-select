@@ -11,6 +11,6 @@
 
 <script>
 export default {
-  name: 'BetterNoOptions',
+	name: 'BetterNoOptions',
 }
 </script>

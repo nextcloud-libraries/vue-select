@@ -6,14 +6,14 @@
 
 <script>
 export default {
-  data: () => ({
-    Deselect: {
-      render: (createElement) => createElement('span', '❌'),
-    },
+	data: () => ({
+		Deselect: {
+			render: (createElement) => createElement('span', '❌'),
+		},
 
-    OpenIndicator: {
-      render: (createElement) => createElement('span', '🔽'),
-    },
-  }),
+		OpenIndicator: {
+			render: (createElement) => createElement('span', '🔽'),
+		},
+	}),
 }
 </script>

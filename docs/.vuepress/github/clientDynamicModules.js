@@ -3,8 +3,8 @@ const axios = require('axios')
 const { graphql } = require('@octokit/graphql')
 
 module.exports = async () => ({
-  name: 'constants.js',
-  content: `
+	name: 'constants.js',
+	content: `
       export const CONTRIBUTORS = ${JSON.stringify(await getContributors())};
     `,
 })
@@ -14,9 +14,9 @@ module.exports = async () => ({
  * @return {Promise<T>}
  */
 async function getContributors() {
-  const { data } = await axios.get(
-    'https://api.github.com/repos/sagalbot/vue-select/contributors?per_page=100',
-  )
+	const { data } = await axios.get(
+		'https://api.github.com/repos/sagalbot/vue-select/contributors?per_page=100',
+	)
 
-  return data
+	return data
 }

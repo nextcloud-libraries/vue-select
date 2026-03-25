@@ -11,16 +11,16 @@
 
 <script>
 const book = {
-  title: "Old Man's War",
-  author: {
-    firstName: 'John',
-    lastName: 'Scalzi',
-  },
+	title: "Old Man's War",
+	author: {
+		firstName: 'John',
+		lastName: 'Scalzi',
+	},
 }
 export default {
-  data: () => ({
-    books: [book],
-    selected: book,
-  }),
+	data: () => ({
+		books: [book],
+		selected: book,
+	}),
 }
 </script>

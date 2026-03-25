@@ -10,13 +10,13 @@ import countries from "../docs/.vuepress/data/countryCodes";
 import books from "../docs/.vuepress/data/books";
 
 export default {
-  components: { VSelect: vSelect },
-  data: () => ({
-    selected: null,
-    config: {
-      options: countries,
-    },
-  }),
+	components: { VSelect: vSelect },
+	data: () => ({
+		selected: null,
+		config: {
+			options: countries,
+		},
+	}),
 };
 </script>
 

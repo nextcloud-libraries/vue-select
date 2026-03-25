@@ -9,8 +9,8 @@
 <script>
 import books from '../data/books'
 export default {
-  computed: {
-    books: () => books,
-  },
+	computed: {
+		books: () => books,
+	},
 }
 </script>

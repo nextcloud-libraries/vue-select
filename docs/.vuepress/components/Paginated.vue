@@ -15,45 +15,45 @@
 <script>
 import countries from '../data/countries'
 export default {
-  data: () => ({
-    countries,
-    search: '',
-    offset: 0,
-    limit: 10,
-  }),
+	data: () => ({
+		countries,
+		search: '',
+		offset: 0,
+		limit: 10,
+	}),
 
-  computed: {
-    filtered() {
-      return this.countries.filter((country) =>
-        country.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()),
-      )
-    },
+	computed: {
+		filtered() {
+			return this.countries.filter((country) =>
+				country.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()),
+			)
+		},
 
-    paginated() {
-      return this.filtered.slice(this.offset, this.limit + this.offset)
-    },
+		paginated() {
+			return this.filtered.slice(this.offset, this.limit + this.offset)
+		},
 
-    hasNextPage() {
-      const nextOffset = this.offset + this.limit
-      return Boolean(
-        this.filtered.slice(nextOffset, this.limit + nextOffset).length,
-      )
-    },
+		hasNextPage() {
+			const nextOffset = this.offset + this.limit
+			return Boolean(
+				this.filtered.slice(nextOffset, this.limit + nextOffset).length,
+			)
+		},
 
-    hasPrevPage() {
-      const prevOffset = this.offset - this.limit
-      return Boolean(
-        this.filtered.slice(prevOffset, this.limit + prevOffset).length,
-      )
-    },
-  },
+		hasPrevPage() {
+			const prevOffset = this.offset - this.limit
+			return Boolean(
+				this.filtered.slice(prevOffset, this.limit + prevOffset).length,
+			)
+		},
+	},
 
-  methods: {
-    onSearch(query) {
-      this.search = query
-      this.offset = 0
-    },
-  },
+	methods: {
+		onSearch(query) {
+			this.search = query
+			this.offset = 0
+		},
+	},
 }
 </script>
 

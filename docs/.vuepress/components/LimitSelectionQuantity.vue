@@ -11,12 +11,12 @@
 <script>
 import books from '../data/books'
 export default {
-  data() {
-    return { selected: [] }
-  },
+	data() {
+		return { selected: [] }
+	},
 
-  computed: {
-    books: () => books,
-  },
+	computed: {
+		books: () => books,
+	},
 }
 </script>

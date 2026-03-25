@@ -15,19 +15,19 @@
 
 <script>
 export default {
-  name: 'ReducerNestedValue',
-  data: () => ({
-    selected: null,
-    options: [
-      {
-        country: 'canada',
-        meta: {
-          id: '1',
-          code: 'ca',
-        },
-      },
-    ],
-  }),
+	name: 'ReducerNestedValue',
+	data: () => ({
+		selected: null,
+		options: [
+			{
+				country: 'canada',
+				meta: {
+					id: '1',
+					code: 'ca',
+				},
+			},
+		],
+	}),
 }
 </script>
 

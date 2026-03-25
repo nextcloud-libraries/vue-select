@@ -6,9 +6,9 @@
 import countryCodes from '../data/countryCodes'
 
 export default {
-  name: 'CountrySelect',
-  data: () => ({
-    options: countryCodes,
-  }),
+	name: 'CountrySelect',
+	data: () => ({
+		options: countryCodes,
+	}),
 }
 </script>

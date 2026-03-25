@@ -12,20 +12,20 @@
 import mountCodePen from '../utils/codePen'
 
 export default {
-  props: {
-    url: {
-      type: String,
-      required: true,
-    },
+	props: {
+		url: {
+			type: String,
+			required: true,
+		},
 
-    height: {
-      type: [String, Number],
-      default: 250,
-    },
-  },
+		height: {
+			type: [String, Number],
+			default: 250,
+		},
+	},
 
-  mounted() {
-    mountCodePen()
-  },
+	mounted() {
+		mountCodePen()
+	},
 }
 </script>

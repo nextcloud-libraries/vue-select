@@ -8,10 +8,10 @@
 
 <script>
 export default {
-  data: () => ({
-    OpenIndicator: {
-      render: (createElement) => createElement('span', '🔽'),
-    },
-  }),
+	data: () => ({
+		OpenIndicator: {
+			render: (createElement) => createElement('span', '🔽'),
+		},
+	}),
 }
 </script>

@@ -20,22 +20,22 @@
 import countries from '../data/countries'
 
 export default {
-  data: () => ({
-    people: [
-      { name: 'John', country: '' },
-      { name: 'Jane', country: '' },
-    ],
-  }),
+	data: () => ({
+		people: [
+			{ name: 'John', country: '' },
+			{ name: 'Jane', country: '' },
+		],
+	}),
 
-  computed: {
-    options: () => countries,
-  },
+	computed: {
+		options: () => countries,
+	},
 
-  methods: {
-    updateCountry(person, country) {
-      person.country = country
-    },
-  },
+	methods: {
+		updateCountry(person, country) {
+			person.country = country
+		},
+	},
 }
 </script>
 
