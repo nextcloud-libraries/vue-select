@@ -1091,8 +1091,7 @@ export default {
      */
 		setInternalValueFromOptions(value) {
 			if (Array.isArray(value)) {
-				this.$data._value = value.map((val) => this.findOptionFromReducedValue(val),
-				)
+				this.$data._value = value.map((val) => this.findOptionFromReducedValue(val))
 			} else {
 				this.$data._value = this.findOptionFromReducedValue(value)
 			}
@@ -1261,8 +1260,7 @@ export default {
      * @return {boolean}        True when selected | False otherwise
      */
 		isOptionSelected(option) {
-			return this.selectedValue.some((value) => this.optionComparator(value, option),
-			)
+			return this.selectedValue.some((value) => this.optionComparator(value, option))
 		},
 
 		/**
@@ -1321,8 +1319,7 @@ export default {
        * @see https://github.com/sagalbot/vue-select/issues/1089#issuecomment-597238735
        */
 			return (
-				matches.find((match) => this.optionComparator(match, this.$data._value),
-				) || value
+				matches.find((match) => this.optionComparator(match, this.$data._value)) || value
 			)
 		},
 
@@ -1366,8 +1363,7 @@ export default {
      * @return {boolean}
      */
 		optionExists(option) {
-			return this.optionList.some((_option) => this.optionComparator(_option, option),
-			)
+			return this.optionList.some((_option) => this.optionComparator(_option, option))
 		},
 
 		/**

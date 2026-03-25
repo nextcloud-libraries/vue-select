@@ -24,8 +24,7 @@ export default {
 
 	computed: {
 		filtered() {
-			return this.countries.filter((country) => country.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()),
-			)
+			return this.countries.filter((country) => country.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()))
 		},
 
 		paginated() {
