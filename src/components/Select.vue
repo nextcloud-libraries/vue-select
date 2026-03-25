@@ -157,33 +157,33 @@ export default {
 
 	props: {
 		/**
-     * Contains the currently selected value. Very similar to a
-     * `value` attribute on an <input>. You can listen for changes
-     * with the 'input' event.
-     * @type {object | string | Array | null}
-     */
+		 * Contains the currently selected value. Very similar to a
+		 * `value` attribute on an <input>. You can listen for changes
+		 * with the 'input' event.
+		 * @type {object | string | Array | null}
+		 */
 		// eslint-disable-next-line vue/require-default-prop,vue/require-prop-types
 		modelValue: {},
 
 		/**
-     * An object with any custom components that you'd like to overwrite
-     * the default implementation of in your app. The keys in this object
-     * will be merged with the defaults.
-     * @see https://vue-select.org/guide/components.html
-     * @type {Function}
-     */
+		 * An object with any custom components that you'd like to overwrite
+		 * the default implementation of in your app. The keys in this object
+		 * will be merged with the defaults.
+		 * @see https://vue-select.org/guide/components.html
+		 * @type {Function}
+		 */
 		components: {
 			type: Object,
 			default: () => ({}),
 		},
 
 		/**
-     * An array of strings or objects to be used as dropdown choices.
-     * If you are using an array of objects, vue-select will look for
-     * a `label` key (ex. [{label: 'This is Foo', value: 'foo'}]). A
-     * custom label key can be set with the `label` prop.
-     * @type {Array}
-     */
+		 * An array of strings or objects to be used as dropdown choices.
+		 * If you are using an array of objects, vue-select will look for
+		 * a `label` key (ex. [{label: 'This is Foo', value: 'foo'}]). A
+		 * custom label key can be set with the `label` prop.
+		 * @type {Array}
+		 */
 		options: {
 			type: Array,
 			default() {
@@ -192,196 +192,196 @@ export default {
 		},
 
 		/**
-     * Sets the maximum number of options to display in the dropdown list
-     * @type {number}
-     */
+		 * Sets the maximum number of options to display in the dropdown list
+		 * @type {number}
+		 */
 		limit: {
 			type: Number,
 			default: null,
 		},
 
 		/**
-     * Disable the entire component.
-     * @type {boolean}
-     */
+		 * Disable the entire component.
+		 * @type {boolean}
+		 */
 		disabled: {
 			type: Boolean,
 			default: false,
 		},
 
 		/**
-     * Can the user clear the selected property.
-     * @type {boolean}
-     */
+		 * Can the user clear the selected property.
+		 * @type {boolean}
+		 */
 		clearable: {
 			type: Boolean,
 			default: true,
 		},
 
 		/**
-     * Can the user deselect an option by clicking it from
-     * within the dropdown.
-     * @type {boolean}
-     */
+		 * Can the user deselect an option by clicking it from
+		 * within the dropdown.
+		 * @type {boolean}
+		 */
 		deselectFromDropdown: {
 			type: Boolean,
 			default: false,
 		},
 
 		/**
-     * Enable/disable filtering the options.
-     * @type {boolean}
-     */
+		 * Enable/disable filtering the options.
+		 * @type {boolean}
+		 */
 		searchable: {
 			type: Boolean,
 			default: true,
 		},
 
 		/**
-     * Equivalent to the `multiple` attribute on a `<select>` input.
-     * @type {boolean}
-     */
+		 * Equivalent to the `multiple` attribute on a `<select>` input.
+		 * @type {boolean}
+		 */
 		multiple: {
 			type: Boolean,
 			default: false,
 		},
 
 		/**
-     * Equivalent to the `placeholder` attribute on an `<input>`.
-     * @type {string}
-     */
+		 * Equivalent to the `placeholder` attribute on an `<input>`.
+		 * @type {string}
+		 */
 		placeholder: {
 			type: String,
 			default: '',
 		},
 
 		/**
-     * Sets a Vue transition property on the `.vs__dropdown-menu`.
-     * @type {string}
-     */
+		 * Sets a Vue transition property on the `.vs__dropdown-menu`.
+		 * @type {string}
+		 */
 		transition: {
 			type: String,
 			default: 'vs__fade',
 		},
 
 		/**
-     * Enables/disables clearing the search text when an option is selected.
-     * @type {boolean}
-     */
+		 * Enables/disables clearing the search text when an option is selected.
+		 * @type {boolean}
+		 */
 		clearSearchOnSelect: {
 			type: Boolean,
 			default: true,
 		},
 
 		/**
-     * Close a dropdown when an option is chosen. Set to false to keep the dropdown
-     * open (useful when combined with multi-select, for example)
-     * @type {boolean}
-     */
+		 * Close a dropdown when an option is chosen. Set to false to keep the dropdown
+		 * open (useful when combined with multi-select, for example)
+		 * @type {boolean}
+		 */
 		closeOnSelect: {
 			type: Boolean,
 			default: true,
 		},
 
 		/**
-     * Tells vue-select what key to use when generating option
-     * labels when each `option` is an object.
-     * @type {string}
-     */
+		 * Tells vue-select what key to use when generating option
+		 * labels when each `option` is an object.
+		 * @type {string}
+		 */
 		label: {
 			type: String,
 			default: 'label',
 		},
 
 		/**
-     * Allows to customize the `aria-label` set on the comobobox for searching options.
-     * @type {string}
-     * @default 'Search for options'
-     */
+		 * Allows to customize the `aria-label` set on the comobobox for searching options.
+		 * @type {string}
+		 * @default 'Search for options'
+		 */
 		ariaLabelCombobox: {
 			type: String,
 			default: 'Search for options',
 		},
 
 		/**
-     * Allows to customize the `aria-label` set on the listbox element.
-     * @type {string}
-     * @default 'Options'
-     */
+		 * Allows to customize the `aria-label` set on the listbox element.
+		 * @type {string}
+		 * @default 'Options'
+		 */
 		ariaLabelListbox: {
 			type: String,
 			default: 'Options',
 		},
 
 		/**
-     * Allows to customize the `aria-label` set on the clear-selected button
-     * @type {string}
-     * @default 'Clear selected'
-     */
+		 * Allows to customize the `aria-label` set on the clear-selected button
+		 * @type {string}
+		 * @default 'Clear selected'
+		 */
 		ariaLabelClearSelected: {
 			type: String,
 			default: 'Clear selected',
 		},
 
 		/**
-     * Allows to customize the `aria-label` for the deselect-option button
-     * The default is "Deselect " + optionLabel
-     * @type {(optionLabel: string) => string}
-     */
+		 * Allows to customize the `aria-label` for the deselect-option button
+		 * The default is "Deselect " + optionLabel
+		 * @type {(optionLabel: string) => string}
+		 */
 		ariaLabelDeselectOption: {
 			type: Function,
 			default: (optionLabel) => `Deselect ${optionLabel}`,
 		},
 
 		/**
-     * Value of the 'autocomplete' field of the input
-     * element.
-     * @type {string}
-     */
+		 * Value of the 'autocomplete' field of the input
+		 * element.
+		 * @type {string}
+		 */
 		autocomplete: {
 			type: String,
 			default: 'off',
 		},
 
 		/**
-     * When working with objects, the reduce
-     * prop allows you to transform a given
-     * object to only the information you
-     * want passed to a v-model binding
-     * or @input event.
-     */
+		 * When working with objects, the reduce
+		 * prop allows you to transform a given
+		 * object to only the information you
+		 * want passed to a v-model binding
+		 * or @input event.
+		 */
 		reduce: {
 			type: Function,
 			default: (option) => option,
 		},
 
 		/**
-     * Decides whether an option is selectable or not. Not selectable options
-     * are displayed but disabled and cannot be selected.
-     *
-     * @type {Function}
-     * @since 3.3.0
-     * @param {object | string} option
-     * @return {boolean}
-     */
+		 * Decides whether an option is selectable or not. Not selectable options
+		 * are displayed but disabled and cannot be selected.
+		 *
+		 * @type {Function}
+		 * @since 3.3.0
+		 * @param {object | string} option
+		 * @return {boolean}
+		 */
 		selectable: {
 			type: Function,
-			default: (option) => true,
+			default: () => true,
 		},
 
 		/**
-     * Callback to generate the label text. If {option}
-     * is an object, returns option[this.label] by default.
-     *
-     * Label text is used for filtering comparison and
-     * displaying. If you only need to adjust the
-     * display, you should use the `option` and
-     * `selected-option` slots.
-     *
-     * @type {Function}
-     * @param  {Object || String} option
-     * @return {string}
-     */
+		 * Callback to generate the label text. If {option}
+		 * is an object, returns option[this.label] by default.
+		 *
+		 * Label text is used for filtering comparison and
+		 * displaying. If you only need to adjust the
+		 * display, you should use the `option` and
+		 * `selected-option` slots.
+		 *
+		 * @type {Function}
+		 * @param  {Object || String} option
+		 * @return {string}
+		 */
 		getOptionLabel: {
 			type: Function,
 			default(option) {
@@ -398,21 +398,21 @@ export default {
 		},
 
 		/**
-     * Generate a unique identifier for each option. If `option`
-     * is an object and `option.hasOwnProperty('id')` exists,
-     * `option.id` is used by default, otherwise the option
-     * will be serialized to JSON.
-     *
-     * If you are supplying a lot of options, you should
-     * provide your own keys, as JSON.stringify can be
-     * slow with lots of objects.
-     *
-     * The result of this function *must* be unique.
-     *
-     * @type {Function}
-     * @param  {Object || String} option
-     * @return {string}
-     */
+		 * Generate a unique identifier for each option. If `option`
+		 * is an object and `option.hasOwnProperty('id')` exists,
+		 * `option.id` is used by default, otherwise the option
+		 * will be serialized to JSON.
+		 *
+		 * If you are supplying a lot of options, you should
+		 * provide your own keys, as JSON.stringify can be
+		 * slow with lots of objects.
+		 *
+		 * The result of this function *must* be unique.
+		 *
+		 * @type {Function}
+		 * @param  {Object || String} option
+		 * @return {string}
+		 */
 		getOptionKey: {
 			type: Function,
 			default(option) {
@@ -436,9 +436,9 @@ export default {
 		},
 
 		/**
-     * Select the current value if selectOnTab is enabled
-     * @deprecated since 3.3
-     */
+		 * Select the current value if selectOnTab is enabled
+		 * @deprecated since 3.3
+		 */
 		onTab: {
 			type: Function,
 			default() {
@@ -449,54 +449,54 @@ export default {
 		},
 
 		/**
-     * Enable/disable creating options from searchEl.
-     * @type {boolean}
-     */
+		 * Enable/disable creating options from searchEl.
+		 * @type {boolean}
+		 */
 		taggable: {
 			type: Boolean,
 			default: false,
 		},
 
 		/**
-     * Set the tabindex for the input field.
-     * @type {number}
-     */
+		 * Set the tabindex for the input field.
+		 * @type {number}
+		 */
 		tabindex: {
 			type: Number,
 			default: null,
 		},
 
 		/**
-     * When true, newly created tags will be added to
-     * the options list.
-     * @type {boolean}
-     */
+		 * When true, newly created tags will be added to
+		 * the options list.
+		 * @type {boolean}
+		 */
 		pushTags: {
 			type: Boolean,
 			default: false,
 		},
 
 		/**
-     * When true, existing options will be filtered
-     * by the search text. Should not be used in conjunction
-     * with taggable.
-     * @type {boolean}
-     */
+		 * When true, existing options will be filtered
+		 * by the search text. Should not be used in conjunction
+		 * with taggable.
+		 * @type {boolean}
+		 */
 		filterable: {
 			type: Boolean,
 			default: true,
 		},
 
 		/**
-     * Callback to determine if the provided option should
-     * match the current search text. Used to determine
-     * if the option should be displayed.
-     * @type   {Function}
-     * @param  {Object || String} option
-     * @param  {string} label
-     * @param  {string} search
-     * @return {boolean}
-     */
+		 * Callback to determine if the provided option should
+		 * match the current search text. Used to determine
+		 * if the option should be displayed.
+		 * @type	{Function}
+		 * @param  {Object || String} option
+		 * @param  {string} label
+		 * @param  {string} search
+		 * @return {boolean}
+		 */
 		filterBy: {
 			type: Function,
 			default(option, label, search) {
@@ -509,16 +509,16 @@ export default {
 		},
 
 		/**
-     * Callback to filter results when search text
-     * is provided. Default implementation loops
-     * each option, and returns the result of
-     * this.filterBy.
-     * @type   {Function}
-     * @param  {Array} list of options
-     * @param  {string} search text
-     * @param  {object} vSelect instance
-     * @return {boolean}
-     */
+		 * Callback to filter results when search text
+		 * is provided. Default implementation loops
+		 * each option, and returns the result of
+		 * this.filterBy.
+		 * @type	{Function}
+		 * @param  {Array} list of options
+		 * @param  {string} search text
+		 * @param  {object} vSelect instance
+		 * @return {boolean}
+		 */
 		filter: {
 			type: Function,
 			default(options, search) {
@@ -533,9 +533,9 @@ export default {
 		},
 
 		/**
-     * User defined function for adding Options
-     * @type {Function}
-     */
+		 * User defined function for adding Options
+		 * @type {Function}
+		 */
 		createOption: {
 			type: Function,
 			default(option) {
@@ -546,36 +546,36 @@ export default {
 		},
 
 		/**
-     * If false, the focused dropdown option will not be reset when filtered
-     * options change.
-     * @type {boolean}
-     */
+		 * If false, the focused dropdown option will not be reset when filtered
+		 * options change.
+		 * @type {boolean}
+		 */
 		resetFocusOnOptionsChange: {
 			type: Boolean,
 			default: true,
 		},
 
 		/**
-     * When false, updating the options will not reset the selected value. Accepts
-     * a `boolean` or `function` that returns a `boolean`. If defined as a function,
-     * it will receive the params listed below.
-     *
-     * @since 3.4 - Type changed to {boolean | Function}
-     *
-     * @type {boolean | Function}
-     * @param {Array} newOptions
-     * @param {Array} oldOptions
-     * @param {Array} selectedValue
-     */
+		 * When false, updating the options will not reset the selected value. Accepts
+		 * a `boolean` or `function` that returns a `boolean`. If defined as a function,
+		 * it will receive the params listed below.
+		 *
+		 * @since 3.4 - Type changed to {boolean | Function}
+		 *
+		 * @type {boolean | Function}
+		 * @param {Array} newOptions
+		 * @param {Array} oldOptions
+		 * @param {Array} selectedValue
+		 */
 		resetOnOptionsChange: {
 			default: false,
 			validator: (value) => ['function', 'boolean'].includes(typeof value),
 		},
 
 		/**
-     * If search text should clear on blur
-     * @return {boolean} True when single and clearSearchOnSelect
-     */
+		 * If search text should clear on blur
+		 * @return {boolean} True when single and clearSearchOnSelect
+		 */
 		clearSearchOnBlur: {
 			type: Function,
 			default({ clearSearchOnSelect, multiple }) {
@@ -584,49 +584,49 @@ export default {
 		},
 
 		/**
-     * Disable the dropdown entirely.
-     * @type {boolean}
-     */
+		 * Disable the dropdown entirely.
+		 * @type {boolean}
+		 */
 		noDrop: {
 			type: Boolean,
 			default: false,
 		},
 
 		/**
-     * Sets the id of the input element.
-     * @type {string}
-     * @default {null}
-     */
+		 * Sets the id of the input element.
+		 * @type {string}
+		 * @default {null}
+		 */
 		// eslint-disable-next-line vue/require-default-prop
 		inputId: {
 			type: String,
 		},
 
 		/**
-     * Sets RTL support. Accepts 'ltr', 'rtl', 'auto'.
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir
-     * @type {string}
-     * @default 'auto'
-     */
+		 * Sets RTL support. Accepts 'ltr', 'rtl', 'auto'.
+		 * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir
+		 * @type {string}
+		 * @default 'auto'
+		 */
 		dir: {
 			type: String,
 			default: 'auto',
 		},
 
 		/**
-     * When true, hitting the 'tab' key will select the current select value
-     * @type {boolean}
-     * @deprecated since 3.3 - use selectOnKeyCodes instead
-     */
+		 * When true, hitting the 'tab' key will select the current select value
+		 * @type {boolean}
+		 * @deprecated since 3.3 - use selectOnKeyCodes instead
+		 */
 		selectOnTab: {
 			type: Boolean,
 			default: false,
 		},
 
 		/**
-     * Keycodes that will select the current option.
-     * @type Array
-     */
+		 * Keycodes that will select the current option.
+		 * @type Array
+		 */
 		selectOnKeyCodes: {
 			type: Array,
 			default: () => [
@@ -636,70 +636,69 @@ export default {
 		},
 
 		/**
-     * Query Selector used to find the search input
-     * when the 'search' scoped slot is used.
-     *
-     * Must be a valid CSS selector string.
-     *
-     * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector
-     * @type {string}
-     */
+		 * Query Selector used to find the search input
+		 * when the 'search' scoped slot is used.
+		 *
+		 * Must be a valid CSS selector string.
+		 *
+		 * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector
+		 * @type {string}
+		 */
 		searchInputQuerySelector: {
 			type: String,
 			default: '[type=search]',
 		},
 
 		/**
-     * Used to modify the default keydown events map
-     * for the search input. Can be used to implement
-     * custom behaviour for key presses.
-     */
-
+		 * Used to modify the default keydown events map
+		 * for the search input. Can be used to implement
+		 * custom behaviour for key presses.
+		 */
 		mapKeydown: {
 			type: Function,
 			/**
-       * @param map {object}
-       * @param vm {VueSelect}
-       * @return {object}
-       */
-			default: (map, vm) => map,
+		* @param map {object}
+		* @param vm {VueSelect}
+		* @return {object}
+		*/
+			default: (map) => map,
 		},
 
 		/**
-     * Append the dropdown element to the end of the body
-     * and size/position it dynamically. Use it if you have
-     * overflow or z-index issues.
-     * @type {boolean}
-     */
+		 * Append the dropdown element to the end of the body
+		 * and size/position it dynamically. Use it if you have
+		 * overflow or z-index issues.
+		 * @type {boolean}
+		 */
 		appendToBody: {
 			type: Boolean,
 			default: false,
 		},
 
 		/**
-     * When `appendToBody` is true, this function is responsible for
-     * positioning the drop down list.
-     *
-     * If a function is returned from `calculatePosition`, it will
-     * be called when the drop down list is removed from the DOM.
-     * This allows for any garbage collection you may need to do.
-     *
-     * @since v3.7.0
-     * @see http://vue-select.org/guide/positioning.html
-     */
+		 * When `appendToBody` is true, this function is responsible for
+		 * positioning the drop down list.
+		 *
+		 * If a function is returned from `calculatePosition`, it will
+		 * be called when the drop down list is removed from the DOM.
+		 * This allows for any garbage collection you may need to do.
+		 *
+		 * @since v3.7.0
+		 * @see http://vue-select.org/guide/positioning.html
+		 */
 		calculatePosition: {
 			type: Function,
 			/**
-       * @param dropdownList {HTMLUListElement}
-       * @param component {Vue} current instance of vue select
-       * @param width.width
-       * @param width {string} calculated width in pixels of the dropdown menu
-       * @param top {string} absolute position top value in pixels relative to the document
-       * @param left {string} absolute position left value in pixels relative to the document
-       * @param width.top
-       * @param width.left
-       * @return {Function | void}
-       */
+		* @param dropdownList {HTMLUListElement}
+		* @param component {Vue} current instance of vue select
+		* @param width.width
+		* @param width {string} calculated width in pixels of the dropdown menu
+		* @param top {string} absolute position top value in pixels relative to the document
+		* @param left {string} absolute position left value in pixels relative to the document
+		* @param width.top
+		* @param width.left
+		* @return {Function | void}
+		*/
 			default(dropdownList, component, { width, top, left }) {
 				dropdownList.style.top = top
 				dropdownList.style.left = left
@@ -708,12 +707,12 @@ export default {
 		},
 
 		/**
-     * Determines whether the dropdown should be open.
-     * Receives the component instance as the only argument.
-     *
-     * @since v3.12.0
-     * @return boolean
-     */
+		 * Determines whether the dropdown should be open.
+		 * Receives the component instance as the only argument.
+		 *
+		 * @since v3.12.0
+		 * @return boolean
+		 */
 		dropdownShouldOpen: {
 			type: Function,
 			default({ noDrop, open, mutableLoading }) {
@@ -722,18 +721,18 @@ export default {
 		},
 
 		/**
-     * Display a visible border around dropdown options
-     * which have keyboard focus.
-     */
+		 * Display a visible border around dropdown options
+		 * which have keyboard focus.
+		 */
 		keyboardFocusBorder: {
 			type: Boolean,
 			default: false,
 		},
 
 		/**
-     * A unique identifier used to generate IDs in HTML.
-     * Must be unique for every instance of the component.
-     */
+		 * A unique identifier used to generate IDs in HTML.
+		 * Must be unique for every instance of the component.
+		 */
 		uid: {
 			type: [String, Number],
 			default: () => uniqueId(),
@@ -777,18 +776,18 @@ export default {
 		},
 
 		/**
-     * Determine if the component needs to
-     * track the state of values internally.
-     * @return {boolean}
-     */
+		 * Determine if the component needs to
+		 * track the state of values internally.
+		 * @return {boolean}
+		 */
 		isTrackingValues() {
 			return typeof this.modelValue === 'undefined' || this.isReducingValues
 		},
 
 		/**
-     * The options that are currently selected.
-     * @return {Array}
-     */
+		 * The options that are currently selected.
+		 * @return {Array}
+		 */
 		selectedValue() {
 			let value = this.modelValue
 			if (this.isTrackingValues) {
@@ -804,20 +803,20 @@ export default {
 		},
 
 		/**
-     * The options available to be chosen
-     * from the dropdown, including any
-     * tags that have been pushed.
-     *
-     * @return {Array}
-     */
+		 * The options available to be chosen
+		 * from the dropdown, including any
+		 * tags that have been pushed.
+		 *
+		 * @return {Array}
+		 */
 		optionList() {
 			return this.options.concat(this.pushTags ? this.pushedTags : [])
 		},
 
 		/**
-     * Find the search input DOM element.
-     * @return {HTMLInputElement}
-     */
+		 * Find the search input DOM element.
+		 * @return {HTMLInputElement}
+		 */
 		searchEl() {
 			return this.$slots.search
 				? this.$refs.selectedOptions.querySelector(this.searchInputQuerySelector)
@@ -825,9 +824,9 @@ export default {
 		},
 
 		/**
-     * The object to be bound to the $slots.search slot.
-     * @return {object}
-     */
+		 * The object to be bound to the $slots.search slot.
+		 * @return {object}
+		 */
 		scope() {
 			const listSlot = {
 				search: this.search,
@@ -897,12 +896,12 @@ export default {
 		},
 
 		/**
-     * Returns an object containing the child components
-     * that will be used throughout the component. The
-     * `component` prop can be used to overwrite the defaults.
-     *
-     * @return {object}
-     */
+		 * Returns an object containing the child components
+		 * that will be used throughout the component. The
+		 * `component` prop can be used to overwrite the defaults.
+		 *
+		 * @return {object}
+		 */
 		childComponents() {
 			return {
 				...childComponents,
@@ -911,9 +910,9 @@ export default {
 		},
 
 		/**
-     * Holds the current state of the component.
-     * @return {object}
-     */
+		 * Holds the current state of the component.
+		 * @return {object}
+		 */
 		stateClasses() {
 			return {
 				'vs--open': this.dropdownOpen,
@@ -928,28 +927,28 @@ export default {
 		},
 
 		/**
-     * Return the current state of the
-     * search input
-     * @return {boolean} True if non empty value
-     */
+		 * Return the current state of the
+		 * search input
+		 * @return {boolean} True if non empty value
+		 */
 		searching() {
 			return !!this.search
 		},
 
 		/**
-     * Return the current state of the
-     * dropdown menu.
-     * @return {boolean} True if open
-     */
+		 * Return the current state of the
+		 * dropdown menu.
+		 * @return {boolean} True if open
+		 */
 		dropdownOpen() {
 			return this.dropdownShouldOpen(this)
 		},
 
 		/**
-     * Return the placeholder string if it's set
-     * & there is no value selected.
-     * @return {string} Placeholder text
-     */
+		 * Return the placeholder string if it's set
+		 * & there is no value selected.
+		 * @return {string} Placeholder text
+		 */
 		searchPlaceholder() {
 			return this.isValueEmpty && this.placeholder
 				? this.placeholder
@@ -957,13 +956,13 @@ export default {
 		},
 
 		/**
-     * The currently displayed options, filtered
-     * by the search elements value. If tagging
-     * true, the search text will be prepended
-     * if it doesn't already exist.
-     *
-     * @return {Array}
-     */
+		 * The currently displayed options, filtered
+		 * by the search elements value. If tagging
+		 * true, the search text will be prepended
+		 * if it doesn't already exist.
+		 *
+		 * @return {Array}
+		 */
 		filteredOptions() {
 			const limitOptions = (options) => {
 				if (this.limit !== null) {
@@ -987,7 +986,7 @@ export default {
 					if (!this.optionExists(createdOption)) {
 						options.unshift(createdOption)
 					}
-				} catch (e) {
+				} catch {
 					// omit option on error
 				}
 			}
@@ -995,17 +994,17 @@ export default {
 		},
 
 		/**
-     * Check if there aren't any options selected.
-     * @return {boolean}
-     */
+		 * Check if there aren't any options selected.
+		 * @return {boolean}
+		 */
 		isValueEmpty() {
 			return this.selectedValue.length === 0
 		},
 
 		/**
-     * Determines if the clear button should be displayed.
-     * @return {boolean}
-     */
+		 * Determines if the clear button should be displayed.
+		 * @return {boolean}
+		 */
 		showClearButton() {
 			return (
 				!this.multiple && this.clearable && !this.open && !this.isValueEmpty
@@ -1015,14 +1014,14 @@ export default {
 
 	watch: {
 		/**
-     * Maybe reset the value
-     * when options change.
-     * Make sure selected option
-     * is correct.
-     * @param newOptions
-     * @param oldOptions
-     * @return {[type]} [description]
-     */
+		 * Maybe reset the value
+		 * when options change.
+		 * Make sure selected option
+		 * is correct.
+		 * @param newOptions
+		 * @param oldOptions
+		 * @return {[type]} [description]
+		 */
 		options(newOptions, oldOptions) {
 			const shouldReset = () => typeof this.resetOnOptionsChange === 'function'
 				? this.resetOnOptionsChange(
@@ -1042,9 +1041,9 @@ export default {
 		},
 
 		/**
-     * Make sure to update internal
-     * value if prop changes outside
-     */
+		 * Make sure to update internal
+		 * value if prop changes outside
+		 */
 		modelValue: {
 			immediate: true,
 			handler(val) {
@@ -1055,10 +1054,10 @@ export default {
 		},
 
 		/**
-     * Always reset the value when
-     * the multiple prop changes.
-     * @return {void}
-     */
+		 * Always reset the value when
+		 * the multiple prop changes.
+		 * @return {void}
+		 */
 		multiple() {
 			this.clearSelection()
 		},
@@ -1080,11 +1079,11 @@ export default {
 
 	methods: {
 		/**
-     * Make sure tracked value is
-     * one option if possible.
-     * @param  {object | string} value
-     * @return {void}
-     */
+		 * Make sure tracked value is
+		 * one option if possible.
+		 * @param  {object | string} value
+		 * @return {void}
+		 */
 		setInternalValueFromOptions(value) {
 			if (Array.isArray(value)) {
 				this.$data._value = value.map((val) => this.findOptionFromReducedValue(val))
@@ -1094,11 +1093,11 @@ export default {
 		},
 
 		/**
-     * Select or deselect a given option.
-     * Allow deselect if clearable or if not the only selected option.
-     * @param  {object | string} option
-     * @return {void}
-     */
+		 * Select or deselect a given option.
+		 * Allow deselect if clearable or if not the only selected option.
+		 * @param  {object | string} option
+		 * @return {void}
+		 */
 		select(option) {
 			this.$emit('option:selecting', option)
 			if (!this.isOptionSelected(option)) {
@@ -1122,10 +1121,10 @@ export default {
 		},
 
 		/**
-     * De-select a given option.
-     * @param  {object | string} option
-     * @return {void}
-     */
+		 * De-select a given option.
+		 * @param  {object | string} option
+		 * @return {void}
+		 */
 		deselect(option) {
 			this.$emit('option:deselecting', option)
 			this.updateValue(this.selectedValue.filter((val) => {
@@ -1135,20 +1134,20 @@ export default {
 		},
 
 		/**
-     * De-select a given option on keyboard input.
-     * @param  {object | string} option
-     * @param  {number} index
-     * @return {void}
-     */
+		 * De-select a given option on keyboard input.
+		 * @param  {object | string} option
+		 * @param  {number} index
+		 * @return {void}
+		 */
 		keyboardDeselect(option, index) {
 			this.deselect(option)
 			/**
-       * The index of the next deselect is not yet at the same index as the
-       * removed deselect element because Vue updates asynchronously
-       *
-       * $nextTick cannot be used as the tests will fail even after using
-       * $nextTick in the tests as well
-       */
+			* The index of the next deselect is not yet at the same index as the
+			* removed deselect element because Vue updates asynchronously
+			*
+			* $nextTick cannot be used as the tests will fail even after using
+			* $nextTick in the tests as well
+			*/
 			const nextDeselect = this.deselectButtons?.[index + 1]
 			const prevDeselect = this.deselectButtons?.[index - 1]
 			const deselectToFocus = nextDeselect ?? prevDeselect
@@ -1160,20 +1159,20 @@ export default {
 		},
 
 		/**
-     * Clears the currently selected value(s)
-     * @return {void}
-     */
+		 * Clears the currently selected value(s)
+		 * @return {void}
+		 */
 		clearSelection() {
 			this.updateValue(this.multiple ? [] : null)
 			this.searchEl.focus()
 		},
 
 		/**
-     * Called from this.select after each selection.
-     * @param  {object | string} option
-     * @return {void}
-     */
-		onAfterSelect(option) {
+		 * Called from this.select after each selection.
+		 * @param  {object | string} option
+		 * @return {void}
+		 */
+		onAfterSelect() {
 			if (this.closeOnSelect) {
 				this.open = !this.open
 			}
@@ -1187,13 +1186,13 @@ export default {
 		},
 
 		/**
-     * Accepts a selected value, updates local
-     * state when required, and triggers the
-     * input event.
-     *
-     * @fires input
-     * @param value
-     */
+		 * Accepts a selected value, updates local
+		 * state when required, and triggers the
+		 * input event.
+		 *
+		 * @fires input
+		 * @param value
+		 */
 		updateValue(value) {
 			if (typeof this.modelValue === 'undefined') {
 				// Vue select has to manage value
@@ -1212,10 +1211,10 @@ export default {
 		},
 
 		/**
-     * Toggle the visibility of the dropdown menu.
-     * @param  {Event} event
-     * @return {void}
-     */
+		 * Toggle the visibility of the dropdown menu.
+		 * @param  {Event} event
+		 * @return {void}
+		 */
 		toggleDropdown(event) {
 			const targetIsNotSearch = event.target !== this.searchEl
 			if (targetIsNotSearch) {
@@ -1226,7 +1225,7 @@ export default {
 			//  they dropdown state will be set in their click handlers
 			const ignoredButtons = [
 				...(this.deselectButtons || []),
-				...([this.$refs.clearButton] || []),
+				...(this.$refs.clearButton ? [this.$refs.clearButton] : []),
 			]
 
 			if (
@@ -1249,28 +1248,28 @@ export default {
 		},
 
 		/**
-     * Check if the given option is currently selected.
-     * @param  {object | string}  option
-     * @return {boolean}        True when selected | False otherwise
-     */
+		 * Check if the given option is currently selected.
+		 * @param  {object | string}  option
+		 * @return {boolean} True when selected | False otherwise
+		 */
 		isOptionSelected(option) {
 			return this.selectedValue.some((value) => this.optionComparator(value, option))
 		},
 
 		/**
-     *  Can the current option be removed via the dropdown?
-     * @param option
-     */
+		 *  Can the current option be removed via the dropdown?
+		 * @param option
+		 */
 		isOptionDeselectable(option) {
 			return this.isOptionSelected(option) && this.deselectFromDropdown
 		},
 
 		/**
-     * Check if the option at the given index should display a
-     * keyboard focus border.
-     * @param  {number} index
-     * @return {boolean}
-     */
+		 * Check if the option at the given index should display a
+		 * keyboard focus border.
+		 * @param  {number} index
+		 * @return {boolean}
+		 */
 		hasKeyboardFocusBorder(index) {
 			if (this.keyboardFocusBorder && this.isKeyboardNavigation) {
 				return index === this.typeAheadPointer
@@ -1279,24 +1278,24 @@ export default {
 		},
 
 		/**
-     * Determine if two option objects are matching.
-     *
-     * @param a {Object}
-     * @param b {Object}
-     * @return {boolean}
-     */
+		 * Determine if two option objects are matching.
+		 *
+		 * @param a {Object}
+		 * @param b {Object}
+		 * @return {boolean}
+		 */
 		optionComparator(a, b) {
 			return this.getOptionKey(a) === this.getOptionKey(b)
 		},
 
 		/**
-     * Finds an option from the options
-     * where a reduced value matches
-     * the passed in value.
-     *
-     * @param value {Object}
-     * @return {*}
-     */
+		 * Finds an option from the options
+		 * where a reduced value matches
+		 * the passed in value.
+		 *
+		 * @param value {Object}
+		 * @return {*}
+		 */
 		findOptionFromReducedValue(value) {
 			const predicate = (option) => JSON.stringify(this.reduce(option)) === JSON.stringify(value)
 
@@ -1307,31 +1306,31 @@ export default {
 			}
 
 			/**
-       * This second loop is needed to cover an edge case where `taggable` + `reduce`
-       * were used in conjunction with a `create-option` that doesn't create a
-       * unique reduced value.
-       * @see https://github.com/sagalbot/vue-select/issues/1089#issuecomment-597238735
-       */
+			* This second loop is needed to cover an edge case where `taggable` + `reduce`
+			* were used in conjunction with a `create-option` that doesn't create a
+			* unique reduced value.
+			* @see https://github.com/sagalbot/vue-select/issues/1089#issuecomment-597238735
+			*/
 			return (
 				matches.find((match) => this.optionComparator(match, this.$data._value)) || value
 			)
 		},
 
 		/**
-     * 'Private' function to close the search options
-     * @fires  {search:blur}
-     * @return {void}
-     */
+		 * 'Private' function to close the search options
+		 * @fires  {search:blur}
+		 * @return {void}
+		 */
 		closeSearchOptions() {
 			this.open = false
 			this.$emit('search:blur')
 		},
 
 		/**
-     * Delete the value on Delete keypress when there is no
-     * text in the search input, & there's tags to delete
-     * @return {this.value}
-     */
+		 * Delete the value on Delete keypress when there is no
+		 * text in the search input, & there's tags to delete
+		 * @return {this.value}
+		 */
 		maybeDeleteValue() {
 			if (
 				!this.searchEl.value.length
@@ -1350,23 +1349,23 @@ export default {
 		},
 
 		/**
-     * Determine if an option exists
-     * within this.optionList array.
-     *
-     * @param  {Object || String} option
-     * @return {boolean}
-     */
+		 * Determine if an option exists
+		 * within this.optionList array.
+		 *
+		 * @param  {Object || String} option
+		 * @return {boolean}
+		 */
 		optionExists(option) {
 			return this.optionList.some((_option) => this.optionComparator(_option, option))
 		},
 
 		/**
-     * Determine the `aria-selected` value
-     * of an option
-     *
-     * @param  {object | string} option
-     * @return {null|string}
-     */
+		 * Determine the `aria-selected` value
+		 * of an option
+		 *
+		 * @param  {object | string} option
+		 * @return {null|string}
+		 */
 		optionAriaSelected(option) {
 			if (!this.selectable(option)) {
 				return null
@@ -1375,31 +1374,31 @@ export default {
 		},
 
 		/**
-     * Ensures that options are always
-     * passed as objects to scoped slots.
-     * @param option
-     * @return {*}
-     */
+		 * Ensures that options are always
+		 * passed as objects to scoped slots.
+		 * @param option
+		 * @return {*}
+		 */
 		normalizeOptionForSlot(option) {
 			return typeof option === 'object' ? option : { [this.label]: option }
 		},
 
 		/**
-     * If push-tags is true, push the
-     * given option to `this.pushedTags`.
-     *
-     * @param  {Object || String} option
-     * @return {void}
-     */
+		 * If push-tags is true, push the
+		 * given option to `this.pushedTags`.
+		 *
+		 * @param  {Object || String} option
+		 * @return {void}
+		 */
 		pushTag(option) {
 			this.pushedTags.push(option)
 		},
 
 		/**
-     * If there is any text in the search input, remove it.
-     * Otherwise, blur the search input to close the dropdown.
-     * @return {void}
-     */
+		 * If there is any text in the search input, remove it.
+		 * Otherwise, blur the search input to close the dropdown.
+		 * @return {void}
+		 */
 		onEscape() {
 			if (!this.search.length) {
 				this.open = false
@@ -1409,10 +1408,10 @@ export default {
 		},
 
 		/**
-     * Close the dropdown on blur.
-     * @fires  {search:blur}
-     * @return {void}
-     */
+		 * Close the dropdown on blur.
+		 * @fires  {search:blur}
+		 * @return {void}
+		 */
 		onSearchBlur() {
 			if (this.mousedown && !this.searching) {
 				this.mousedown = false
@@ -1431,42 +1430,42 @@ export default {
 		},
 
 		/**
-     * Open the dropdown on focus.
-     * @fires  {search:focus}
-     * @return {void}
-     */
+		 * Open the dropdown on focus.
+		 * @fires  {search:focus}
+		 * @return {void}
+		 */
 		onSearchFocus() {
 			this.open = true
 			this.$emit('search:focus')
 		},
 
 		/**
-     * Event-Handler to help workaround IE11 (probably fixes 10 as well)
-     * firing a `blur` event when clicking
-     * the dropdown's scrollbar, causing it
-     * to collapse abruptly.
-     * @see https://github.com/sagalbot/vue-select/issues/106
-     * @return {void}
-     */
+		 * Event-Handler to help workaround IE11 (probably fixes 10 as well)
+		 * firing a `blur` event when clicking
+		 * the dropdown's scrollbar, causing it
+		 * to collapse abruptly.
+		 * @see https://github.com/sagalbot/vue-select/issues/106
+		 * @return {void}
+		 */
 		onMousedown() {
 			this.mousedown = true
 		},
 
 		/**
-     * Event-Handler to help workaround IE11 (probably fixes 10 as well)
-     * @see https://github.com/sagalbot/vue-select/issues/106
-     * @return {void}
-     */
+		 * Event-Handler to help workaround IE11 (probably fixes 10 as well)
+		 * @see https://github.com/sagalbot/vue-select/issues/106
+		 * @return {void}
+		 */
 		onMouseUp() {
 			this.mousedown = false
 		},
 
 		/**
-     * Event-Handler for option mousemove
-     * @param {object | string} option
-     * @param {number} index
-     * @return {void}
-     */
+		 * Event-Handler for option mousemove
+		 * @param {object | string} option
+		 * @param {number} index
+		 * @return {void}
+		 */
 		onMouseMove(option, index) {
 			this.isKeyboardNavigation = false
 			if (!this.selectable(option)) {
@@ -1476,10 +1475,10 @@ export default {
 		},
 
 		/**
-     * Search <input> KeyBoardEvent handler.
-     * @param {KeyboardEvent} e
-     * @return {Function}
-     */
+		 * Search <input> KeyBoardEvent handler.
+		 * @param {KeyboardEvent} e
+		 * @return {Function}
+		 */
 		onSearchKeyDown(e) {
 			const preventAndSelect = (e) => {
 				e.preventDefault()
@@ -1492,11 +1491,11 @@ export default {
 
 			const defaults = {
 				//  backspace
-				8: (e) => this.maybeDeleteValue(),
+				8: () => this.maybeDeleteValue(),
 				//  tab
-				9: (e) => this.onTab(),
+				9: () => this.onTab(),
 				//  esc
-				27: (e) => this.onEscape(),
+				27: () => this.onEscape(),
 				//  up.prevent
 				38: (e) => {
 					e.preventDefault()
@@ -1530,9 +1529,9 @@ export default {
 		},
 
 		/**
-     * @todo: Probably want to add a mapKeyPress method just like we have for keydown.
-     * @param {KeyboardEvent} e
-     */
+		 * @todo: Probably want to add a mapKeyPress method just like we have for keydown.
+		 * @param {KeyboardEvent} e
+		 */
 		onSearchKeyPress(e) {
 			if (!this.open && e.keyCode === 32) {
 				e.preventDefault()

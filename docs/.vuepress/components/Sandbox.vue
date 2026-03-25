@@ -225,7 +225,6 @@
 </template>
 
 <script>
-import Fuse from 'fuse.js'
 import debounce from 'lodash/debounce'
 import vSelect from '../../../src/components/Select.vue'
 import books from '../data/books'

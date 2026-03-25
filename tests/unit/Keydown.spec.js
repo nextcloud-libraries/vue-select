@@ -13,7 +13,7 @@ describe('Custom Keydown Handlers', () => {
 	it('can use the map-keydown prop to trigger custom behaviour', async () => {
 		const onKeyDown = vi.fn()
 		const Select = mountDefault({
-			mapKeydown: (defaults, vm) => ({ ...defaults, 32: onKeyDown }),
+			mapKeydown: (defaults) => ({ ...defaults, 32: onKeyDown }),
 		})
 
 		await Select.get('input').trigger('keydown.space')
@@ -39,7 +39,7 @@ describe('Custom Keydown Handlers', () => {
 
 		const onKeyDown = vi.fn()
 		const Select = mountDefault({
-			mapKeydown: (defaults, vm) => ({ ...defaults, 32: onKeyDown }),
+			mapKeydown: (defaults) => ({ ...defaults, 32: onKeyDown }),
 			selectOnKeyCodes: [9],
 		})
 

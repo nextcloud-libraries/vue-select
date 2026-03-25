@@ -6,7 +6,6 @@
 
 <script>
 import vSelect from '../src/components/Select.vue'
-import books from '../docs/.vuepress/data/books'
 import countries from '../docs/.vuepress/data/countryCodes'
 
 export default {
