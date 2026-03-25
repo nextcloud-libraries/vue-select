@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
 	<div
 		:id="`v-select-${uid}`"
@@ -137,6 +138,7 @@
 </template>
 
 <script>
+import { warn } from 'vue'
 import appendToBody from '../directives/appendToBody.js'
 import ajax from '../mixins/ajax.js'
 import pointerScroll from '../mixins/pointerScroll.js'
@@ -162,7 +164,6 @@ export default {
 		 * with the 'input' event.
 		 * @type {object | string | Array | null}
 		 */
-		// eslint-disable-next-line vue/require-default-prop,vue/require-prop-types
 		modelValue: {},
 
 		/**
@@ -387,7 +388,7 @@ export default {
 			default(option) {
 				if (typeof option === 'object') {
 					if (!Object.hasOwn(option, this.label)) {
-						return console.warn(`[vue-select warn]: Label key "option.${this.label}" does not`
+						return warn(`[vue-select warn]: Label key "option.${this.label}" does not`
 							+ ` exist in options object ${JSON.stringify(option)}.\n`
 							+ 'https://vue-select.org/api/props.html#getoptionlabel')
 					}
@@ -430,7 +431,7 @@ export default {
 							+ 'to generate unique key. Please provide\'getOptionKey\' prop '
 							+ 'to return a unique key for each option.\n'
 							+ 'https://vue-select.org/api/props.html#getoptionkey'
-					return console.warn(warning, option, e)
+					return warn(warning, option, e)
 				}
 			},
 		},
@@ -491,7 +492,7 @@ export default {
 		 * Callback to determine if the provided option should
 		 * match the current search text. Used to determine
 		 * if the option should be displayed.
-		 * @type	{Function}
+		 * @type {Function}
 		 * @param  {Object || String} option
 		 * @param  {string} label
 		 * @param  {string} search
@@ -513,7 +514,7 @@ export default {
 		 * is provided. Default implementation loops
 		 * each option, and returns the result of
 		 * this.filterBy.
-		 * @type	{Function}
+		 * @type {Function}
 		 * @param  {Array} list of options
 		 * @param  {string} search text
 		 * @param  {object} vSelect instance
@@ -597,7 +598,6 @@ export default {
 		 * @type {string}
 		 * @default {null}
 		 */
-		// eslint-disable-next-line vue/require-default-prop
 		inputId: {
 			type: String,
 		},
@@ -657,8 +657,8 @@ export default {
 		mapKeydown: {
 			type: Function,
 			/**
-		* @param map {object}
-		* @param vm {VueSelect}
+		* @param {object} map
+		* @param {VueSelect} vm
 		* @return {object}
 		*/
 			default: (map) => map,
@@ -689,14 +689,12 @@ export default {
 		calculatePosition: {
 			type: Function,
 			/**
-		* @param dropdownList {HTMLUListElement}
-		* @param component {Vue} current instance of vue select
-		* @param width.width
-		* @param width {string} calculated width in pixels of the dropdown menu
-		* @param top {string} absolute position top value in pixels relative to the document
-		* @param left {string} absolute position left value in pixels relative to the document
-		* @param width.top
-		* @param width.left
+		* @param {HTMLUListElement} dropdownList
+		* @param {Vue} component
+		* @param {object} width
+		* @param {string} width.width
+		* @param {string} width.top
+		* @param {string} width.left
 		* @return {Function | void}
 		*/
 			default(dropdownList, component, { width, top, left }) {
@@ -711,7 +709,7 @@ export default {
 		 * Receives the component instance as the only argument.
 		 *
 		 * @since v3.12.0
-		 * @return boolean
+		 * @return {boolean}
 		 */
 		dropdownShouldOpen: {
 			type: Function,
@@ -1018,9 +1016,9 @@ export default {
 		 * when options change.
 		 * Make sure selected option
 		 * is correct.
-		 * @param newOptions
-		 * @param oldOptions
-		 * @return {[type]} [description]
+		 * @param {Array} newOptions
+		 * @param {Array} oldOptions
+		 * @return {boolean} [description]
 		 */
 		options(newOptions, oldOptions) {
 			const shouldReset = () => typeof this.resetOnOptionsChange === 'function'
@@ -1191,7 +1189,7 @@ export default {
 		 * input event.
 		 *
 		 * @fires input
-		 * @param value
+		 * @param {object | string} value
 		 */
 		updateValue(value) {
 			if (typeof this.modelValue === 'undefined') {
@@ -1258,7 +1256,8 @@ export default {
 
 		/**
 		 *  Can the current option be removed via the dropdown?
-		 * @param option
+		 * @param {object | string} option
+		 * @return {boolean}
 		 */
 		isOptionDeselectable(option) {
 			return this.isOptionSelected(option) && this.deselectFromDropdown
@@ -1280,8 +1279,8 @@ export default {
 		/**
 		 * Determine if two option objects are matching.
 		 *
-		 * @param a {Object}
-		 * @param b {Object}
+		 * @param {object} a
+		 * @param {object} b
 		 * @return {boolean}
 		 */
 		optionComparator(a, b) {
@@ -1293,7 +1292,7 @@ export default {
 		 * where a reduced value matches
 		 * the passed in value.
 		 *
-		 * @param value {Object}
+		 * @param {object} value
 		 * @return {*}
 		 */
 		findOptionFromReducedValue(value) {
@@ -1376,8 +1375,8 @@ export default {
 		/**
 		 * Ensures that options are always
 		 * passed as objects to scoped slots.
-		 * @param option
-		 * @return {*}
+		 * @param {object | string} option
+		 * @return {object}
 		 */
 		normalizeOptionForSlot(option) {
 			return typeof option === 'object' ? option : { [this.label]: option }
@@ -1529,7 +1528,7 @@ export default {
 		},
 
 		/**
-		 * @todo: Probably want to add a mapKeyPress method just like we have for keydown.
+		 * TODO: Probably want to add a mapKeyPress method just like we have for keydown.
 		 * @param {KeyboardEvent} e
 		 */
 		onSearchKeyPress(e) {

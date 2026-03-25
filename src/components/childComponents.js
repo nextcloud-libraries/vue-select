@@ -1,4 +1,4 @@
-import Deselect from './Deselect.vue'
+import Deselect from './DeselectIndicator.vue'
 import OpenIndicator from './OpenIndicator.vue'
 
 export default {

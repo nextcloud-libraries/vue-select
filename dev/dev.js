@@ -1,6 +1,6 @@
 import { createApp, h } from 'vue'
-import Dev from './Dev.vue'
+import DevApp from './DevApp.vue'
 
 createApp({
-	render: () => h(Dev),
+	render: () => h(DevApp),
 }).mount('#app')

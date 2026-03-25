@@ -6,7 +6,7 @@
 
 <script>
 import vSelect from '../src/components/Select.vue'
-import countries from '../docs/.vuepress/data/countryCodes'
+import countries from '../docs/.vuepress/data/countryCodes.js'
 
 export default {
 	components: { VSelect: vSelect },

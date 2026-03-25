@@ -50,7 +50,7 @@ export default {
      * @return {*}
      */
 		toggleLoading(toggle = null) {
-			if (toggle == null) {
+			if (toggle === null || toggle === undefined) {
 				return (this.mutableLoading = !this.mutableLoading)
 			}
 			return (this.mutableLoading = toggle)
