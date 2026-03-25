@@ -231,19 +231,21 @@ import vSelect from '../../../src/components/Select.vue'
 import countries from '../data/countryCodes'
 import books from '../data/books'
 
-const defaultConfig = () => ({
-	options: countries,
-	multiple: false,
-	dir: 'ltr',
-	clearable: true,
-	searchable: true,
-	filterable: true,
-	noDrop: false,
-	closeOnSelect: true,
-	disabled: false,
-	selectOntab: false,
-	placeholder: 'Select a Country...',
-})
+function defaultConfig() {
+	return {
+		options: countries,
+		multiple: false,
+		dir: 'ltr',
+		clearable: true,
+		searchable: true,
+		filterable: true,
+		noDrop: false,
+		closeOnSelect: true,
+		disabled: false,
+		selectOntab: false,
+		placeholder: 'Select a Country...',
+	}
+}
 
 export default {
 	components: { VSelect: vSelect },
