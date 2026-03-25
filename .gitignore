@@ -27,3 +27,6 @@ test/unit/coverage
 dev/dist
 docs/.vuepress/dist
 .netlify
+
+# Tool caches
+.vite/
