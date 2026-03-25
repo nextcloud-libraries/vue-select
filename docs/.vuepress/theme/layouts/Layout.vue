@@ -1,5 +1,5 @@
 <template>
-  <ParentLayout></ParentLayout>
+	<ParentLayout></ParentLayout>
 </template>
 
 <script>

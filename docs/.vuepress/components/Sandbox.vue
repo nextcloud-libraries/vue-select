@@ -1,264 +1,227 @@
 <template>
-  <div id="sandbox-wrap">
-    <div id="config">
-      <div v-if="!hideHelp" class="list-item">
-        <p>
-          Use the controls below to adjust the props used by the vue-select
-          components.
-        </p>
-        <p>
-          The API provides more props than are shown here, these are some
-          commonly adjusted settings.
-        </p>
-      </div>
+	<div id="sandbox-wrap">
+		<div id="config">
+			<div v-if="!hideHelp" class="list-item">
+				<p>
+					Use the controls below to adjust the props used by the vue-select
+					components.
+				</p>
+				<p>
+					The API provides more props than are shown here, these are some
+					commonly adjusted settings.
+				</p>
+			</div>
 
-      <h5 class="list-item">Basic Features</h5>
+			<h5 class="list-item">Basic Features</h5>
 
-      <div class="list-item">
-        <label for="multiple">
-          <input
-            id="multiple"
-            v-model="configuration.multiple"
-            type="checkbox"
-          />
-          <code
-            >:multiple="{{ configuration.multiple ? 'true' : 'false' }}"</code
-          >
-        </label>
-      </div>
+			<div class="list-item">
+				<label for="multiple">
+					<input
+						id="multiple"
+						v-model="configuration.multiple"
+						type="checkbox" />
+					<code>:multiple="{{ configuration.multiple ? 'true' : 'false' }}"</code>
+				</label>
+			</div>
 
-      <div class="list-item">
-        <label for="disabled">
-          <input
-            id="disabled"
-            v-model="configuration.disabled"
-            type="checkbox"
-          />
-          <code
-            >:disabled="{{ configuration.disabled ? 'true' : 'false' }}"</code
-          >
-        </label>
-      </div>
+			<div class="list-item">
+				<label for="disabled">
+					<input
+						id="disabled"
+						v-model="configuration.disabled"
+						type="checkbox" />
+					<code>:disabled="{{ configuration.disabled ? 'true' : 'false' }}"</code>
+				</label>
+			</div>
 
-      <div class="list-item">
-        <label for="clearable">
-          <input
-            id="clearable"
-            v-model="configuration.clearable"
-            type="checkbox"
-          />
-          <code
-            >:clearable="{{ configuration.clearable ? 'true' : 'false' }}"</code
-          >
-        </label>
-      </div>
+			<div class="list-item">
+				<label for="clearable">
+					<input
+						id="clearable"
+						v-model="configuration.clearable"
+						type="checkbox" />
+					<code>:clearable="{{ configuration.clearable ? 'true' : 'false' }}"</code>
+				</label>
+			</div>
 
-      <div class="list-item">
-        <label for="searchable">
-          <input
-            id="searchable"
-            v-model="configuration.searchable"
-            type="checkbox"
-          />
-          <code
-            >:searchable="{{
-              configuration.searchable ? 'true' : 'false'
-            }}"</code
-          >
-        </label>
-      </div>
+			<div class="list-item">
+				<label for="searchable">
+					<input
+						id="searchable"
+						v-model="configuration.searchable"
+						type="checkbox" />
+					<code>:searchable="{{
+						configuration.searchable ? 'true' : 'false'
+					}}"</code>
+				</label>
+			</div>
 
-      <div class="list-item">
-        <label for="filterable">
-          <input
-            id="filterable"
-            v-model="configuration.filterable"
-            type="checkbox"
-          />
-          <code
-            >:filterable="{{
-              configuration.searchable ? 'true' : 'false'
-            }}"</code
-          >
-        </label>
-      </div>
+			<div class="list-item">
+				<label for="filterable">
+					<input
+						id="filterable"
+						v-model="configuration.filterable"
+						type="checkbox" />
+					<code>:filterable="{{
+						configuration.searchable ? 'true' : 'false'
+					}}"</code>
+				</label>
+			</div>
 
-      <h5 class="list-item">Tagging</h5>
+			<h5 class="list-item">Tagging</h5>
 
-      <div class="list-item">
-        <label for="taggable">
-          <input
-            id="taggable"
-            v-model="configuration.taggable"
-            type="checkbox"
-          />
-          <code
-            >:taggable="{{ configuration.taggable ? 'true' : 'false' }}"</code
-          >
-        </label>
-      </div>
+			<div class="list-item">
+				<label for="taggable">
+					<input
+						id="taggable"
+						v-model="configuration.taggable"
+						type="checkbox" />
+					<code>:taggable="{{ configuration.taggable ? 'true' : 'false' }}"</code>
+				</label>
+			</div>
 
-      <div class="list-item">
-        <label for="noDrop">
-          <input id="noDrop" v-model="configuration.noDrop" type="checkbox" />
-          <code>:no-drop="{{ configuration.noDrop ? 'true' : 'false' }}"</code>
-        </label>
-      </div>
+			<div class="list-item">
+				<label for="noDrop">
+					<input id="noDrop" v-model="configuration.noDrop" type="checkbox" />
+					<code>:no-drop="{{ configuration.noDrop ? 'true' : 'false' }}"</code>
+				</label>
+			</div>
 
-      <div class="list-item">
-        <label for="pushTags">
-          <input
-            id="pushTags"
-            v-model="configuration.pushTags"
-            type="checkbox"
-          />
-          <code
-            >:push-tags="{{ configuration.pushTags ? 'true' : 'false' }}"</code
-          >
-        </label>
-      </div>
+			<div class="list-item">
+				<label for="pushTags">
+					<input
+						id="pushTags"
+						v-model="configuration.pushTags"
+						type="checkbox" />
+					<code>:push-tags="{{ configuration.pushTags ? 'true' : 'false' }}"</code>
+				</label>
+			</div>
 
-      <h5 class="list-item">UX</h5>
+			<h5 class="list-item">UX</h5>
 
-      <div class="list-item">
-        <label for="selectOnTab">
-          <input
-            id="selectOnTab"
-            v-model="configuration.selectOnTab"
-            type="checkbox"
-          />
-          <code
-            >:select-on-tab="{{
-              configuration.selectOnTab ? 'true' : 'false'
-            }}"</code
-          >
-        </label>
-      </div>
+			<div class="list-item">
+				<label for="selectOnTab">
+					<input
+						id="selectOnTab"
+						v-model="configuration.selectOnTab"
+						type="checkbox" />
+					<code>:select-on-tab="{{
+						configuration.selectOnTab ? 'true' : 'false'
+					}}"</code>
+				</label>
+			</div>
 
-      <div class="list-item">
-        <label for="closeOnSelect">
-          <input
-            id="closeOnSelect"
-            v-model="configuration.closeOnSelect"
-            type="checkbox"
-          />
-          <code
-            >:close-on-select="{{
-              configuration.closeOnSelect ? 'true' : 'false'
-            }}"</code
-          >
-        </label>
-      </div>
+			<div class="list-item">
+				<label for="closeOnSelect">
+					<input
+						id="closeOnSelect"
+						v-model="configuration.closeOnSelect"
+						type="checkbox" />
+					<code>:close-on-select="{{
+						configuration.closeOnSelect ? 'true' : 'false'
+					}}"</code>
+				</label>
+			</div>
 
-      <h5 class="list-item">Localization / i18n</h5>
+			<h5 class="list-item">Localization / i18n</h5>
 
-      <div class="list-item">
-        <label for="rtl">
-          <input
-            id="rtl"
-            v-model="configuration.dir"
-            type="radio"
-            value="rtl"
-          />
-          <code>dir="rtl"</code>
-        </label>
-        <label for="ltr">
-          <input
-            id="ltr"
-            v-model="configuration.dir"
-            type="radio"
-            value="ltr"
-          />
-          <code>dir="ltr"</code>
-        </label>
-      </div>
-    </div>
+			<div class="list-item">
+				<label for="rtl">
+					<input
+						id="rtl"
+						v-model="configuration.dir"
+						type="radio"
+						value="rtl" />
+					<code>dir="rtl"</code>
+				</label>
+				<label for="ltr">
+					<input
+						id="ltr"
+						v-model="configuration.dir"
+						type="radio"
+						value="ltr" />
+					<code>dir="ltr"</code>
+				</label>
+			</div>
+		</div>
 
-    <div id="sandbox">
-      <slot v-bind="configuration">
-        <div class="example">
-          <v-select
-            v-bind="configuration"
-            placeholder="country objects"
-          ></v-select>
-        </div>
+		<div id="sandbox">
+			<slot v-bind="configuration">
+				<div class="example">
+					<VSelect
+						v-bind="configuration"
+						placeholder="country objects"></VSelect>
+				</div>
 
-        <div class="example">
-          <v-select
-            v-bind="configuration"
-            placeholder="country objects, using option scoped slots"
-          >
-            <template slot="selected-option" slot-scope="{ label, value }">
-              {{ label }} -- {{ value }}
-            </template>
-            <template slot="option" slot-scope="{ label, value }">
-              {{ label }} ({{ value }})
-            </template>
-          </v-select>
-        </div>
+				<div class="example">
+					<VSelect
+						v-bind="configuration"
+						placeholder="country objects, using option scoped slots">
+						<template v-slot:selected-option="{ label, value }">
+							{{ label }} -- {{ value }}
+						</template>
+						<template v-slot:option="{ label, value }">
+							{{ label }} ({{ value }})
+						</template>
+					</VSelect>
+				</div>
 
-        <div class="example">
-          <v-select
-            v-bind="configuration"
-            :options="['cat', 'dog', 'bear']"
-            placeholder="string options, option slots"
-          >
-            <template slot="selected-option" slot-scope="{ label }">
-              {{ label }}
-            </template>
-            <template slot="option" slot-scope="{ label }">
-              {{ label }}
-            </template>
-          </v-select>
-        </div>
+				<div class="example">
+					<VSelect
+						v-bind="configuration"
+						:options="['cat', 'dog', 'bear']"
+						placeholder="string options, option slots">
+						<template v-slot:selected-option="{ label }">
+							{{ label }}
+						</template>
+						<template v-slot:option="{ label }">
+							{{ label }}
+						</template>
+					</VSelect>
+				</div>
 
-        <div class="example">
-          <v-select
-            v-bind="configuration"
-            :options="[1, 5, 10]"
-            placeholder="options=[1,5,10]"
-          ></v-select>
-        </div>
+				<div class="example">
+					<VSelect
+						v-bind="configuration"
+						:options="[1, 5, 10]"
+						placeholder="options=[1,5,10]"></VSelect>
+				</div>
 
-        <div class="example">
-          <v-select
-            v-bind="configuration"
-            label="title"
-            :options="optionDataSets.books"
-            :filter="fuseSearch"
-            placeholder="advanced filtering w/ fuse.js + scoped slots"
-          >
-            <template slot="option" slot-scope="option">
-              <strong>{{ option.title }}</strong
-              ><br />
-              <em>{{
-                `${option.author.firstName} ${option.author.lastName}`
-              }}</em>
-            </template>
-          </v-select>
-        </div>
+				<div class="example">
+					<VSelect
+						v-bind="configuration"
+						label="title"
+						:options="optionDataSets.books"
+						:filter="fuseSearch"
+						placeholder="advanced filtering w/ fuse.js + scoped slots">
+						<template v-slot:option="option">
+							<strong>{{ option.title }}</strong><br />
+							<em>{{
+								`${option.author.firstName} ${option.author.lastName}`
+							}}</em>
+						</template>
+					</VSelect>
+				</div>
 
-        <div class="example">
-          <v-select
-            v-bind="configuration"
-            placeholder="search github repositories.."
-            label="full_name"
-            :options="ajaxRes"
-            @search="search"
-          >
-          </v-select>
-        </div>
+				<div class="example">
+					<VSelect
+						v-bind="configuration"
+						placeholder="search github repositories.."
+						label="full_name"
+						:options="ajaxRes"
+						@search="search">
+					</VSelect>
+				</div>
 
-        <div class="example">
-          <v-select
-            v-bind="configuration"
-            :options="[]"
-            placeholder="options=[]"
-          ></v-select>
-        </div>
-      </slot>
-    </div>
-  </div>
+				<div class="example">
+					<VSelect
+						v-bind="configuration"
+						:options="[]"
+						placeholder="options=[]"></VSelect>
+				</div>
+			</slot>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -283,13 +246,14 @@ const defaultConfig = () => ({
 })
 
 export default {
-  components: { vSelect },
+  components: { VSelect: vSelect },
   props: {
     hideHelp: {
       type: Boolean,
       default: false,
     },
   },
+
   data() {
     return {
       configuration: defaultConfig(),
@@ -303,21 +267,25 @@ export default {
       },
     }
   },
+
   methods: {
     search(search, loading) {
       loading(true)
       this.getRepositories(search, loading, this)
     },
+
     searchPeople(search, loading) {
       loading(true)
       this.getPeople(loading, this)
     },
+
     getPeople: debounce((loading, vm) => {
       vm.$http.get(`https://reqres.in/api/users?per_page=10`).then((res) => {
         vm.people = res.data.data
         loading(false)
       })
     }, 250),
+
     getRepositories: debounce((search, loading, vm) => {
       vm.$http
         .get(`https://api.github.com/search/repositories?q=${search}`)

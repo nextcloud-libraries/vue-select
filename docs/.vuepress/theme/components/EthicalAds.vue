@@ -6,11 +6,11 @@ export default {
   watch: {
     $route(to, from) {
       if (
-        to.path !== from.path &&
+        to.path !== from.path
         // Only reload if the ad has been loaded
         // otherwise it's possible that the script is appended but
         // the ads are not loaded yet. This would result in duplicated ads.
-        [...this.$el.classList].includes('loaded')
+        && [...this.$el.classList].includes('loaded')
       ) {
         this.$el.innerHTML = ''
         this.$el.classList.remove('loaded')
@@ -18,9 +18,11 @@ export default {
       }
     },
   },
+
   mounted() {
     this.load()
   },
+
   methods: {
     load() {
       const s = document.createElement('script')
@@ -30,6 +32,7 @@ export default {
       this.$el.appendChild(s)
     },
   },
+
   render(h) {
     return h('div', {
       attrs: {

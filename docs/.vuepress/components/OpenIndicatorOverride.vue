@@ -1,10 +1,9 @@
 <template>
-  <div>
-    <v-select
-      :options="['Canada', 'United States']"
-      :components="{ OpenIndicator }"
-    />
-  </div>
+	<div>
+		<v-select
+			:options="['Canada', 'United States']"
+			:components="{ OpenIndicator }" />
+	</div>
 </template>
 
 <script>

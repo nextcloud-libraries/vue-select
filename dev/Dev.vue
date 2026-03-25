@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
-    <v-select v-model="selected" v-bind="config" />
-  </div>
+	<div id="app">
+		<VSelect v-model="selected" v-bind="config" />
+	</div>
 </template>
 
 <script>
@@ -10,7 +10,7 @@ import countries from "../docs/.vuepress/data/countryCodes";
 import books from "../docs/.vuepress/data/books";
 
 export default {
-  components: { vSelect },
+  components: { VSelect: vSelect },
   data: () => ({
     selected: null,
     config: {

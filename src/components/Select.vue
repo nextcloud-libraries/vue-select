@@ -1,151 +1,139 @@
 <template>
-  <div
-    :id="`v-select-${uid}`"
-    :dir="dir"
-    class="v-select"
-    :class="stateClasses"
-  >
-    <slot name="header" v-bind="scope.header" />
-    <div ref="toggle" class="vs__dropdown-toggle">
-      <div
-        ref="selectedOptions"
-        class="vs__selected-options"
-        @mousedown="toggleDropdown"
-      >
-        <slot
-          v-for="(option, index) in selectedValue"
-          name="selected-option-container"
-          :option="normalizeOptionForSlot(option)"
-          :deselect="deselect"
-          :multiple="multiple"
-          :disabled="disabled"
-        >
-          <span :key="getOptionKey(option)" class="vs__selected">
-            <slot
-              name="selected-option"
-              v-bind="normalizeOptionForSlot(option)"
-            >
-              {{ getOptionLabel(option) }}
-            </slot>
-            <button
-              v-if="multiple"
-              :ref="(el) => (deselectButtons[index] = el)"
-              :disabled="disabled"
-              type="button"
-              class="vs__deselect"
-              :title="ariaLabelDeselectOption(getOptionLabel(option))"
-              :aria-label="ariaLabelDeselectOption(getOptionLabel(option))"
-              @mousedown.stop="deselect(option)"
-              @keydown.enter="keyboardDeselect(option, index)"
-            >
-              <component :is="childComponents.Deselect" />
-            </button>
-          </span>
-        </slot>
+	<div
+		:id="`v-select-${uid}`"
+		:dir="dir"
+		class="v-select"
+		:class="stateClasses">
+		<slot name="header" v-bind="scope.header" />
+		<div ref="toggle" class="vs__dropdown-toggle">
+			<div
+				ref="selectedOptions"
+				class="vs__selected-options"
+				@mousedown="toggleDropdown">
+				<slot
+					v-for="(option, index) in selectedValue"
+					name="selected-option-container"
+					:option="normalizeOptionForSlot(option)"
+					:deselect="deselect"
+					:multiple="multiple"
+					:disabled="disabled">
+					<span :key="getOptionKey(option)" class="vs__selected">
+						<slot
+							name="selected-option"
+							v-bind="normalizeOptionForSlot(option)">
+							{{ getOptionLabel(option) }}
+						</slot>
+						<button
+							v-if="multiple"
+							:ref="(el) => (deselectButtons[index] = el)"
+							:disabled="disabled"
+							type="button"
+							class="vs__deselect"
+							:title="ariaLabelDeselectOption(getOptionLabel(option))"
+							:aria-label="ariaLabelDeselectOption(getOptionLabel(option))"
+							@mousedown.stop="deselect(option)"
+							@keydown.enter="keyboardDeselect(option, index)">
+							<component :is="childComponents.Deselect" />
+						</button>
+					</span>
+				</slot>
 
-        <slot name="search" v-bind="scope.search">
-          <input
-            class="vs__search"
-            v-bind="scope.search.attributes"
-            v-on="scope.search.events"
-          />
-        </slot>
-      </div>
+				<slot name="search" v-bind="scope.search">
+					<input
+						class="vs__search"
+						v-bind="scope.search.attributes"
+						v-on="scope.search.events" />
+				</slot>
+			</div>
 
-      <div ref="actions" class="vs__actions">
-        <button
-          v-show="showClearButton"
-          ref="clearButton"
-          :disabled="disabled"
-          type="button"
-          class="vs__clear"
-          :title="ariaLabelClearSelected"
-          :aria-label="ariaLabelClearSelected"
-          @click="clearSelection"
-        >
-          <component :is="childComponents.Deselect" />
-        </button>
+			<div ref="actions" class="vs__actions">
+				<button
+					v-show="showClearButton"
+					ref="clearButton"
+					:disabled="disabled"
+					type="button"
+					class="vs__clear"
+					:title="ariaLabelClearSelected"
+					:aria-label="ariaLabelClearSelected"
+					@click="clearSelection">
+					<component :is="childComponents.Deselect" />
+				</button>
 
-        <!-- tabindex -1 is used to remove it from the tab sequence as tabbing to the input combobox opens the dropdown -->
-        <button
-          v-if="!noDrop"
-          ref="openIndicatorButton"
-          class="vs__open-indicator-button"
-          type="button"
-          tabindex="-1"
-          :aria-labelledby="`vs-${uid}__listbox`"
-          :aria-controls="`vs-${uid}__listbox`"
-          :aria-expanded="dropdownOpen.toString()"
-          @mousedown="toggleDropdown"
-        >
-          <slot name="open-indicator" v-bind="scope.openIndicator">
-            <component
-              :is="childComponents.OpenIndicator"
-              v-bind="scope.openIndicator.attributes"
-            />
-          </slot>
-        </button>
+				<!-- tabindex -1 is used to remove it from the tab sequence as tabbing to the input combobox opens the dropdown -->
+				<button
+					v-if="!noDrop"
+					ref="openIndicatorButton"
+					class="vs__open-indicator-button"
+					type="button"
+					tabindex="-1"
+					:aria-labelledby="`vs-${uid}__listbox`"
+					:aria-controls="`vs-${uid}__listbox`"
+					:aria-expanded="dropdownOpen.toString()"
+					@mousedown="toggleDropdown">
+					<slot name="open-indicator" v-bind="scope.openIndicator">
+						<component
+							:is="childComponents.OpenIndicator"
+							v-bind="scope.openIndicator.attributes" />
+					</slot>
+				</button>
 
-        <slot name="spinner" v-bind="scope.spinner">
-          <div v-show="mutableLoading" class="vs__spinner">Loading...</div>
-        </slot>
-      </div>
-    </div>
-    <transition :name="transition">
-      <ul
-        v-if="dropdownOpen"
-        :id="`vs-${uid}__listbox`"
-        ref="dropdownMenu"
-        :key="`vs-${uid}__listbox`"
-        v-append-to-body
-        class="vs__dropdown-menu"
-        role="listbox"
-        :aria-label="ariaLabelListbox"
-        :aria-multiselectable="multiple ? 'true' : null"
-        tabindex="-1"
-        @mousedown.prevent="onMousedown"
-        @mouseup="onMouseUp"
-      >
-        <slot name="list-header" v-bind="scope.listHeader" />
-        <li
-          v-for="(option, index) in filteredOptions"
-          :id="`vs-${uid}__option-${index}`"
-          :key="getOptionKey(option)"
-          role="option"
-          class="vs__dropdown-option"
-          :class="{
-            'vs__dropdown-option--deselect':
-              isOptionDeselectable(option) && index === typeAheadPointer,
-            'vs__dropdown-option--selected': isOptionSelected(option),
-            'vs__dropdown-option--highlight': index === typeAheadPointer,
-            'vs__dropdown-option--kb-focus': hasKeyboardFocusBorder(index),
-            'vs__dropdown-option--disabled': !selectable(option),
-          }"
-          :aria-selected="optionAriaSelected(option)"
-          @mousemove="onMouseMove(option, index)"
-          @click.prevent.stop="selectable(option) ? select(option) : null"
-        >
-          <slot name="option" v-bind="normalizeOptionForSlot(option)">
-            {{ getOptionLabel(option) }}
-          </slot>
-        </li>
-        <li v-if="filteredOptions.length === 0" class="vs__no-options">
-          <slot name="no-options" v-bind="scope.noOptions">
-            Sorry, no matching options.
-          </slot>
-        </li>
-        <slot name="list-footer" v-bind="scope.listFooter" />
-      </ul>
-      <ul
-        v-else
-        :id="`vs-${uid}__listbox`"
-        role="listbox"
-        :aria-label="ariaLabelListbox"
-        style="display: none; visibility: hidden"
-      ></ul>
-    </transition>
-    <slot name="footer" v-bind="scope.footer" />
-  </div>
+				<slot name="spinner" v-bind="scope.spinner">
+					<div v-show="mutableLoading" class="vs__spinner">Loading...</div>
+				</slot>
+			</div>
+		</div>
+		<transition :name="transition">
+			<ul
+				v-if="dropdownOpen"
+				:id="`vs-${uid}__listbox`"
+				ref="dropdownMenu"
+				:key="`vs-${uid}__listbox`"
+				v-append-to-body
+				class="vs__dropdown-menu"
+				role="listbox"
+				:aria-label="ariaLabelListbox"
+				:aria-multiselectable="multiple ? 'true' : null"
+				tabindex="-1"
+				@mousedown.prevent="onMousedown"
+				@mouseup="onMouseUp">
+				<slot name="list-header" v-bind="scope.listHeader" />
+				<li
+					v-for="(option, index) in filteredOptions"
+					:id="`vs-${uid}__option-${index}`"
+					:key="getOptionKey(option)"
+					role="option"
+					class="vs__dropdown-option"
+					:class="{
+						'vs__dropdown-option--deselect':
+							isOptionDeselectable(option) && index === typeAheadPointer,
+						'vs__dropdown-option--selected': isOptionSelected(option),
+						'vs__dropdown-option--highlight': index === typeAheadPointer,
+						'vs__dropdown-option--kb-focus': hasKeyboardFocusBorder(index),
+						'vs__dropdown-option--disabled': !selectable(option),
+					}"
+					:aria-selected="optionAriaSelected(option)"
+					@mousemove="onMouseMove(option, index)"
+					@click.prevent.stop="selectable(option) ? select(option) : null">
+					<slot name="option" v-bind="normalizeOptionForSlot(option)">
+						{{ getOptionLabel(option) }}
+					</slot>
+				</li>
+				<li v-if="filteredOptions.length === 0" class="vs__no-options">
+					<slot name="no-options" v-bind="scope.noOptions">
+						Sorry, no matching options.
+					</slot>
+				</li>
+				<slot name="list-footer" v-bind="scope.listFooter" />
+			</ul>
+			<ul
+				v-else
+				:id="`vs-${uid}__listbox`"
+				role="listbox"
+				:aria-label="ariaLabelListbox"
+				style="display: none; visibility: hidden"></ul>
+		</transition>
+		<slot name="footer" v-bind="scope.footer" />
+	</div>
 </template>
 
 <script>
@@ -400,9 +388,9 @@ export default {
         if (typeof option === "object") {
           if (!Object.hasOwn(option, this.label)) {
             return console.warn(
-              `[vue-select warn]: Label key "option.${this.label}" does not` +
-                ` exist in options object ${JSON.stringify(option)}.\n` +
-                "https://vue-select.org/api/props.html#getoptionlabel",
+              `[vue-select warn]: Label key "option.${this.label}" does not`
+              + ` exist in options object ${JSON.stringify(option)}.\n`
+              + "https://vue-select.org/api/props.html#getoptionlabel",
             );
           }
           return option[this.label];
@@ -439,11 +427,11 @@ export default {
             ? option.id
             : sortAndStringify(option);
         } catch (e) {
-          const warning =
-            `[vue-select warn]: Could not stringify this option ` +
-            `to generate unique key. Please provide'getOptionKey' prop ` +
-            `to return a unique key for each option.\n` +
-            "https://vue-select.org/api/props.html#getoptionkey";
+          const warning
+            = `[vue-select warn]: Could not stringify this option `
+            	+ `to generate unique key. Please provide'getOptionKey' prop `
+            	+ `to return a unique key for each option.\n`
+            	+ "https://vue-select.org/api/props.html#getoptionkey";
           return console.warn(warning, option, e);
         }
       },
@@ -875,6 +863,7 @@ export default {
                 }
               : {}),
           },
+
           events: {
             compositionstart: () => (this.isComposing = true),
             compositionend: () => (this.isComposing = false),
@@ -885,14 +874,17 @@ export default {
             input: (e) => (this.search = e.target.value),
           },
         },
+
         spinner: {
           loading: this.mutableLoading,
         },
+
         noOptions: {
           search: this.search,
           loading: this.mutableLoading,
           searching: this.searching,
         },
+
         openIndicator: {
           attributes: {
             ref: "openIndicator",
@@ -900,6 +892,7 @@ export default {
             class: "vs__open-indicator",
           },
         },
+
         listHeader: listSlot,
         listFooter: listSlot,
         header: { ...listSlot, deselect: this.deselect },
@@ -1127,8 +1120,8 @@ export default {
         this.updateValue(option);
         this.$emit("option:selected", option);
       } else if (
-        this.deselectFromDropdown &&
-        (this.clearable || (this.multiple && this.selectedValue.length > 1))
+        this.deselectFromDropdown
+        && (this.clearable || (this.multiple && this.selectedValue.length > 1))
       ) {
         this.deselect(option);
       }
@@ -1246,8 +1239,8 @@ export default {
       ];
 
       if (
-        this.searchEl === undefined ||
-        ignoredButtons
+        this.searchEl === undefined
+        || ignoredButtons
           .filter(Boolean)
           .some((ref) => ref.contains(event.target) || ref === event.target)
       ) {
@@ -1355,10 +1348,10 @@ export default {
      */
     maybeDeleteValue() {
       if (
-        !this.searchEl.value.length &&
-        this.selectedValue &&
-        this.selectedValue.length &&
-        this.clearable
+        !this.searchEl.value.length
+        && this.selectedValue
+        && this.selectedValue.length
+        && this.clearable
       ) {
         let value = null;
         if (this.multiple) {
@@ -1530,6 +1523,7 @@ export default {
           }
           return this.typeAheadUp();
         },
+
         //  down.prevent
         40: (e) => {
           e.preventDefault();

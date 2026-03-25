@@ -1,17 +1,16 @@
 <template>
-  <v-select
-    :options="paginated"
-    :filterable="false"
-    @open="onOpen"
-    @close="onClose"
-    @search="(query) => (search = query)"
-  >
-    <template #list-footer>
-      <li v-show="hasNextPage" ref="load" class="loader">
-        Loading more options...
-      </li>
-    </template>
-  </v-select>
+	<v-select
+		:options="paginated"
+		:filterable="false"
+		@open="onOpen"
+		@close="onClose"
+		@search="(query) => (search = query)">
+		<template #list-footer>
+			<li v-show="hasNextPage" ref="load" class="loader">
+				Loading more options...
+			</li>
+		</template>
+	</v-select>
 </template>
 
 <script>
@@ -24,17 +23,21 @@ export default {
     limit: 10,
     search: '',
   }),
+
   computed: {
     filtered() {
       return countries.filter((country) => country.includes(this.search))
     },
+
     paginated() {
       return this.filtered.slice(0, this.limit)
     },
+
     hasNextPage() {
       return this.paginated.length < this.filtered.length
     },
   },
+
   mounted() {
     /**
      * You could do this directly in data(), but since these docs
@@ -43,6 +46,7 @@ export default {
      */
     this.observer = new IntersectionObserver(this.infiniteScroll)
   },
+
   methods: {
     async onOpen() {
       if (this.hasNextPage) {
@@ -50,9 +54,11 @@ export default {
         this.observer.observe(this.$refs.load)
       }
     },
+
     onClose() {
       this.observer.disconnect()
     },
+
     async infiniteScroll([{ isIntersecting, target }]) {
       if (isIntersecting) {
         const ul = target.offsetParent

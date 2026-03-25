@@ -1,22 +1,20 @@
 <template>
-  <div>
-    <v-select
-      :options="countries"
-      append-to-body
-      :calculate-position="withPopper"
-    />
+	<div>
+		<v-select
+			:options="countries"
+			appendToBody
+			:calculatePosition="withPopper" />
 
-    <label for="position" style="display: block; margin: 1rem 0">
-      <input
-        id="position"
-        v-model="placement"
-        type="checkbox"
-        true-value="top"
-        false-value="bottom"
-      />
-      Position dropdown above
-    </label>
-  </div>
+		<label for="position" style="display: block; margin: 1rem 0">
+			<input
+				id="position"
+				v-model="placement"
+				type="checkbox"
+				true-value="top"
+				false-value="bottom" />
+			Position dropdown above
+		</label>
+	</div>
 </template>
 
 <script>
@@ -59,7 +57,7 @@ export default {
             fn({ state }) {
               component.$el.classList.toggle(
                 'drop-up',
-                state.placement === 'top'
+                state.placement === 'top',
               )
             },
           },

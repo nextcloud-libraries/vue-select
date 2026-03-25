@@ -19,7 +19,7 @@ function clickEvent(currentTarget) {
 describe("Toggling Dropdown", () => {
   let spy;
   afterEach(() => {
-    if (spy) spy.mockClear();
+    if (spy) { spy.mockClear(); }
   });
 
   it("should not open the dropdown when the el is clicked but the component is disabled", () => {

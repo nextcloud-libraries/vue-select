@@ -1,20 +1,19 @@
 <template>
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Country</th>
-    </tr>
-    <tr v-for="person in people" :key="person.name">
-      <td>{{ person.name }}</td>
-      <td>
-        <v-select
-          :options="options"
-          :value="person.country"
-          @input="(country) => updateCountry(person, country)"
-        />
-      </td>
-    </tr>
-  </table>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Country</th>
+		</tr>
+		<tr v-for="person in people" :key="person.name">
+			<td>{{ person.name }}</td>
+			<td>
+				<v-select
+					:options="options"
+					:value="person.country"
+					@input="(country) => updateCountry(person, country)" />
+			</td>
+		</tr>
+	</table>
 </template>
 
 <script>
@@ -27,9 +26,11 @@ export default {
       { name: 'Jane', country: '' },
     ],
   }),
+
   computed: {
     options: () => countries,
   },
+
   methods: {
     updateCountry(person, country) {
       person.country = country

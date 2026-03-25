@@ -1,7 +1,7 @@
 <template>
-  <div style="background: #282c34; padding: 1rem; border-radius: 0.3rem">
-    <v-select :options="countries" />
-  </div>
+	<div style="background: #282c34; padding: 1rem; border-radius: 0.3rem">
+		<v-select :options="countries" />
+	</div>
 </template>
 
 <script>

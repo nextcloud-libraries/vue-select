@@ -1,12 +1,11 @@
 <template>
-  <div>
-    <v-select
-      v-model="selected"
-      placeholder="choose a country"
-      :components="{ Deselect }"
-      :options="['Canada', 'United States']"
-    />
-  </div>
+	<div>
+		<v-select
+			v-model="selected"
+			placeholder="choose a country"
+			:components="{ Deselect }"
+			:options="['Canada', 'United States']" />
+	</div>
 </template>
 
 <script>

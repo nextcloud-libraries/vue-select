@@ -1,46 +1,45 @@
 export default () => {
-  document.getElementsByClassName ||
-    (document.getElementsByClassName = function (e) {
-      var n,
+  document.getElementsByClassName
+  || (document.getElementsByClassName = function(e) {
+      let n,
         t,
         r,
         a = document,
         o = []
-      if (a.querySelectorAll) return a.querySelectorAll('.' + e)
-      if (a.evaluate)
-        for (
+      if (a.querySelectorAll) { return a.querySelectorAll('.' + e) }
+      if (a.evaluate) {
+ for (
           t = ".//*[contains(concat(' ', @class, ' '), ' " + e + " ')]",
             n = a.evaluate(t, a, null, 0, null);
           (r = n.iterateNext());
 
-        )
-          o.push(r)
-      else
-        for (
+        ) { o.push(r) }
+} else {
+ for (
           n = a.getElementsByTagName('*'),
             t = new RegExp('(^|\\s)' + e + '(\\s|$)'),
             r = 0;
           r < n.length;
           r++
-        )
-          t.test(n[r].className) && o.push(n[r])
+        ) { t.test(n[r].className) && o.push(n[r]) }
+}
       return o
     }),
-    (function () {
+    (function() {
       function e() {
         function e() {
           for (
-            var e = document.getElementsByClassName('codepen'),
+            let e = document.getElementsByClassName('codepen'),
               t = e.length - 1;
             t > -1;
             t--
           ) {
-            var u = a(e[t])
+            let u = a(e[t])
             if (
-              0 !== Object.keys(u).length &&
-              ((u = o(u)), (u.user = n(u, e[t])), r(u))
+              0 !== Object.keys(u).length
+              && ((u = o(u)), (u.user = n(u, e[t])), r(u))
             ) {
-              var c = i(u),
+              const c = i(u),
                 l = s(u, c)
               f(e[t], l)
             }
@@ -49,12 +48,12 @@ export default () => {
         }
 
         function n(e, n) {
-          if ('string' == typeof e.user) return e.user
-          for (var t = 0, r = n.children.length; t < r; t++) {
-            var a = n.children[t],
+          if ('string' === typeof e.user) { return e.user }
+          for (let t = 0, r = n.children.length; t < r; t++) {
+            const a = n.children[t],
               o = a.href || '',
               i = o.match(/codepen\.(io|dev)\/(\w+)\/pen\//i)
-            if (i) return i[2]
+            if (i) { return i[2] }
           }
           return 'anon'
         }
@@ -65,7 +64,7 @@ export default () => {
 
         function a(e) {
           for (var n = {}, t = e.attributes, r = 0, a = t.length; r < a; r++) {
-            var o = t[r].name
+            const o = t[r].name
             0 === o.indexOf('data-') && (n[o.replace('data-', '')] = t[r].value)
           }
           return n
@@ -75,8 +74,8 @@ export default () => {
           return (
             e.href && (e['slug-hash'] = e.href),
             e.type && (e['default-tab'] = e.type),
-            e.safe &&
-              ('true' === e.safe
+            e.safe
+            && ('true' === e.safe
                 ? (e.animations = 'run')
                 : (e.animations = 'stop-after-5')),
             e
@@ -84,7 +83,7 @@ export default () => {
         }
 
         function i(e) {
-          var n = u(e),
+          const n = u(e),
             t = e.user ? e.user : 'anon',
             r = '?' + l(e),
             a = e.preview && 'true' === e.preview ? 'embed/preview' : 'embed',
@@ -107,18 +106,17 @@ export default () => {
         }
 
         function l(e) {
-          var n = ''
-          for (var t in e)
-            '' !== n && (n += '&'), (n += t + '=' + encodeURIComponent(e[t]))
+          let n = ''
+          for (const t in e) { '' !== n && (n += '&'), (n += t + '=' + encodeURIComponent(e[t])) }
           return n
         }
 
         function s(e, n) {
-          var r
+          let r
           e['pen-title']
             ? (r = e['pen-title'])
             : ((r = 'CodePen Embed ' + t), t++)
-          var a = {
+          let a = {
               id: 'cp_embed_' + e['slug-hash'].replace('/', '_'),
               src: n,
               scrolling: 'no',
@@ -129,11 +127,11 @@ export default () => {
               allowpaymentrequest: 'true',
               name: 'CodePen Embed',
               title: r,
-              class: 'cp_embed_iframe ' + (e['class'] ? e['class'] : ''),
+              class: 'cp_embed_iframe ' + (e.class ? e.class : ''),
               style: 'width: ' + p + '; overflow: hidden;',
             },
             o = '<iframe '
-          for (var i in a) o += i + '="' + a[i] + '" '
+          for (const i in a) { o += i + '="' + a[i] + '" ' }
           return (o += '></iframe>')
         }
 
@@ -143,16 +141,16 @@ export default () => {
 
         function f(e, n) {
           if (e.parentNode) {
-            var t = document.createElement('div')
+            const t = document.createElement('div')
             ;(t.className = 'cp_embed_wrapper'),
               (t.innerHTML = n),
               e.parentNode.replaceChild(t, e)
-          } else e.innerHTML = n
+          } else { e.innerHTML = n }
         }
 
         function m() {
-          'function' == typeof __CodePenIFrameAddedToPage &&
-            __CodePenIFrameAddedToPage()
+          'function' === typeof __CodePenIFrameAddedToPage
+          && __CodePenIFrameAddedToPage()
         }
 
         var p = '100%'
@@ -160,7 +158,7 @@ export default () => {
       }
 
       function n(e) {
-        ;/in/.test(document.readyState)
+        /in/.test(document.readyState)
           ? setTimeout('window.__cp_domReady(' + e + ')', 9)
           : e()
       }
@@ -168,7 +166,7 @@ export default () => {
       var t = 1
       ;(window.__cp_domReady = n),
         (window.__CPEmbed = e),
-        n(function () {
+        n(function() {
           new __CPEmbed()
         })
     })()

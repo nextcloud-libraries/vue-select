@@ -1,9 +1,8 @@
 <template>
-  <v-select
-    v-model="country"
-    :options="countries"
-    :dropdown-should-open="dropdownShouldOpen"
-  />
+	<v-select
+		v-model="country"
+		:options="countries"
+		:dropdownShouldOpen="dropdownShouldOpen" />
 </template>
 
 <script>
@@ -16,6 +15,7 @@ export default {
       country: null,
     }
   },
+
   methods: {
     dropdownShouldOpen(VueSelect) {
       if (this.country !== null) {

@@ -1,17 +1,16 @@
 <template>
-  <div class="flex">
-    <div>
-      <v-select
-        v-model="selected"
-        label="country"
-        :reduce="(opt) => opt.meta.id"
-        :options="options"
-      />
-    </div>
-    <div>
-      <pre><code>v-model value: {{ selected || 'null' }}</code></pre>
-    </div>
-  </div>
+	<div class="flex">
+		<div>
+			<v-select
+				v-model="selected"
+				label="country"
+				:reduce="(opt) => opt.meta.id"
+				:options="options" />
+		</div>
+		<div>
+			<pre><code>v-model value: {{ selected || 'null' }}</code></pre>
+		</div>
+	</div>
 </template>
 
 <script>

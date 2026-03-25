@@ -1,15 +1,14 @@
 <template>
-  <v-select
-    :filter="fuseSearch"
-    :options="books"
-    :get-option-label="(option) => option.title"
-  >
-    <template #option="{ author, title }">
-      {{ title }}
-      <br />
-      <cite>{{ author.firstName }} {{ author.lastName }}</cite>
-    </template>
-  </v-select>
+	<v-select
+		:filter="fuseSearch"
+		:options="books"
+		:getOptionLabel="(option) => option.title">
+		<template #option="{ author, title }">
+			{{ title }}
+			<br />
+			<cite>{{ author.firstName }} {{ author.lastName }}</cite>
+		</template>
+	</v-select>
 </template>
 
 <script>
@@ -20,6 +19,7 @@ export default {
   computed: {
     books: () => books,
   },
+
   methods: {
     fuseSearch(options, search) {
       const fuse = new Fuse(options, {

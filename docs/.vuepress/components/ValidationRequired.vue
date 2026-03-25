@@ -1,18 +1,17 @@
 <template>
-  <form @submit.stop="onSubmit">
-    <v-select v-model="selected" :options="books" label="title">
-      <template #search="{ attributes, events }">
-        <input
-          :required="!selected"
-          class="vs__search"
-          v-bind="attributes"
-          v-on="events"
-        />
-      </template>
-    </v-select>
+	<form @submit.stop="onSubmit">
+		<v-select v-model="selected" :options="books" label="title">
+			<template #search="{ attributes, events }">
+				<input
+					:required="!selected"
+					class="vs__search"
+					v-bind="attributes"
+					v-on="events" />
+			</template>
+		</v-select>
 
-    <input type="submit" />
-  </form>
+		<input type="submit" />
+	</form>
 </template>
 
 <script>
@@ -22,6 +21,7 @@ export default {
     books,
     selected: null,
   }),
+
   methods: {
     onSubmit() {
       alert('Submitted!')
