@@ -387,11 +387,9 @@ export default {
 			default(option) {
 				if (typeof option === "object") {
 					if (!Object.hasOwn(option, this.label)) {
-						return console.warn(
-							`[vue-select warn]: Label key "option.${this.label}" does not`
+						return console.warn(`[vue-select warn]: Label key "option.${this.label}" does not`
 							+ ` exist in options object ${JSON.stringify(option)}.\n`
-							+ "https://vue-select.org/api/props.html#getoptionlabel",
-						)
+							+ "https://vue-select.org/api/props.html#getoptionlabel")
 					}
 					return option[this.label]
 				}
@@ -822,9 +820,7 @@ export default {
      */
 		searchEl() {
 			return this.$slots.search
-				? this.$refs.selectedOptions.querySelector(
-						this.searchInputQuerySelector,
-					)
+				? this.$refs.selectedOptions.querySelector(this.searchInputQuerySelector)
 				: this.$refs.search
 		},
 
@@ -1132,11 +1128,9 @@ export default {
      */
 		deselect(option) {
 			this.$emit("option:deselecting", option)
-			this.updateValue(
-				this.selectedValue.filter((val) => {
-					return !this.optionComparator(val, option)
-				}),
-			)
+			this.updateValue(this.selectedValue.filter((val) => {
+				return !this.optionComparator(val, option)
+			}))
 			this.$emit("option:deselected", option)
 		},
 
@@ -1526,9 +1520,7 @@ export default {
 				},
 			}
 
-			this.selectOnKeyCodes.forEach(
-				(keyCode) => (defaults[keyCode] = preventAndSelect),
-			)
+			this.selectOnKeyCodes.forEach((keyCode) => (defaults[keyCode] = preventAndSelect))
 
 			const handlers = this.mapKeydown(defaults, this)
 

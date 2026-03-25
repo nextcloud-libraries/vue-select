@@ -33,16 +33,12 @@ export default {
 
 		hasNextPage() {
 			const nextOffset = this.offset + this.limit
-			return Boolean(
-				this.filtered.slice(nextOffset, this.limit + nextOffset).length,
-			)
+			return Boolean(this.filtered.slice(nextOffset, this.limit + nextOffset).length)
 		},
 
 		hasPrevPage() {
 			const prevOffset = this.offset - this.limit
-			return Boolean(
-				this.filtered.slice(prevOffset, this.limit + prevOffset).length,
-			)
+			return Boolean(this.filtered.slice(prevOffset, this.limit + prevOffset).length)
 		},
 	},
 

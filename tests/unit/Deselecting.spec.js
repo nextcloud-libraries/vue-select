@@ -208,9 +208,7 @@ describe("Removing values", () => {
 				disabled: true,
 			})
 
-			expect(
-				Select.find("button.vs__clear").attributes().disabled,
-			).toBeDefined()
+			expect(Select.find("button.vs__clear").attributes().disabled).toBeDefined()
 		})
 
 		it("should return focus to the search input after clear", () => {

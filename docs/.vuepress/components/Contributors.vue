@@ -19,9 +19,7 @@ import { CONTRIBUTORS } from '@dynamic/constants'
 
 export default {
 	data: () => ({
-		contributors: CONTRIBUTORS.filter(
-			({ login }) => login !== 'semantic-release-bot',
-		),
+		contributors: CONTRIBUTORS.filter(({ login }) => login !== 'semantic-release-bot'),
 	}),
 }
 </script>

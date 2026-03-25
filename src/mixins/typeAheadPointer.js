@@ -81,9 +81,7 @@ export default {
 		typeAheadToLastSelected() {
 			const indexOfLastSelected
 				= this.selectedValue.length !== 0
-					? this.filteredOptions.indexOf(
-							this.selectedValue[this.selectedValue.length - 1],
-						)
+					? this.filteredOptions.indexOf(this.selectedValue[this.selectedValue.length - 1])
 					: -1
 
 			if (indexOfLastSelected !== -1) {

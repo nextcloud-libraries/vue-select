@@ -41,12 +41,10 @@ describe("When reduce prop is defined", () => {
 			},
 		})
 
-		expect(
-			Select.vm.isOptionSelected({
-				id: "foo",
-				label: "This is Foo",
-			}),
-		).toEqual(true)
+		expect(Select.vm.isOptionSelected({
+			id: "foo",
+			label: "This is Foo",
+		})).toEqual(true)
 	})
 
 	it("can determine if an object is selected after its been chosen", () => {
@@ -59,12 +57,10 @@ describe("When reduce prop is defined", () => {
 
 		Select.vm.select({ id: "foo", label: "FooBar" })
 
-		expect(
-			Select.vm.isOptionSelected({
-				id: "foo",
-				label: "This is FooBar",
-			}),
-		).toEqual(true)
+		expect(Select.vm.isOptionSelected({
+			id: "foo",
+			label: "This is FooBar",
+		})).toEqual(true)
 	})
 
 	it("can accept an array of objects and pre-selected values (multiple)", () => {
@@ -199,9 +195,7 @@ describe("When reduce prop is defined", () => {
 		})
 
 		expect(Select.vm.findOptionFromReducedValue(1)).toEqual(optionToFind)
-		expect(Select.vm.findOptionFromReducedValue(optionToFind)).toEqual(
-			optionToFind,
-		)
+		expect(Select.vm.findOptionFromReducedValue(optionToFind)).toEqual(optionToFind)
 	})
 
 	it("can work with falsey values", () => {
@@ -306,9 +300,7 @@ describe("When reduce prop is defined", () => {
 
 			//  Then
 			expect(Select.vm.selectedValue).toEqual([{ label: "hello", value: -1 }])
-			expect(Select.vm.$refs.selectedOptions.textContent.trim()).toEqual(
-				"hello",
-			)
+			expect(Select.vm.$refs.selectedOptions.textContent.trim()).toEqual("hello")
 			expect(Parent.vm.selected).toEqual(-1)
 		})
 	})

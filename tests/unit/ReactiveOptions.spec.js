@@ -27,24 +27,16 @@ describe("Reset on options change", () => {
 			spy = vi.spyOn(console, "warn").mockImplementation(() => {})
 
 			mountDefault({ resetOnOptionsChange: 1 })
-			expect(spy.mock.calls[0][0]).toContain(
-				'Invalid prop: custom validator check failed for prop "resetOnOptionsChange"',
-			)
+			expect(spy.mock.calls[0][0]).toContain('Invalid prop: custom validator check failed for prop "resetOnOptionsChange"')
 
 			mountDefault({ resetOnOptionsChange: "one" })
-			expect(spy.mock.calls[1][0]).toContain(
-				'Invalid prop: custom validator check failed for prop "resetOnOptionsChange"',
-			)
+			expect(spy.mock.calls[1][0]).toContain('Invalid prop: custom validator check failed for prop "resetOnOptionsChange"')
 
 			mountDefault({ resetOnOptionsChange: [] })
-			expect(spy.mock.calls[2][0]).toContain(
-				'Invalid prop: custom validator check failed for prop "resetOnOptionsChange"',
-			)
+			expect(spy.mock.calls[2][0]).toContain('Invalid prop: custom validator check failed for prop "resetOnOptionsChange"')
 
 			mountDefault({ resetOnOptionsChange: {} })
-			expect(spy.mock.calls[3][0]).toContain(
-				'Invalid prop: custom validator check failed for prop "resetOnOptionsChange"',
-			)
+			expect(spy.mock.calls[3][0]).toContain('Invalid prop: custom validator check failed for prop "resetOnOptionsChange"')
 		})
 
 		it("should receive the new options, old options, and current value", async () => {

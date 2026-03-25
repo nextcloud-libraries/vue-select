@@ -10,16 +10,12 @@ describe("Search Slot Scope", () => {
 		it("adds the active descendant attribute only when the dropdown is open and there is a typeAheadPointer value", async () => {
 			const Select = mountDefault()
 
-			expect(
-				Select.vm.scope.search?.attributes["aria-activedescendant"],
-			).toEqual(undefined)
+			expect(Select.vm.scope.search?.attributes["aria-activedescendant"]).toEqual(undefined)
 
 			Select.vm.open = true
 			await nextTick()
 
-			expect(
-				Select.vm.scope.search?.attributes["aria-activedescendant"],
-			).toEqual(undefined)
+			expect(Select.vm.scope.search?.attributes["aria-activedescendant"]).toEqual(undefined)
 		})
 
 		it("adds the active descendant attribute when there's a typeahead value and an open dropdown", async () => {
@@ -33,9 +29,7 @@ describe("Search Slot Scope", () => {
 			Select.vm.typeAheadPointer = 1
 			await nextTick()
 
-			expect(
-				Select.vm.scope.search.attributes["aria-activedescendant"],
-			).toEqual(`vs-${Select.vm.uid}__option-2`)
+			expect(Select.vm.scope.search.attributes["aria-activedescendant"]).toEqual(`vs-${Select.vm.uid}__option-2`)
 		})
 	})
 
@@ -106,9 +100,7 @@ describe("Option List", () => {
 		Select.vm.open = true
 		await nextTick()
 
-		expect(
-			Select.find(".vs__dropdown-menu").attributes()["aria-multiselectable"],
-		).toEqual(undefined)
+		expect(Select.find(".vs__dropdown-menu").attributes()["aria-multiselectable"]).toEqual(undefined)
 	})
 
 	it("multiselectable attribute should be true when multiple is true", async () => {
@@ -117,9 +109,7 @@ describe("Option List", () => {
 		Select.vm.open = true
 		await nextTick()
 
-		expect(
-			Select.find(".vs__dropdown-menu").attributes()["aria-multiselectable"],
-		).toEqual("true")
+		expect(Select.find(".vs__dropdown-menu").attributes()["aria-multiselectable"]).toEqual("true")
 	})
 
 	it("selected attribute should be true if selected, false otherwise", async () => {
@@ -130,11 +120,7 @@ describe("Option List", () => {
 		Select.vm.open = true
 		await nextTick()
 
-		expect(
-			Select.findAll(".vs__dropdown-option").map(
-				(option) => option.attributes()["aria-selected"],
-			),
-		).toStrictEqual(["false", "true", "false"])
+		expect(Select.findAll(".vs__dropdown-option").map((option) => option.attributes()["aria-selected"])).toStrictEqual(["false", "true", "false"])
 	})
 
 	it("selected attribute should be true on all selected options when multiple is true, false otherwise", async () => {
@@ -146,10 +132,6 @@ describe("Option List", () => {
 		Select.vm.open = true
 		await nextTick()
 
-		expect(
-			Select.findAll(".vs__dropdown-option").map(
-				(option) => option.attributes()["aria-selected"],
-			),
-		).toStrictEqual(["true", "true", "false"])
+		expect(Select.findAll(".vs__dropdown-option").map((option) => option.attributes()["aria-selected"])).toStrictEqual(["true", "true", "false"])
 	})
 })

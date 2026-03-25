@@ -203,9 +203,7 @@ describe("VS - Selecting Values", () => {
 				modelValue: [{ label: "foo", value: "bar" }],
 			},
 		})
-		expect(Select.vm.isOptionSelected({ label: "foo", value: "bar" })).toEqual(
-			true,
-		)
+		expect(Select.vm.isOptionSelected({ label: "foo", value: "bar" })).toEqual(true)
 	})
 
 	it("can select two options with the same label", () => {

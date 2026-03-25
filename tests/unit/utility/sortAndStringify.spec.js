@@ -11,7 +11,5 @@ test("it will sort attributes alphabetically", () => {
 })
 
 test("comparing two objects with unsorted keys", () => {
-	expect(sortAndStringify({ b: "b", a: "a" })).toEqual(
-		sortAndStringify({ a: "a", b: "b" }),
-	)
+	expect(sortAndStringify({ b: "b", a: "a" })).toEqual(sortAndStringify({ a: "a", b: "b" }))
 })
