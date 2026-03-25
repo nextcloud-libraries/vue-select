@@ -5,7 +5,9 @@ import { mountDefault } from '../helpers.js'
 describe('Custom Keydown Handlers', () => {
 	let spy
 	afterEach(() => {
-		if (spy) { spy.mockClear() }
+		if (spy) {
+			spy.mockClear()
+		}
 	})
 
 	it('can use the map-keydown prop to trigger custom behaviour', async () => {

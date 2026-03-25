@@ -19,7 +19,9 @@ describe('Reset on options change', () => {
 	describe('resetOnOptionsChange as a function', () => {
 		let spy
 		afterEach(() => {
-			if (spy) { spy.mockClear() }
+			if (spy) {
+				spy.mockClear()
+			}
 		})
 
 		it('will yell at you if resetOnOptionsChange is not a function or boolean', () => {

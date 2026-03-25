@@ -17,7 +17,9 @@ describe('VS - Selecting Values', () => {
 	})
 
 	afterEach(() => {
-		if (spy) { spy.mockClear() }
+		if (spy) {
+			spy.mockClear()
+		}
 	})
 
 	it('can accept an array with pre-selected values', () => {

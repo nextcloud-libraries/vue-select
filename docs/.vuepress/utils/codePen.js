@@ -6,7 +6,9 @@ export default () => {
 			r,
 			a = document,
 			o = []
-		if (a.querySelectorAll) { return a.querySelectorAll('.' + e) }
+		if (a.querySelectorAll) {
+			return a.querySelectorAll('.' + e)
+		}
 		if (a.evaluate) {
 			for (
 				t = ".//*[contains(concat(' ', @class, ' '), ' " + e + " ')]",
@@ -48,12 +50,16 @@ export default () => {
 			}
 
 			function n(e, n) {
-				if ('string' === typeof e.user) { return e.user }
+				if ('string' === typeof e.user) {
+					return e.user
+				}
 				for (let t = 0, r = n.children.length; t < r; t++) {
 					const a = n.children[t],
 						o = a.href || '',
 						i = o.match(/codepen\.(io|dev)\/(\w+)\/pen\//i)
-					if (i) { return i[2] }
+					if (i) {
+						return i[2]
+					}
 				}
 				return 'anon'
 			}
@@ -107,7 +113,12 @@ export default () => {
 
 			function l(e) {
 				let n = ''
-				for (const t in e) { '' !== n && (n += '&'), (n += t + '=' + encodeURIComponent(e[t])) }
+				for (const t in e) {
+					if ('' !== n) {
+						n += '&'
+					}
+					n += t + '=' + encodeURIComponent(e[t])
+				}
 				return n
 			}
 
@@ -131,7 +142,9 @@ export default () => {
 						style: 'width: ' + p + '; overflow: hidden;',
 					},
 					o = '<iframe '
-				for (const i in a) { o += i + '="' + a[i] + '" ' }
+				for (const i in a) {
+					o += i + '="' + a[i] + '" '
+				}
 				return (o += '></iframe>')
 			}
 

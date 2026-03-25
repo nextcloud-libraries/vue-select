@@ -131,7 +131,9 @@ describe('When reduce prop is defined', () => {
 						return this.current
 					},
 					set(value) {
-						if (value === 'baz') { return }
+						if (value === 'baz') {
+							return
+						}
 						this.current = value
 					},
 				},
