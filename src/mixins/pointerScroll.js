@@ -21,11 +21,12 @@ export default {
 
 	methods: {
 		/**
-     * Adjust the scroll position of the dropdown list
-     * if the current pointer is outside of the
-     * overflow bounds.
-     * @return {*}
-     */
+		 * Adjust the scroll position of the dropdown list
+		 * if the current pointer is outside of the
+		 * overflow bounds.
+		 *
+		 * @return {*}
+		 */
 		maybeAdjustScroll() {
 			const optionEl
 				= this.$refs.dropdownMenu?.children[this.typeAheadPointer] || false
@@ -44,9 +45,10 @@ export default {
 		},
 
 		/**
-     * The currently viewable portion of the dropdownMenu.
-     * @return {{top: (string|*|number), bottom: *}}
-     */
+		 * The currently viewable portion of the dropdownMenu.
+		 *
+		 * @return {{top: (string|*|number), bottom: *}}
+		 */
 		getDropdownViewport() {
 			return this.$refs.dropdownMenu
 				? this.$refs.dropdownMenu.getBoundingClientRect()

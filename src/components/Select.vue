@@ -43,7 +43,7 @@
 					<input
 						class="vs__search"
 						v-bind="scope.search.attributes"
-						v-on="scope.search.events" />
+						v-on="scope.search.events">
 				</slot>
 			</div>
 
@@ -79,7 +79,9 @@
 				</button>
 
 				<slot name="spinner" v-bind="scope.spinner">
-					<div v-show="mutableLoading" class="vs__spinner">Loading...</div>
+					<div v-show="mutableLoading" class="vs__spinner">
+						Loading...
+					</div>
 				</slot>
 			</div>
 		</div>
@@ -131,7 +133,7 @@
 				:id="`vs-${uid}__listbox`"
 				role="listbox"
 				:aria-label="ariaLabelListbox"
-				style="display: none; visibility: hidden"></ul>
+				style="display: none; visibility: hidden" />
 		</transition>
 		<slot name="footer" v-bind="scope.footer" />
 	</div>
@@ -162,6 +164,7 @@ export default {
 		 * Contains the currently selected value. Very similar to a
 		 * `value` attribute on an <input>. You can listen for changes
 		 * with the 'input' event.
+		 *
 		 * @type {object | string | Array | null}
 		 */
 		modelValue: {},
@@ -170,6 +173,7 @@ export default {
 		 * An object with any custom components that you'd like to overwrite
 		 * the default implementation of in your app. The keys in this object
 		 * will be merged with the defaults.
+		 *
 		 * @see https://vue-select.org/guide/components.html
 		 * @type {Function}
 		 */
@@ -183,6 +187,7 @@ export default {
 		 * If you are using an array of objects, vue-select will look for
 		 * a `label` key (ex. [{label: 'This is Foo', value: 'foo'}]). A
 		 * custom label key can be set with the `label` prop.
+		 *
 		 * @type {Array}
 		 */
 		options: {
@@ -194,6 +199,7 @@ export default {
 
 		/**
 		 * Sets the maximum number of options to display in the dropdown list
+		 *
 		 * @type {number}
 		 */
 		limit: {
@@ -203,6 +209,7 @@ export default {
 
 		/**
 		 * Disable the entire component.
+		 *
 		 * @type {boolean}
 		 */
 		disabled: {
@@ -212,6 +219,7 @@ export default {
 
 		/**
 		 * Can the user clear the selected property.
+		 *
 		 * @type {boolean}
 		 */
 		clearable: {
@@ -222,6 +230,7 @@ export default {
 		/**
 		 * Can the user deselect an option by clicking it from
 		 * within the dropdown.
+		 *
 		 * @type {boolean}
 		 */
 		deselectFromDropdown: {
@@ -231,6 +240,7 @@ export default {
 
 		/**
 		 * Enable/disable filtering the options.
+		 *
 		 * @type {boolean}
 		 */
 		searchable: {
@@ -240,6 +250,7 @@ export default {
 
 		/**
 		 * Equivalent to the `multiple` attribute on a `<select>` input.
+		 *
 		 * @type {boolean}
 		 */
 		multiple: {
@@ -249,6 +260,7 @@ export default {
 
 		/**
 		 * Equivalent to the `placeholder` attribute on an `<input>`.
+		 *
 		 * @type {string}
 		 */
 		placeholder: {
@@ -258,6 +270,7 @@ export default {
 
 		/**
 		 * Sets a Vue transition property on the `.vs__dropdown-menu`.
+		 *
 		 * @type {string}
 		 */
 		transition: {
@@ -267,6 +280,7 @@ export default {
 
 		/**
 		 * Enables/disables clearing the search text when an option is selected.
+		 *
 		 * @type {boolean}
 		 */
 		clearSearchOnSelect: {
@@ -277,6 +291,7 @@ export default {
 		/**
 		 * Close a dropdown when an option is chosen. Set to false to keep the dropdown
 		 * open (useful when combined with multi-select, for example)
+		 *
 		 * @type {boolean}
 		 */
 		closeOnSelect: {
@@ -287,6 +302,7 @@ export default {
 		/**
 		 * Tells vue-select what key to use when generating option
 		 * labels when each `option` is an object.
+		 *
 		 * @type {string}
 		 */
 		label: {
@@ -296,6 +312,7 @@ export default {
 
 		/**
 		 * Allows to customize the `aria-label` set on the comobobox for searching options.
+		 *
 		 * @type {string}
 		 * @default 'Search for options'
 		 */
@@ -306,6 +323,7 @@ export default {
 
 		/**
 		 * Allows to customize the `aria-label` set on the listbox element.
+		 *
 		 * @type {string}
 		 * @default 'Options'
 		 */
@@ -316,6 +334,7 @@ export default {
 
 		/**
 		 * Allows to customize the `aria-label` set on the clear-selected button
+		 *
 		 * @type {string}
 		 * @default 'Clear selected'
 		 */
@@ -327,6 +346,7 @@ export default {
 		/**
 		 * Allows to customize the `aria-label` for the deselect-option button
 		 * The default is "Deselect " + optionLabel
+		 *
 		 * @type {(optionLabel: string) => string}
 		 */
 		ariaLabelDeselectOption: {
@@ -337,6 +357,7 @@ export default {
 		/**
 		 * Value of the 'autocomplete' field of the input
 		 * element.
+		 *
 		 * @type {string}
 		 */
 		autocomplete: {
@@ -438,6 +459,7 @@ export default {
 
 		/**
 		 * Select the current value if selectOnTab is enabled
+		 *
 		 * @deprecated since 3.3
 		 */
 		onTab: {
@@ -451,6 +473,7 @@ export default {
 
 		/**
 		 * Enable/disable creating options from searchEl.
+		 *
 		 * @type {boolean}
 		 */
 		taggable: {
@@ -460,6 +483,7 @@ export default {
 
 		/**
 		 * Set the tabindex for the input field.
+		 *
 		 * @type {number}
 		 */
 		tabindex: {
@@ -470,6 +494,7 @@ export default {
 		/**
 		 * When true, newly created tags will be added to
 		 * the options list.
+		 *
 		 * @type {boolean}
 		 */
 		pushTags: {
@@ -481,6 +506,7 @@ export default {
 		 * When true, existing options will be filtered
 		 * by the search text. Should not be used in conjunction
 		 * with taggable.
+		 *
 		 * @type {boolean}
 		 */
 		filterable: {
@@ -492,6 +518,7 @@ export default {
 		 * Callback to determine if the provided option should
 		 * match the current search text. Used to determine
 		 * if the option should be displayed.
+		 *
 		 * @type {Function}
 		 * @param  {Object || String} option
 		 * @param  {string} label
@@ -514,6 +541,7 @@ export default {
 		 * is provided. Default implementation loops
 		 * each option, and returns the result of
 		 * this.filterBy.
+		 *
 		 * @type {Function}
 		 * @param  {Array} list of options
 		 * @param  {string} search text
@@ -535,6 +563,7 @@ export default {
 
 		/**
 		 * User defined function for adding Options
+		 *
 		 * @type {Function}
 		 */
 		createOption: {
@@ -549,6 +578,7 @@ export default {
 		/**
 		 * If false, the focused dropdown option will not be reset when filtered
 		 * options change.
+		 *
 		 * @type {boolean}
 		 */
 		resetFocusOnOptionsChange: {
@@ -575,6 +605,7 @@ export default {
 
 		/**
 		 * If search text should clear on blur
+		 *
 		 * @return {boolean} True when single and clearSearchOnSelect
 		 */
 		clearSearchOnBlur: {
@@ -586,6 +617,7 @@ export default {
 
 		/**
 		 * Disable the dropdown entirely.
+		 *
 		 * @type {boolean}
 		 */
 		noDrop: {
@@ -595,6 +627,7 @@ export default {
 
 		/**
 		 * Sets the id of the input element.
+		 *
 		 * @type {string}
 		 * @default {null}
 		 */
@@ -604,6 +637,7 @@ export default {
 
 		/**
 		 * Sets RTL support. Accepts 'ltr', 'rtl', 'auto'.
+		 *
 		 * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir
 		 * @type {string}
 		 * @default 'auto'
@@ -615,6 +649,7 @@ export default {
 
 		/**
 		 * When true, hitting the 'tab' key will select the current select value
+		 *
 		 * @type {boolean}
 		 * @deprecated since 3.3 - use selectOnKeyCodes instead
 		 */
@@ -625,6 +660,7 @@ export default {
 
 		/**
 		 * Keycodes that will select the current option.
+		 *
 		 * @type Array
 		 */
 		selectOnKeyCodes: {
@@ -657,10 +693,10 @@ export default {
 		mapKeydown: {
 			type: Function,
 			/**
-		* @param {object} map
-		* @param {VueSelect} vm
-		* @return {object}
-		*/
+			 * @param {object} map
+			 * @param {VueSelect} vm
+			 * @return {object}
+			 */
 			default: (map) => map,
 		},
 
@@ -668,6 +704,7 @@ export default {
 		 * Append the dropdown element to the end of the body
 		 * and size/position it dynamically. Use it if you have
 		 * overflow or z-index issues.
+		 *
 		 * @type {boolean}
 		 */
 		appendToBody: {
@@ -689,14 +726,14 @@ export default {
 		calculatePosition: {
 			type: Function,
 			/**
-		* @param {HTMLUListElement} dropdownList
-		* @param {Vue} component
-		* @param {object} width
-		* @param {string} width.width
-		* @param {string} width.top
-		* @param {string} width.left
-		* @return {Function | void}
-		*/
+			 * @param {HTMLUListElement} dropdownList
+			 * @param {Vue} component
+			 * @param {object} width
+			 * @param {string} width.width
+			 * @param {string} width.top
+			 * @param {string} width.left
+			 * @return {Function | void}
+			 */
 			default(dropdownList, component, { width, top, left }) {
 				dropdownList.style.top = top
 				dropdownList.style.left = left
@@ -776,6 +813,7 @@ export default {
 		/**
 		 * Determine if the component needs to
 		 * track the state of values internally.
+		 *
 		 * @return {boolean}
 		 */
 		isTrackingValues() {
@@ -784,6 +822,7 @@ export default {
 
 		/**
 		 * The options that are currently selected.
+		 *
 		 * @return {Array}
 		 */
 		selectedValue() {
@@ -813,6 +852,7 @@ export default {
 
 		/**
 		 * Find the search input DOM element.
+		 *
 		 * @return {HTMLInputElement}
 		 */
 		searchEl() {
@@ -823,6 +863,7 @@ export default {
 
 		/**
 		 * The object to be bound to the $slots.search slot.
+		 *
 		 * @return {object}
 		 */
 		scope() {
@@ -909,6 +950,7 @@ export default {
 
 		/**
 		 * Holds the current state of the component.
+		 *
 		 * @return {object}
 		 */
 		stateClasses() {
@@ -927,6 +969,7 @@ export default {
 		/**
 		 * Return the current state of the
 		 * search input
+		 *
 		 * @return {boolean} True if non empty value
 		 */
 		searching() {
@@ -936,6 +979,7 @@ export default {
 		/**
 		 * Return the current state of the
 		 * dropdown menu.
+		 *
 		 * @return {boolean} True if open
 		 */
 		dropdownOpen() {
@@ -945,6 +989,7 @@ export default {
 		/**
 		 * Return the placeholder string if it's set
 		 * & there is no value selected.
+		 *
 		 * @return {string} Placeholder text
 		 */
 		searchPlaceholder() {
@@ -993,6 +1038,7 @@ export default {
 
 		/**
 		 * Check if there aren't any options selected.
+		 *
 		 * @return {boolean}
 		 */
 		isValueEmpty() {
@@ -1001,6 +1047,7 @@ export default {
 
 		/**
 		 * Determines if the clear button should be displayed.
+		 *
 		 * @return {boolean}
 		 */
 		showClearButton() {
@@ -1016,6 +1063,7 @@ export default {
 		 * when options change.
 		 * Make sure selected option
 		 * is correct.
+		 *
 		 * @param {Array} newOptions
 		 * @param {Array} oldOptions
 		 * @return {boolean} [description]
@@ -1054,6 +1102,7 @@ export default {
 		/**
 		 * Always reset the value when
 		 * the multiple prop changes.
+		 *
 		 * @return {void}
 		 */
 		multiple() {
@@ -1079,6 +1128,7 @@ export default {
 		/**
 		 * Make sure tracked value is
 		 * one option if possible.
+		 *
 		 * @param  {object | string} value
 		 * @return {void}
 		 */
@@ -1093,6 +1143,7 @@ export default {
 		/**
 		 * Select or deselect a given option.
 		 * Allow deselect if clearable or if not the only selected option.
+		 *
 		 * @param  {object | string} option
 		 * @return {void}
 		 */
@@ -1120,6 +1171,7 @@ export default {
 
 		/**
 		 * De-select a given option.
+		 *
 		 * @param  {object | string} option
 		 * @return {void}
 		 */
@@ -1133,6 +1185,7 @@ export default {
 
 		/**
 		 * De-select a given option on keyboard input.
+		 *
 		 * @param  {object | string} option
 		 * @param  {number} index
 		 * @return {void}
@@ -1140,12 +1193,12 @@ export default {
 		keyboardDeselect(option, index) {
 			this.deselect(option)
 			/**
-			* The index of the next deselect is not yet at the same index as the
-			* removed deselect element because Vue updates asynchronously
-			*
-			* $nextTick cannot be used as the tests will fail even after using
-			* $nextTick in the tests as well
-			*/
+			 * The index of the next deselect is not yet at the same index as the
+			 * removed deselect element because Vue updates asynchronously
+			 *
+			 * $nextTick cannot be used as the tests will fail even after using
+			 * $nextTick in the tests as well
+			 */
 			const nextDeselect = this.deselectButtons?.[index + 1]
 			const prevDeselect = this.deselectButtons?.[index - 1]
 			const deselectToFocus = nextDeselect ?? prevDeselect
@@ -1158,6 +1211,7 @@ export default {
 
 		/**
 		 * Clears the currently selected value(s)
+		 *
 		 * @return {void}
 		 */
 		clearSelection() {
@@ -1167,6 +1221,7 @@ export default {
 
 		/**
 		 * Called from this.select after each selection.
+		 *
 		 * @param  {object | string} option
 		 * @return {void}
 		 */
@@ -1210,6 +1265,7 @@ export default {
 
 		/**
 		 * Toggle the visibility of the dropdown menu.
+		 *
 		 * @param  {Event} event
 		 * @return {void}
 		 */
@@ -1247,6 +1303,7 @@ export default {
 
 		/**
 		 * Check if the given option is currently selected.
+		 *
 		 * @param  {object | string}  option
 		 * @return {boolean} True when selected | False otherwise
 		 */
@@ -1256,6 +1313,7 @@ export default {
 
 		/**
 		 *  Can the current option be removed via the dropdown?
+		 *
 		 * @param {object | string} option
 		 * @return {boolean}
 		 */
@@ -1266,6 +1324,7 @@ export default {
 		/**
 		 * Check if the option at the given index should display a
 		 * keyboard focus border.
+		 *
 		 * @param  {number} index
 		 * @return {boolean}
 		 */
@@ -1305,11 +1364,12 @@ export default {
 			}
 
 			/**
-			* This second loop is needed to cover an edge case where `taggable` + `reduce`
-			* were used in conjunction with a `create-option` that doesn't create a
-			* unique reduced value.
-			* @see https://github.com/sagalbot/vue-select/issues/1089#issuecomment-597238735
-			*/
+			 * This second loop is needed to cover an edge case where `taggable` + `reduce`
+			 * were used in conjunction with a `create-option` that doesn't create a
+			 * unique reduced value.
+			 *
+			 * @see https://github.com/sagalbot/vue-select/issues/1089#issuecomment-597238735
+			 */
 			return (
 				matches.find((match) => this.optionComparator(match, this.$data._value)) || value
 			)
@@ -1317,6 +1377,7 @@ export default {
 
 		/**
 		 * 'Private' function to close the search options
+		 *
 		 * @fires  {search:blur}
 		 * @return {void}
 		 */
@@ -1328,6 +1389,7 @@ export default {
 		/**
 		 * Delete the value on Delete keypress when there is no
 		 * text in the search input, & there's tags to delete
+		 *
 		 * @return {this.value}
 		 */
 		maybeDeleteValue() {
@@ -1375,6 +1437,7 @@ export default {
 		/**
 		 * Ensures that options are always
 		 * passed as objects to scoped slots.
+		 *
 		 * @param {object | string} option
 		 * @return {object}
 		 */
@@ -1396,6 +1459,7 @@ export default {
 		/**
 		 * If there is any text in the search input, remove it.
 		 * Otherwise, blur the search input to close the dropdown.
+		 *
 		 * @return {void}
 		 */
 		onEscape() {
@@ -1408,6 +1472,7 @@ export default {
 
 		/**
 		 * Close the dropdown on blur.
+		 *
 		 * @fires  {search:blur}
 		 * @return {void}
 		 */
@@ -1430,6 +1495,7 @@ export default {
 
 		/**
 		 * Open the dropdown on focus.
+		 *
 		 * @fires  {search:focus}
 		 * @return {void}
 		 */
@@ -1443,6 +1509,7 @@ export default {
 		 * firing a `blur` event when clicking
 		 * the dropdown's scrollbar, causing it
 		 * to collapse abruptly.
+		 *
 		 * @see https://github.com/sagalbot/vue-select/issues/106
 		 * @return {void}
 		 */
@@ -1452,6 +1519,7 @@ export default {
 
 		/**
 		 * Event-Handler to help workaround IE11 (probably fixes 10 as well)
+		 *
 		 * @see https://github.com/sagalbot/vue-select/issues/106
 		 * @return {void}
 		 */
@@ -1461,6 +1529,7 @@ export default {
 
 		/**
 		 * Event-Handler for option mousemove
+		 *
 		 * @param {object | string} option
 		 * @param {number} index
 		 * @return {void}
@@ -1475,6 +1544,7 @@ export default {
 
 		/**
 		 * Search <input> KeyBoardEvent handler.
+		 *
 		 * @param {KeyboardEvent} e
 		 * @return {Function}
 		 */
@@ -1529,6 +1599,7 @@ export default {
 
 		/**
 		 * TODO: Probably want to add a mapKeyPress method just like we have for keydown.
+		 *
 		 * @param {KeyboardEvent} e
 		 */
 		onSearchKeyPress(e) {

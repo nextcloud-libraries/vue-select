@@ -1,10 +1,10 @@
 export default {
 	props: {
 		/**
-     * Toggles the adding of a 'loading' class to the main
-     * .v-select wrapper. Useful to control UI state when
-     * results are being processed through AJAX.
-     */
+		 * Toggles the adding of a 'loading' class to the main
+		 * .v-select wrapper. Useful to control UI state when
+		 * results are being processed through AJAX.
+		 */
 		loading: {
 			type: Boolean,
 			default: false,
@@ -19,23 +19,24 @@ export default {
 
 	watch: {
 		/**
-     * Anytime the search string changes, emit the
-     * 'search' event. The event is passed with two
-     * parameters: the search string, and a function
-     * that accepts a boolean parameter to toggle the
-     * loading state.
-     *
-     * @fires 'search'
-     */
+		 * Anytime the search string changes, emit the
+		 * 'search' event. The event is passed with two
+		 * parameters: the search string, and a function
+		 * that accepts a boolean parameter to toggle the
+		 * loading state.
+		 *
+		 * @fires 'search'
+		 */
 		search() {
 			this.$emit('search', this.search, this.toggleLoading)
 		},
 
 		/**
-     * Sync the loading prop with the internal
-     * mutable loading value.
-     * @param val
-     */
+		 * Sync the loading prop with the internal
+		 * mutable loading value.
+		 *
+		 * @param val
+		 */
 		loading(val) {
 			this.mutableLoading = val
 		},
@@ -43,12 +44,13 @@ export default {
 
 	methods: {
 		/**
-     * Toggle this.loading. Optionally pass a boolean
-     * value. If no value is provided, this.loading
-     * will be set to the opposite of it's current value.
-     * @param toggle Boolean
-     * @return {*}
-     */
+		 * Toggle this.loading. Optionally pass a boolean
+		 * value. If no value is provided, this.loading
+		 * will be set to the opposite of it's current value.
+		 *
+		 * @param toggle Boolean
+		 * @return {*}
+		 */
 		toggleLoading(toggle = null) {
 			if (toggle === null || toggle === undefined) {
 				return (this.mutableLoading = !this.mutableLoading)

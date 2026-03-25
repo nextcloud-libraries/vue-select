@@ -31,10 +31,11 @@ export default {
 
 	methods: {
 		/**
-     * Move the typeAheadPointer visually up the list by
-     * setting it to the previous selectable option.
-     * @return {void}
-     */
+		 * Move the typeAheadPointer visually up the list by
+		 * setting it to the previous selectable option.
+		 *
+		 * @return {void}
+		 */
 		typeAheadUp() {
 			for (let i = this.typeAheadPointer - 1; i >= 0; i--) {
 				if (this.selectable(this.filteredOptions[i])) {
@@ -45,10 +46,11 @@ export default {
 		},
 
 		/**
-     * Move the typeAheadPointer visually down the list by
-     * setting it to the next selectable option.
-     * @return {void}
-     */
+		 * Move the typeAheadPointer visually down the list by
+		 * setting it to the next selectable option.
+		 *
+		 * @return {void}
+		 */
 		typeAheadDown() {
 			for (
 				let i = this.typeAheadPointer + 1;
@@ -63,10 +65,11 @@ export default {
 		},
 
 		/**
-     * Select the option at the current typeAheadPointer position.
-     * Optionally clear the search input on selection.
-     * @return {void}
-     */
+		 * Select the option at the current typeAheadPointer position.
+		 * Optionally clear the search input on selection.
+		 *
+		 * @return {void}
+		 */
 		typeAheadSelect() {
 			const typeAheadOption = this.filteredOptions[this.typeAheadPointer]
 
@@ -76,8 +79,8 @@ export default {
 		},
 
 		/**
-     * Moves the pointer to the last selected option.
-     */
+		 * Moves the pointer to the last selected option.
+		 */
 		typeAheadToLastSelected() {
 			const indexOfLastSelected
 				= this.selectedValue.length !== 0
