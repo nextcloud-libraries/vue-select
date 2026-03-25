@@ -1,12 +1,12 @@
-import { describe, expect, it } from "vitest"
-import { defineComponent, h } from "vue"
-import { selectWithProps } from "../helpers.js"
+import { describe, expect, it } from 'vitest'
+import { defineComponent, h } from 'vue'
+import { selectWithProps } from '../helpers.js'
 
-describe("Components API", () => {
-	it("swap the Deselect component", () => {
-		const Deselect = defineComponent("Deselect", {
+describe('Components API', () => {
+	it('swap the Deselect component', () => {
+		const Deselect = defineComponent('Deselect', {
 			render() {
-				return h("button", "remove")
+				return h('button', 'remove')
 			},
 		})
 
@@ -15,10 +15,10 @@ describe("Components API", () => {
 		expect(Select.find(Deselect)).toBeTruthy()
 	})
 
-	it("swap the OpenIndicator component", () => {
-		const OpenIndicator = defineComponent("OpenIndicator", {
+	it('swap the OpenIndicator component', () => {
+		const OpenIndicator = defineComponent('OpenIndicator', {
 			render() {
-				return h("i", "^")
+				return h('i', '^')
 			},
 		})
 

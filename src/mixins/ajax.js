@@ -28,7 +28,7 @@ export default {
      * @fires 'search'
      */
 		search() {
-			this.$emit("search", this.search, this.toggleLoading)
+			this.$emit('search', this.search, this.toggleLoading)
 		},
 
 		/**

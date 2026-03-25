@@ -1,45 +1,45 @@
-import { shallowMount } from "@vue/test-utils"
-import { describe, expect, it } from "vitest"
-import { nextTick } from "vue"
-import VueSelect from "../../src/components/Select.vue"
-import { mountDefault } from "../helpers.js"
+import { shallowMount } from '@vue/test-utils'
+import { describe, expect, it } from 'vitest'
+import { nextTick } from 'vue'
+import VueSelect from '../../src/components/Select.vue'
+import { mountDefault } from '../helpers.js'
 
-describe("Moving the Typeahead Pointer", () => {
-	it("should set the pointer to zero when the filteredOptions watcher is called", async () => {
+describe('Moving the Typeahead Pointer', () => {
+	it('should set the pointer to zero when the filteredOptions watcher is called', async () => {
 		const Select = shallowMount(VueSelect, {
-			props: { options: ["one", "two", "three"] },
+			props: { options: ['one', 'two', 'three'] },
 			sync: false,
 		})
 
-		Select.vm.search = "one"
+		Select.vm.search = 'one'
 
 		await nextTick()
 		expect(Select.vm.typeAheadPointer).toEqual(0)
 	})
 
-	it("should move the pointer visually up the list on up arrow keyUp", () => {
+	it('should move the pointer visually up the list on up arrow keyUp', () => {
 		const Select = mountDefault()
 
 		Select.vm.open = true
 		Select.vm.typeAheadPointer = 1
 
-		Select.get("input").trigger("keydown.up")
+		Select.get('input').trigger('keydown.up')
 
 		expect(Select.vm.typeAheadPointer).toEqual(0)
 	})
 
-	it("should move the pointer visually down the list on down arrow keyUp", () => {
+	it('should move the pointer visually down the list on down arrow keyUp', () => {
 		const Select = mountDefault()
 
 		Select.vm.open = true
 		Select.vm.typeAheadPointer = 1
 
-		Select.get("input").trigger("keydown.down")
+		Select.get('input').trigger('keydown.down')
 
 		expect(Select.vm.typeAheadPointer).toEqual(2)
 	})
 
-	it("should not move the pointer past the end of the list", () => {
+	it('should not move the pointer past the end of the list', () => {
 		const Select = mountDefault()
 
 		Select.vm.typeAheadPointer = 2
@@ -47,56 +47,56 @@ describe("Moving the Typeahead Pointer", () => {
 		expect(Select.vm.typeAheadPointer).toEqual(2)
 	})
 
-	it("will set the pointer to the selected option when opening", async () => {
+	it('will set the pointer to the selected option when opening', async () => {
 		const Select = shallowMount(VueSelect, {
 			props: {
-				modelValue: "three",
-				options: ["one", "two", "three"],
+				modelValue: 'three',
+				options: ['one', 'two', 'three'],
 			},
 		})
 
-		Select.get("input").trigger("focus")
+		Select.get('input').trigger('focus')
 		await nextTick()
 
 		expect(Select.vm.typeAheadPointer).toEqual(2)
 	})
 
-	it("will set the pointer to the reduced selected option when opening", async () => {
+	it('will set the pointer to the reduced selected option when opening', async () => {
 		const Select = shallowMount(VueSelect, {
 			props: {
 				modelValue: 3,
 				reduce: ({ value }) => value,
 				options: [
-					{ label: "one", value: 1 },
-					{ label: "two", value: 2 },
-					{ label: "three", value: 3 },
+					{ label: 'one', value: 1 },
+					{ label: 'two', value: 2 },
+					{ label: 'three', value: 3 },
 				],
 			},
 		})
 
-		Select.get("input").trigger("focus")
+		Select.get('input').trigger('focus')
 		await nextTick()
 
 		expect(Select.vm.typeAheadPointer).toEqual(2)
 	})
 })
 
-it("should not move the pointer visually up the list on up arrow keyUp when dropdown is not open", () => {
+it('should not move the pointer visually up the list on up arrow keyUp when dropdown is not open', () => {
 	const Select = mountDefault()
 
 	Select.vm.typeAheadPointer = 1
 
-	Select.get("input").trigger("keydown.up")
+	Select.get('input').trigger('keydown.up')
 
 	expect(Select.vm.typeAheadPointer).toEqual(1)
 })
 
-it("should not move the pointer visually down the list on down arrow keyUp when dropdown is not open", () => {
+it('should not move the pointer visually down the list on down arrow keyUp when dropdown is not open', () => {
 	const Select = mountDefault()
 
 	Select.vm.typeAheadPointer = 1
 
-	Select.get("input").trigger("keydown.down")
+	Select.get('input').trigger('keydown.down')
 
 	expect(Select.vm.typeAheadPointer).toEqual(1)
 })

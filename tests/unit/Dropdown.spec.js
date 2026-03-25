@@ -1,9 +1,9 @@
-import { shallowMount } from "@vue/test-utils"
-import { afterEach, describe, expect, it, vi } from "vitest"
-import { nextTick } from "vue"
-import OpenIndicator from "../../src/components/OpenIndicator.vue"
-import VueSelect from "../../src/components/Select.vue"
-import { mountDefault, selectWithProps } from "../helpers.js"
+import { shallowMount } from '@vue/test-utils'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import { nextTick } from 'vue'
+import OpenIndicator from '../../src/components/OpenIndicator.vue'
+import VueSelect from '../../src/components/Select.vue'
+import { mountDefault, selectWithProps } from '../helpers.js'
 
 const preventDefault = vi.fn()
 
@@ -15,32 +15,32 @@ function clickEvent(currentTarget) {
 	return { currentTarget, preventDefault }
 }
 
-describe("Toggling Dropdown", () => {
+describe('Toggling Dropdown', () => {
 	let spy
 	afterEach(() => {
 		if (spy) { spy.mockClear() }
 	})
 
-	it("should not open the dropdown when the el is clicked but the component is disabled", () => {
+	it('should not open the dropdown when the el is clicked but the component is disabled', () => {
 		const Select = selectWithProps({ disabled: true })
 		Select.vm.toggleDropdown(clickEvent(Select.vm.$refs.search))
 		expect(Select.vm.open).toEqual(false)
 	})
 
-	it("should open the dropdown when the el is clicked", () => {
+	it('should open the dropdown when the el is clicked', () => {
 		const Select = selectWithProps({
-			modelValue: [{ label: "one" }],
-			options: [{ label: "one" }],
+			modelValue: [{ label: 'one' }],
+			options: [{ label: 'one' }],
 		})
 
 		Select.vm.toggleDropdown(clickEvent(Select.vm.$refs.search))
 		expect(Select.vm.open).toEqual(true)
 	})
 
-	it("should not close the dropdown when the el is clicked and enableMouseInputSearch is set to true", () => {
+	it('should not close the dropdown when the el is clicked and enableMouseInputSearch is set to true', () => {
 		const Select = selectWithProps({
-			modelValue: [{ label: "one" }],
-			options: [{ label: "one" }],
+			modelValue: [{ label: 'one' }],
+			options: [{ label: 'one' }],
 			enableMouseSearchInput: true,
 		})
 
@@ -48,64 +48,64 @@ describe("Toggling Dropdown", () => {
 		expect(Select.vm.open).toEqual(true)
 	})
 
-	it("should open the dropdown when the selected tag is clicked", () => {
+	it('should open the dropdown when the selected tag is clicked', () => {
 		const Select = selectWithProps({
-			modelValue: [{ label: "one" }],
-			options: [{ label: "one" }],
+			modelValue: [{ label: 'one' }],
+			options: [{ label: 'one' }],
 		})
 
-		const selectedTag = Select.find(".vs__selected").element
+		const selectedTag = Select.find('.vs__selected').element
 
 		Select.vm.toggleDropdown(clickEvent(selectedTag))
 		expect(Select.vm.open).toEqual(true)
 	})
 
-	it("will open the dropdown when: the input has focus, space is pressed, menu is closed", async () => {
+	it('will open the dropdown when: the input has focus, space is pressed, menu is closed', async () => {
 		const Select = mountDefault()
-		const input = Select.get("input")
+		const input = Select.get('input')
 
-		input.trigger("focus")
+		input.trigger('focus')
 		Select.vm.open = false
-		input.trigger("keypress.space")
+		input.trigger('keypress.space')
 
 		expect(Select.vm.open).toEqual(true)
-		expect(Select.vm.search).toEqual("")
+		expect(Select.vm.search).toEqual('')
 	})
 
-	it("should open dropdown on selectOnKeyCodes keydown", async () => {
+	it('should open dropdown on selectOnKeyCodes keydown', async () => {
 		const Select = mountDefault()
-		const input = Select.get("input")
+		const input = Select.get('input')
 
-		input.trigger("keydown.enter")
+		input.trigger('keydown.enter')
 
 		expect(Select.vm.open).toEqual(true)
 	})
 
-	it("should open dropdown on alphabetic input", async () => {
+	it('should open dropdown on alphabetic input', async () => {
 		const Select = mountDefault()
-		const input = Select.get("input")
+		const input = Select.get('input')
 
-		input.element.value = "a"
-		input.trigger("input")
+		input.element.value = 'a'
+		input.trigger('input')
 		await nextTick()
 
 		expect(Select.vm.open).toEqual(true)
 	})
 
-	it("should open dropdown on numeric input", async () => {
+	it('should open dropdown on numeric input', async () => {
 		const Select = shallowMount(VueSelect)
-		const input = Select.get("input")
+		const input = Select.get('input')
 
 		input.element.value = 1
-		input.trigger("input")
+		input.trigger('input')
 		await nextTick()
 
 		expect(Select.vm.open).toEqual(true)
 	})
 
-	it("can close the dropdown when the el is clicked", () => {
+	it('can close the dropdown when the el is clicked', () => {
 		const Select = selectWithProps()
-		const spy = vi.spyOn(Select.vm.$refs.search, "blur")
+		const spy = vi.spyOn(Select.vm.$refs.search, 'blur')
 
 		Select.vm.open = true
 		Select.vm.toggleDropdown(clickEvent(Select.vm.$el))
@@ -113,46 +113,46 @@ describe("Toggling Dropdown", () => {
 		expect(spy).toHaveBeenCalled()
 	})
 
-	it("closes the dropdown when an option is selected, multiple is true, and closeOnSelect option is true", () => {
+	it('closes the dropdown when an option is selected, multiple is true, and closeOnSelect option is true', () => {
 		const Select = selectWithProps({
 			modelValue: [],
-			options: ["one", "two", "three"],
+			options: ['one', 'two', 'three'],
 			multiple: true,
 		})
 
 		Select.vm.open = true
-		Select.vm.select("one")
+		Select.vm.select('one')
 
 		expect(Select.vm.open).toEqual(false)
 	})
 
-	it("does not close the dropdown when the el is clicked, multiple is true, and closeOnSelect option is false", () => {
+	it('does not close the dropdown when the el is clicked, multiple is true, and closeOnSelect option is false', () => {
 		const Select = selectWithProps({
 			modelValue: [],
-			options: ["one", "two", "three"],
+			options: ['one', 'two', 'three'],
 			multiple: true,
 			closeOnSelect: false,
 		})
 
 		Select.vm.open = true
-		Select.vm.select("one")
+		Select.vm.select('one')
 
 		expect(Select.vm.open).toEqual(true)
 	})
 
-	it("should close the dropdown on search blur", async () => {
+	it('should close the dropdown on search blur', async () => {
 		const Select = selectWithProps({
-			options: [{ label: "one" }],
+			options: [{ label: 'one' }],
 		})
 
 		Select.vm.open = true
-		await Select.get("input").trigger("blur")
+		await Select.get('input').trigger('blur')
 
 		expect(Select.vm.open).toEqual(false)
 	})
 
-	it("will close the dropdown and emit the search:blur event from onSearchBlur", () => {
-		spy = vi.spyOn(VueSelect.methods, "onSearchBlur")
+	it('will close the dropdown and emit the search:blur event from onSearchBlur', () => {
+		spy = vi.spyOn(VueSelect.methods, 'onSearchBlur')
 		const Select = selectWithProps()
 
 		Select.vm.open = true
@@ -162,8 +162,8 @@ describe("Toggling Dropdown", () => {
 		expect(spy).toHaveBeenCalled()
 	})
 
-	it("will open the dropdown and emit the search:focus event from onSearchFocus", () => {
-		spy = vi.spyOn(VueSelect.methods, "onSearchFocus")
+	it('will open the dropdown and emit the search:focus event from onSearchFocus', () => {
+		spy = vi.spyOn(VueSelect.methods, 'onSearchFocus')
 		const Select = selectWithProps()
 
 		Select.vm.onSearchFocus()
@@ -172,7 +172,7 @@ describe("Toggling Dropdown", () => {
 		expect(spy).toHaveBeenCalled()
 	})
 
-	it("will close the dropdown on escape, if search is empty", () => {
+	it('will close the dropdown on escape, if search is empty', () => {
 		const Select = selectWithProps()
 
 		Select.vm.open = true
@@ -181,27 +181,27 @@ describe("Toggling Dropdown", () => {
 		expect(Select.vm.open).toEqual(false)
 	})
 
-	it("should remove existing search text on escape keydown", () => {
+	it('should remove existing search text on escape keydown', () => {
 		const Select = selectWithProps({
-			modelValue: [{ label: "one" }],
-			options: [{ label: "one" }],
+			modelValue: [{ label: 'one' }],
+			options: [{ label: 'one' }],
 		})
 
-		Select.vm.search = "foo"
-		Select.find(".vs__search").trigger("keydown.esc")
-		expect(Select.vm.search).toEqual("")
+		Select.vm.search = 'foo'
+		Select.find('.vs__search').trigger('keydown.esc')
+		expect(Select.vm.search).toEqual('')
 	})
 
-	it("should have an open class when dropdown is active", () => {
+	it('should have an open class when dropdown is active', () => {
 		const Select = selectWithProps()
 
-		expect(Select.vm.stateClasses["vs--open"]).toEqual(false)
+		expect(Select.vm.stateClasses['vs--open']).toEqual(false)
 
 		Select.vm.open = true
-		expect(Select.vm.stateClasses["vs--open"]).toEqual(true)
+		expect(Select.vm.stateClasses['vs--open']).toEqual(true)
 	})
 
-	it("should not display the dropdown if noDrop is true", async () => {
+	it('should not display the dropdown if noDrop is true', async () => {
 		const Select = selectWithProps({
 			noDrop: true,
 		})
@@ -211,44 +211,44 @@ describe("Toggling Dropdown", () => {
 		expect(Select.vm.open).toEqual(true)
 		await nextTick()
 
-		expect(Select.find(".vs__dropdown-menu").exists()).toBeFalsy()
-		expect(Select.find(".vs__dropdown-option").exists()).toBeFalsy()
-		expect(Select.find(".vs__no-options").exists()).toBeFalsy()
-		expect(Select.vm.stateClasses["vs--open"]).toBeFalsy()
+		expect(Select.find('.vs__dropdown-menu').exists()).toBeFalsy()
+		expect(Select.find('.vs__dropdown-option').exists()).toBeFalsy()
+		expect(Select.find('.vs__no-options').exists()).toBeFalsy()
+		expect(Select.vm.stateClasses['vs--open']).toBeFalsy()
 	})
 
-	it("should hide the open indicator if noDrop is true", () => {
+	it('should hide the open indicator if noDrop is true', () => {
 		const Select = selectWithProps({
 			noDrop: true,
 		})
 		expect(Select.findComponent(OpenIndicator).exists()).toBeFalsy()
 	})
 
-	it("should not add the searchable state class when noDrop is true", () => {
+	it('should not add the searchable state class when noDrop is true', () => {
 		const Select = selectWithProps({
 			noDrop: true,
 		})
-		expect(Select.classes("vs--searchable")).toBeFalsy()
+		expect(Select.classes('vs--searchable')).toBeFalsy()
 	})
 
-	it("should not add the searching state class when noDrop is true", () => {
+	it('should not add the searching state class when noDrop is true', () => {
 		const Select = selectWithProps({
 			noDrop: true,
 		})
 
-		Select.vm.search = "Canada"
+		Select.vm.search = 'Canada'
 
-		expect(Select.classes("vs--searching")).toBeFalsy()
+		expect(Select.classes('vs--searching')).toBeFalsy()
 	})
 
-	it("can be opened with dropdownShouldOpen", () => {
+	it('can be opened with dropdownShouldOpen', () => {
 		const Select = selectWithProps({
 			noDrop: true,
 			dropdownShouldOpen: () => true,
-			options: ["one"],
+			options: ['one'],
 		})
 
-		expect(Select.classes("vs--open")).toBeTruthy()
-		expect(Select.find(".vs__dropdown-menu li")).toBeTruthy()
+		expect(Select.classes('vs--open')).toBeTruthy()
+		expect(Select.find('.vs__dropdown-menu li')).toBeTruthy()
 	})
 })

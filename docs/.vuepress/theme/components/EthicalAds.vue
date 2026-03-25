@@ -27,7 +27,7 @@ export default {
 		load() {
 			const s = document.createElement('script')
 			s.id = '_ads_js'
-			s.src = `https://media.ethicalads.io/media/client/ethicalads.min.js`
+			s.src = 'https://media.ethicalads.io/media/client/ethicalads.min.js'
 			s.async = 'async'
 			this.$el.appendChild(s)
 		},

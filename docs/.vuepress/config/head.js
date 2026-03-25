@@ -18,13 +18,13 @@ const head = [
 			type: 'text/css',
 		},
 	],
-	['link', { rel: 'icon', href: `/vue-logo.png` }],
+	['link', { rel: 'icon', href: '/vue-logo.png' }],
 	['meta', { name: 'theme-color', content: '#3eaf7c' }],
 	['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
 	['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
 	[
 		'link',
-		{ rel: 'apple-touch-icon', href: `/icons/apple-touch-icon-152x152.png` },
+		{ rel: 'apple-touch-icon', href: '/icons/apple-touch-icon-152x152.png' },
 	],
 	[
 		'link',

@@ -137,13 +137,13 @@
 </template>
 
 <script>
-import appendToBody from "../directives/appendToBody.js"
-import ajax from "../mixins/ajax.js"
-import pointerScroll from "../mixins/pointerScroll.js"
-import typeAheadPointer from "../mixins/typeAheadPointer.js"
-import sortAndStringify from "../utility/sortAndStringify.js"
-import uniqueId from "../utility/uniqueId.js"
-import childComponents from "./childComponents.js"
+import appendToBody from '../directives/appendToBody.js'
+import ajax from '../mixins/ajax.js'
+import pointerScroll from '../mixins/pointerScroll.js'
+import typeAheadPointer from '../mixins/typeAheadPointer.js'
+import sortAndStringify from '../utility/sortAndStringify.js'
+import uniqueId from '../utility/uniqueId.js'
+import childComponents from './childComponents.js'
 
 /**
  * @name VueSelect
@@ -252,7 +252,7 @@ export default {
      */
 		placeholder: {
 			type: String,
-			default: "",
+			default: '',
 		},
 
 		/**
@@ -261,7 +261,7 @@ export default {
      */
 		transition: {
 			type: String,
-			default: "vs__fade",
+			default: 'vs__fade',
 		},
 
 		/**
@@ -290,7 +290,7 @@ export default {
      */
 		label: {
 			type: String,
-			default: "label",
+			default: 'label',
 		},
 
 		/**
@@ -300,7 +300,7 @@ export default {
      */
 		ariaLabelCombobox: {
 			type: String,
-			default: "Search for options",
+			default: 'Search for options',
 		},
 
 		/**
@@ -310,7 +310,7 @@ export default {
      */
 		ariaLabelListbox: {
 			type: String,
-			default: "Options",
+			default: 'Options',
 		},
 
 		/**
@@ -320,7 +320,7 @@ export default {
      */
 		ariaLabelClearSelected: {
 			type: String,
-			default: "Clear selected",
+			default: 'Clear selected',
 		},
 
 		/**
@@ -340,7 +340,7 @@ export default {
      */
 		autocomplete: {
 			type: String,
-			default: "off",
+			default: 'off',
 		},
 
 		/**
@@ -385,11 +385,11 @@ export default {
 		getOptionLabel: {
 			type: Function,
 			default(option) {
-				if (typeof option === "object") {
+				if (typeof option === 'object') {
 					if (!Object.hasOwn(option, this.label)) {
 						return console.warn(`[vue-select warn]: Label key "option.${this.label}" does not`
 							+ ` exist in options object ${JSON.stringify(option)}.\n`
-							+ "https://vue-select.org/api/props.html#getoptionlabel")
+							+ 'https://vue-select.org/api/props.html#getoptionlabel')
 					}
 					return option[this.label]
 				}
@@ -416,20 +416,20 @@ export default {
 		getOptionKey: {
 			type: Function,
 			default(option) {
-				if (typeof option !== "object") {
+				if (typeof option !== 'object') {
 					return option
 				}
 
 				try {
-					return Object.hasOwn(option, "id")
+					return Object.hasOwn(option, 'id')
 						? option.id
 						: sortAndStringify(option)
 				} catch (e) {
 					const warning
-						= `[vue-select warn]: Could not stringify this option `
-							+ `to generate unique key. Please provide'getOptionKey' prop `
-							+ `to return a unique key for each option.\n`
-							+ "https://vue-select.org/api/props.html#getoptionkey"
+						= '[vue-select warn]: Could not stringify this option '
+							+ 'to generate unique key. Please provide\'getOptionKey\' prop '
+							+ 'to return a unique key for each option.\n'
+							+ 'https://vue-select.org/api/props.html#getoptionkey'
 					return console.warn(warning, option, e)
 				}
 			},
@@ -501,7 +501,7 @@ export default {
 			type: Function,
 			default(option, label, search) {
 				return (
-					(label || "")
+					(label || '')
 						.toLocaleLowerCase()
 						.indexOf(search.toLocaleLowerCase()) > -1
 				)
@@ -524,7 +524,7 @@ export default {
 			default(options, search) {
 				return options.filter((option) => {
 					let label = this.getOptionLabel(option)
-					if (typeof label === "number") {
+					if (typeof label === 'number') {
 						label = label.toString()
 					}
 					return this.filterBy(option, label, search)
@@ -539,7 +539,7 @@ export default {
 		createOption: {
 			type: Function,
 			default(option) {
-				return typeof this.optionList[0] === "object"
+				return typeof this.optionList[0] === 'object'
 					? { [this.label]: option }
 					: option
 			},
@@ -569,7 +569,7 @@ export default {
      */
 		resetOnOptionsChange: {
 			default: false,
-			validator: (value) => ["function", "boolean"].includes(typeof value),
+			validator: (value) => ['function', 'boolean'].includes(typeof value),
 		},
 
 		/**
@@ -610,7 +610,7 @@ export default {
      */
 		dir: {
 			type: String,
-			default: "auto",
+			default: 'auto',
 		},
 
 		/**
@@ -646,7 +646,7 @@ export default {
      */
 		searchInputQuerySelector: {
 			type: String,
-			default: "[type=search]",
+			default: '[type=search]',
 		},
 
 		/**
@@ -741,26 +741,26 @@ export default {
 	},
 
 	emits: [
-		"open",
-		"close",
-		"update:modelValue",
-		"search",
-		"search:compositionstart",
-		"search:compositionend",
-		"search:keydown",
-		"search:blur",
-		"search:focus",
-		"search:input",
-		"option:created",
-		"option:selecting",
-		"option:selected",
-		"option:deselecting",
-		"option:deselected",
+		'open',
+		'close',
+		'update:modelValue',
+		'search',
+		'search:compositionstart',
+		'search:compositionend',
+		'search:keydown',
+		'search:blur',
+		'search:focus',
+		'search:input',
+		'option:created',
+		'option:selecting',
+		'option:selected',
+		'option:deselecting',
+		'option:deselected',
 	],
 
 	data() {
 		return {
-			search: "",
+			search: '',
 			open: false,
 			isComposing: false,
 			isKeyboardNavigation: false,
@@ -782,7 +782,7 @@ export default {
      * @return {boolean}
      */
 		isTrackingValues() {
-			return typeof this.modelValue === "undefined" || this.isReducingValues
+			return typeof this.modelValue === 'undefined' || this.isReducingValues
 		},
 
 		/**
@@ -796,7 +796,7 @@ export default {
 				value = this.$data._value
 			}
 
-			if (value !== undefined && value !== null && value !== "") {
+			if (value !== undefined && value !== null && value !== '') {
 				return [].concat(value)
 			}
 
@@ -843,19 +843,19 @@ export default {
 						placeholder: this.searchPlaceholder,
 						tabindex: this.tabindex,
 						readonly: !this.searchable,
-						role: "combobox",
-						"aria-autocomplete": "list",
-						"aria-label": this.ariaLabelCombobox,
-						"aria-controls": `vs-${this.uid}__listbox`,
-						"aria-owns": `vs-${this.uid}__listbox`,
-						"aria-expanded": this.dropdownOpen.toString(),
-						ref: "search",
-						type: "search",
+						role: 'combobox',
+						'aria-autocomplete': 'list',
+						'aria-label': this.ariaLabelCombobox,
+						'aria-controls': `vs-${this.uid}__listbox`,
+						'aria-owns': `vs-${this.uid}__listbox`,
+						'aria-expanded': this.dropdownOpen.toString(),
+						ref: 'search',
+						type: 'search',
 						autocomplete: this.autocomplete,
 						value: this.search,
 						...(this.dropdownOpen && this.filteredOptions[this.typeAheadPointer]
 							? {
-									"aria-activedescendant": `vs-${this.uid}__option-${this.typeAheadPointer}`,
+									'aria-activedescendant': `vs-${this.uid}__option-${this.typeAheadPointer}`,
 								}
 							: {}),
 					},
@@ -883,9 +883,9 @@ export default {
 
 				openIndicator: {
 					attributes: {
-						ref: "openIndicator",
-						role: "presentation",
-						class: "vs__open-indicator",
+						ref: 'openIndicator',
+						role: 'presentation',
+						class: 'vs__open-indicator',
 					},
 				},
 
@@ -916,14 +916,14 @@ export default {
      */
 		stateClasses() {
 			return {
-				"vs--open": this.dropdownOpen,
-				"vs--single": !this.multiple,
-				"vs--multiple": this.multiple,
-				"vs--searching": this.searching && !this.noDrop,
-				"vs--searchable": this.searchable && !this.noDrop,
-				"vs--unsearchable": !this.searchable,
-				"vs--loading": this.mutableLoading,
-				"vs--disabled": this.disabled,
+				'vs--open': this.dropdownOpen,
+				'vs--single': !this.multiple,
+				'vs--multiple': this.multiple,
+				'vs--searching': this.searching && !this.noDrop,
+				'vs--searchable': this.searchable && !this.noDrop,
+				'vs--unsearchable': !this.searchable,
+				'vs--loading': this.mutableLoading,
+				'vs--disabled': this.disabled,
 			}
 		},
 
@@ -1024,7 +1024,7 @@ export default {
      * @return {[type]} [description]
      */
 		options(newOptions, oldOptions) {
-			const shouldReset = () => typeof this.resetOnOptionsChange === "function"
+			const shouldReset = () => typeof this.resetOnOptionsChange === 'function'
 				? this.resetOnOptionsChange(
 						newOptions,
 						oldOptions,
@@ -1064,7 +1064,7 @@ export default {
 		},
 
 		open(isOpen) {
-			this.$emit(isOpen ? "open" : "close")
+			this.$emit(isOpen ? 'open' : 'close')
 		},
 
 		search(search) {
@@ -1100,18 +1100,18 @@ export default {
      * @return {void}
      */
 		select(option) {
-			this.$emit("option:selecting", option)
+			this.$emit('option:selecting', option)
 			if (!this.isOptionSelected(option)) {
 				if (this.taggable && !this.optionExists(option)) {
 					/* @TODO: could we use v-model instead of push-tags? */
-					this.$emit("option:created", option)
+					this.$emit('option:created', option)
 					this.pushTag(option)
 				}
 				if (this.multiple) {
 					option = this.selectedValue.concat(option)
 				}
 				this.updateValue(option)
-				this.$emit("option:selected", option)
+				this.$emit('option:selected', option)
 			} else if (
 				this.deselectFromDropdown
 				&& (this.clearable || (this.multiple && this.selectedValue.length > 1))
@@ -1127,11 +1127,11 @@ export default {
      * @return {void}
      */
 		deselect(option) {
-			this.$emit("option:deselecting", option)
+			this.$emit('option:deselecting', option)
 			this.updateValue(this.selectedValue.filter((val) => {
 				return !this.optionComparator(val, option)
 			}))
-			this.$emit("option:deselected", option)
+			this.$emit('option:deselected', option)
 		},
 
 		/**
@@ -1179,7 +1179,7 @@ export default {
 			}
 
 			if (this.clearSearchOnSelect) {
-				this.search = ""
+				this.search = ''
 			}
 			if (this.noDrop && this.multiple) {
 				this.$nextTick(() => this.$refs.search.focus())
@@ -1195,7 +1195,7 @@ export default {
      * @param value
      */
 		updateValue(value) {
-			if (typeof this.modelValue === "undefined") {
+			if (typeof this.modelValue === 'undefined') {
 				// Vue select has to manage value
 				this.$data._value = value
 			}
@@ -1208,7 +1208,7 @@ export default {
 				}
 			}
 
-			this.$emit("update:modelValue", value)
+			this.$emit('update:modelValue', value)
 		},
 
 		/**
@@ -1324,7 +1324,7 @@ export default {
      */
 		closeSearchOptions() {
 			this.open = false
-			this.$emit("search:blur")
+			this.$emit('search:blur')
 		},
 
 		/**
@@ -1381,7 +1381,7 @@ export default {
      * @return {*}
      */
 		normalizeOptionForSlot(option) {
-			return typeof option === "object" ? option : { [this.label]: option }
+			return typeof option === 'object' ? option : { [this.label]: option }
 		},
 
 		/**
@@ -1404,7 +1404,7 @@ export default {
 			if (!this.search.length) {
 				this.open = false
 			} else {
-				this.search = ""
+				this.search = ''
 			}
 		},
 
@@ -1419,7 +1419,7 @@ export default {
 			} else {
 				const { clearSearchOnSelect, multiple } = this
 				if (this.clearSearchOnBlur({ clearSearchOnSelect, multiple })) {
-					this.search = ""
+					this.search = ''
 				}
 				this.closeSearchOptions()
 				return
@@ -1437,7 +1437,7 @@ export default {
      */
 		onSearchFocus() {
 			this.open = true
-			this.$emit("search:focus")
+			this.$emit('search:focus')
 		},
 
 		/**
@@ -1524,7 +1524,7 @@ export default {
 
 			const handlers = this.mapKeydown(defaults, this)
 
-			if (typeof handlers[e.keyCode] === "function") {
+			if (typeof handlers[e.keyCode] === 'function') {
 				return handlers[e.keyCode](e)
 			}
 		},

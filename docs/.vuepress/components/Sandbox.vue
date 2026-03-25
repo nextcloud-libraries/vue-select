@@ -282,7 +282,7 @@ export default {
 		},
 
 		getPeople: debounce((loading, vm) => {
-			vm.$http.get(`https://reqres.in/api/users?per_page=10`).then((res) => {
+			vm.$http.get('https://reqres.in/api/users?per_page=10').then((res) => {
 				vm.people = res.data.data
 				loading(false)
 			})
