@@ -63,8 +63,7 @@ describe("Filtering Options", () => {
 		const Select = shallowMount(VueSelect, {
 			propsData: {
 				options: [{ label: "Aoo" }, { label: "Bar" }, { label: "Baz" }],
-				filterBy: (option, label, search) =>
-					label.match(new RegExp("^" + search, "i")),
+				filterBy: (option, label, search) => label.match(new RegExp("^" + search, "i")),
 			},
 		})
 

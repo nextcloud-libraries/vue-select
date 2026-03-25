@@ -8,12 +8,11 @@ describe("Scoped Slots", () => {
 			{ modelValue: "one" },
 			{
 				slots: {
-					"selected-option-container": (slotProps) =>
-						h(
-							"span",
-							{ slot: "selected-option-container" },
-							slotProps.option.label,
-						),
+					"selected-option-container": (slotProps) => h(
+						"span",
+						{ slot: "selected-option-container" },
+						slotProps.option.label,
+					),
 				},
 			},
 		)
@@ -27,8 +26,7 @@ describe("Scoped Slots", () => {
 				{ modelValue: "one" },
 				{
 					slots: {
-						"selected-option": (slotProps) =>
-							h("span", { slot: "selected-option" }, slotProps.label),
+						"selected-option": (slotProps) => h("span", { slot: "selected-option" }, slotProps.label),
 					},
 				},
 			)
@@ -41,8 +39,7 @@ describe("Scoped Slots", () => {
 				{ modelValue: "one" },
 				{
 					slots: {
-						"selected-option": (slotProps) =>
-							h("span", { class: "my-option" }, slotProps.label),
+						"selected-option": (slotProps) => h("span", { class: "my-option" }, slotProps.label),
 					},
 				},
 			)

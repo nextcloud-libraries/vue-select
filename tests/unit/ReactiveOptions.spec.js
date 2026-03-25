@@ -90,8 +90,7 @@ describe("Reset on options change", () => {
 		})
 
 		it("should reset the options if the selectedValue does not exist in the new options", async () => {
-			const resetOnOptionsChange = (options, old, val) =>
-				val.some((val) => options.includes(val))
+			const resetOnOptionsChange = (options, old, val) => val.some((val) => options.includes(val))
 			const Select = shallowMount(VueSelect, {
 				props: { resetOnOptionsChange, options: ["one"], modelValue: "one" },
 			})

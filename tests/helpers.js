@@ -73,12 +73,11 @@ export function mountDefault(props = {}, options = {}) {
  */
 export function mountWithoutTestUtils(props = {}, options = {}) {
 	return createApp({
-		render: (createEl) =>
-			createEl("vue-select", {
-				ref: "select",
-				props: { options: ["one", "two", "three"], ...props },
-				...options,
-			}),
+		render: (createEl) => createEl("vue-select", {
+			ref: "select",
+			props: { options: ["one", "two", "three"], ...props },
+			...options,
+		}),
 		components: { VueSelect },
 	}).mount().$refs.select
 }
