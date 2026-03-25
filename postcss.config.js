@@ -1,5 +1,5 @@
-import autoprefixer from "autoprefixer";
-import cssnanoPlugin from "cssnano";
+import autoprefixer from "autoprefixer"
+import cssnanoPlugin from "cssnano"
 
 export default {
 	plugins: [
@@ -8,4 +8,4 @@ export default {
 			preset: "default",
 		}),
 	],
-};
+}

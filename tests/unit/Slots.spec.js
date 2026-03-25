@@ -1,6 +1,6 @@
-import { describe, expect, it, test, vi } from "vitest";
-import { h, nextTick } from "vue";
-import { mountDefault } from "../helpers.js";
+import { describe, expect, it, test, vi } from "vitest"
+import { h, nextTick } from "vue"
+import { mountDefault } from "../helpers.js"
 
 describe("Scoped Slots", () => {
 	it("receives an option object to the selected-option-container slot", () => {
@@ -16,10 +16,10 @@ describe("Scoped Slots", () => {
 						),
 				},
 			},
-		);
+		)
 
-		expect(Select.get(".vs__selected-options").text()).toEqual("one");
-	});
+		expect(Select.get(".vs__selected-options").text()).toEqual("one")
+	})
 
 	describe("Slot: selected-option", () => {
 		it("receives an option object to the selected-option slot", () => {
@@ -31,10 +31,10 @@ describe("Scoped Slots", () => {
 							h("span", { slot: "selected-option" }, slotProps.label),
 					},
 				},
-			);
+			)
 
-			expect(Select.get(".vs__selected").text()).toEqual("one");
-		});
+			expect(Select.get(".vs__selected").text()).toEqual("one")
+		})
 
 		it("opens the dropdown when clicking an option in selected-option slot", () => {
 			const Select = mountDefault(
@@ -45,12 +45,12 @@ describe("Scoped Slots", () => {
 							h("span", { class: "my-option" }, slotProps.label),
 					},
 				},
-			);
+			)
 
-			Select.get(".my-option").trigger("mousedown");
-			expect(Select.vm.open).toEqual(true);
-		});
-	});
+			Select.get(".my-option").trigger("mousedown")
+			expect(Select.vm.open).toEqual(true)
+		})
+	})
 
 	it("receives an option object to the option slot in the dropdown menu", async () => {
 		const Select = mountDefault(
@@ -60,103 +60,103 @@ describe("Scoped Slots", () => {
 					option: (slotProps) => h("span", { slot: "option" }, slotProps.label),
 				},
 			},
-		);
+		)
 
-		Select.vm.open = true;
-		await nextTick();
+		Select.vm.open = true
+		await nextTick()
 
-		expect(Select.get(".vs__dropdown-menu").text()).toEqual("onetwothree");
-	});
+		expect(Select.get(".vs__dropdown-menu").text()).toEqual("onetwothree")
+	})
 
 	it("noOptions slot receives the current search text", async () => {
-		const noOptions = vi.fn();
+		const noOptions = vi.fn()
 		const Select = mountDefault(
 			{},
 			{
 				slots: { "no-options": noOptions },
 			},
-		);
+		)
 
-		Select.vm.search = "something not there";
-		Select.vm.open = true;
-		await nextTick();
+		Select.vm.search = "something not there"
+		Select.vm.open = true
+		await nextTick()
 
 		expect(noOptions).toHaveBeenCalledWith({
 			loading: false,
 			search: "something not there",
 			searching: true,
-		});
-	});
+		})
+	})
 
 	test("header slot props", async () => {
-		const header = vi.fn();
+		const header = vi.fn()
 		mountDefault(
 			{},
 			{
 				slots: { header },
 			},
-		);
-		await nextTick();
+		)
+		await nextTick()
 		expect(Object.keys(header.mock.calls[0][0])).toEqual([
 			"search",
 			"loading",
 			"searching",
 			"filteredOptions",
 			"deselect",
-		]);
-	});
+		])
+	})
 
 	test("footer slot props", async () => {
-		const footer = vi.fn();
+		const footer = vi.fn()
 		mountDefault(
 			{},
 			{
 				slots: { footer },
 			},
-		);
-		await nextTick();
+		)
+		await nextTick()
 		expect(Object.keys(footer.mock.calls[0][0])).toEqual([
 			"search",
 			"loading",
 			"searching",
 			"filteredOptions",
 			"deselect",
-		]);
-	});
+		])
+	})
 
 	test("list-header slot props", async () => {
-		const header = vi.fn();
+		const header = vi.fn()
 		const Select = mountDefault(
 			{},
 			{
 				slots: { "list-header": header },
 			},
-		);
-		Select.vm.open = true;
-		await nextTick();
+		)
+		Select.vm.open = true
+		await nextTick()
 		expect(Object.keys(header.mock.calls[0][0])).toEqual([
 			"search",
 			"loading",
 			"searching",
 			"filteredOptions",
-		]);
-	});
+		])
+	})
 
 	test("list-footer slot props", async () => {
-		const footer = vi.fn();
+		const footer = vi.fn()
 		const Select = mountDefault(
 			{},
 			{
 				slots: { "list-footer": footer },
 			},
-		);
-		Select.vm.open = true;
-		await nextTick();
+		)
+		Select.vm.open = true
+		await nextTick()
 		expect(Object.keys(footer.mock.calls[0][0])).toEqual([
 			"search",
 			"loading",
 			"searching",
 			"filteredOptions",
-		]);
-	});
-});
+		])
+	})
+})

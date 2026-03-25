@@ -1,4 +1,4 @@
-import VueSelect from "./components/Select.vue";
-import mixins from "./mixins/index.js";
+import VueSelect from "./components/Select.vue"
+import mixins from "./mixins/index.js"
 
-export { mixins, VueSelect };
+export { mixins, VueSelect }

@@ -14,7 +14,7 @@ export default {
 	data() {
 		return {
 			mutableLoading: false,
-		};
+		}
 	},
 
 	watch: {
@@ -28,7 +28,7 @@ export default {
      * @fires 'search'
      */
 		search() {
-			this.$emit("search", this.search, this.toggleLoading);
+			this.$emit("search", this.search, this.toggleLoading)
 		},
 
 		/**
@@ -37,7 +37,7 @@ export default {
      * @param val
      */
 		loading(val) {
-			this.mutableLoading = val;
+			this.mutableLoading = val
 		},
 	},
 
@@ -51,9 +51,9 @@ export default {
      */
 		toggleLoading(toggle = null) {
 			if (toggle == null) {
-				return (this.mutableLoading = !this.mutableLoading);
+				return (this.mutableLoading = !this.mutableLoading)
 			}
-			return (this.mutableLoading = toggle);
+			return (this.mutableLoading = toggle)
 		},
 	},
-};
+}

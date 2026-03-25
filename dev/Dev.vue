@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import vSelect from "../src/components/Select.vue";
-import countries from "../docs/.vuepress/data/countryCodes";
-import books from "../docs/.vuepress/data/books";
+import vSelect from "../src/components/Select.vue"
+import countries from "../docs/.vuepress/data/countryCodes"
+import books from "../docs/.vuepress/data/books"
 
 export default {
 	components: { VSelect: vSelect },
@@ -17,7 +17,7 @@ export default {
 			options: countries,
 		},
 	}),
-};
+}
 </script>
 
 <style>

@@ -1,34 +1,34 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest"
 
-import Select from "../../src/components/Select.vue";
+import Select from "../../src/components/Select.vue"
 
 describe("Comparing Options", () => {
 	const comparator = Select.methods.optionComparator.bind({
 		getOptionKey: Select.props.getOptionKey.default,
-	});
+	})
 
 	it("can compare numbers", () => {
-		expect(comparator(1, 2)).toBeFalsy();
-		expect(comparator(1, 1)).toBeTruthy();
-	});
+		expect(comparator(1, 2)).toBeFalsy()
+		expect(comparator(1, 1)).toBeTruthy()
+	})
 
 	it("can compare strings", () => {
-		expect(comparator("one", "one")).toBeTruthy();
-		expect(comparator("one", "two")).toBeFalsy();
-	});
+		expect(comparator("one", "one")).toBeTruthy()
+		expect(comparator("one", "two")).toBeFalsy()
+	})
 
 	it("can compare objects", () => {
 		//  compare ID keys
 		expect(
 			comparator({ label: "halo", id: 1 }, { label: "halo", id: 2 }),
-		).toBeFalsy();
+		).toBeFalsy()
 		//  compare objects
 		expect(
 			comparator({ label: "halo", value: 1 }, { label: "halo", value: 1 }),
-		).toBeTruthy();
+		).toBeTruthy()
 		//  compare objects with different orders
 		expect(
 			comparator({ value: 1, label: "halo" }, { label: "halo", value: 1 }),
-		).toBeTruthy();
-	});
-});
+		).toBeTruthy()
+	})
+})

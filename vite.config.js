@@ -1,4 +1,4 @@
-import { createLibConfig } from "@nextcloud/vite-config";
+import { createLibConfig } from "@nextcloud/vite-config"
 
 export default createLibConfig(
 	{
@@ -13,4 +13,4 @@ export default createLibConfig(
 			},
 		},
 	},
-);
+)
