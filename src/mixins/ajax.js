@@ -35,7 +35,7 @@ export default {
 		 * Sync the loading prop with the internal
 		 * mutable loading value.
 		 *
-		 * @param val
+		 * @param val Incoming loading state.
 		 */
 		loading(val) {
 			this.mutableLoading = val

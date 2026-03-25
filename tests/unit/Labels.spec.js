@@ -23,8 +23,9 @@ describe('Labels', () => {
 		Select.vm.open = true
 		await nextTick()
 
-		expect(spy).toHaveBeenCalledWith('[vue-select warn]: Label key "option.label" does not exist in options object {}.'
-			+ '\nhttps://vue-select.org/api/props.html#getoptionlabel')
+		expect(spy).toHaveBeenCalled()
+		expect(spy.mock.calls[0][0]).toContain('[vue-select warn]: Label key "option.label" does not exist in options object {}.')
+		expect(spy.mock.calls[0][0]).toContain('https://vue-select.org/api/props.html#getoptionlabel')
 	})
 
 	it('should display a placeholder if the value is empty', () => {

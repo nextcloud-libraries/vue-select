@@ -370,7 +370,7 @@ export default {
 		 * prop allows you to transform a given
 		 * object to only the information you
 		 * want passed to a v-model binding
-		 * or @input event.
+		 * or \@input event.
 		 */
 		reduce: {
 			type: Function,
@@ -401,7 +401,7 @@ export default {
 		 * `selected-option` slots.
 		 *
 		 * @type {Function}
-		 * @param  {Object || String} option
+		 * @param  {object | string} option
 		 * @return {string}
 		 */
 		getOptionLabel: {
@@ -432,7 +432,7 @@ export default {
 		 * The result of this function *must* be unique.
 		 *
 		 * @type {Function}
-		 * @param  {Object || String} option
+		 * @param  {object | string} option
 		 * @return {string}
 		 */
 		getOptionKey: {
@@ -520,7 +520,7 @@ export default {
 		 * if the option should be displayed.
 		 *
 		 * @type {Function}
-		 * @param  {Object || String} option
+		 * @param  {object | string} option
 		 * @param  {string} label
 		 * @param  {string} search
 		 * @return {boolean}
@@ -693,8 +693,8 @@ export default {
 		mapKeydown: {
 			type: Function,
 			/**
-			 * @param {object} map
-			 * @param {VueSelect} vm
+			 * @param {object} map Existing keydown handlers map.
+			 * @param {VueSelect} vm Component instance.
 			 * @return {object}
 			 */
 			default: (map) => map,
@@ -726,12 +726,12 @@ export default {
 		calculatePosition: {
 			type: Function,
 			/**
-			 * @param {HTMLUListElement} dropdownList
-			 * @param {Vue} component
-			 * @param {object} width
-			 * @param {string} width.width
-			 * @param {string} width.top
-			 * @param {string} width.left
+			 * @param {HTMLUListElement} dropdownList Dropdown list element.
+			 * @param {Vue} component Component instance.
+			 * @param {object} width Computed dropdown coordinates.
+			 * @param {string} width.width Computed width value.
+			 * @param {string} width.top Computed top position.
+			 * @param {string} width.left Computed left position.
 			 * @return {Function | void}
 			 */
 			default(dropdownList, component, { width, top, left }) {
@@ -1064,8 +1064,8 @@ export default {
 		 * Make sure selected option
 		 * is correct.
 		 *
-		 * @param {Array} newOptions
-		 * @param {Array} oldOptions
+		 * @param {Array} newOptions Updated options list.
+		 * @param {Array} oldOptions Previous options list.
 		 * @return {boolean} [description]
 		 */
 		options(newOptions, oldOptions) {
@@ -1129,7 +1129,7 @@ export default {
 		 * Make sure tracked value is
 		 * one option if possible.
 		 *
-		 * @param  {object | string} value
+		 * @param  {object | string} value Reduced value to resolve.
 		 * @return {void}
 		 */
 		setInternalValueFromOptions(value) {
@@ -1144,7 +1144,7 @@ export default {
 		 * Select or deselect a given option.
 		 * Allow deselect if clearable or if not the only selected option.
 		 *
-		 * @param  {object | string} option
+		 * @param  {object | string} option Option to select or deselect.
 		 * @return {void}
 		 */
 		select(option) {
@@ -1172,7 +1172,7 @@ export default {
 		/**
 		 * De-select a given option.
 		 *
-		 * @param  {object | string} option
+		 * @param  {object | string} option Option to remove.
 		 * @return {void}
 		 */
 		deselect(option) {
@@ -1186,8 +1186,8 @@ export default {
 		/**
 		 * De-select a given option on keyboard input.
 		 *
-		 * @param  {object | string} option
-		 * @param  {number} index
+		 * @param  {object | string} option Option to remove.
+		 * @param  {number} index Index of the deselect button.
 		 * @return {void}
 		 */
 		keyboardDeselect(option, index) {
@@ -1222,7 +1222,7 @@ export default {
 		/**
 		 * Called from this.select after each selection.
 		 *
-		 * @param  {object | string} option
+		 * @param  {object | string} option Option that was handled.
 		 * @return {void}
 		 */
 		onAfterSelect() {
@@ -1244,7 +1244,7 @@ export default {
 		 * input event.
 		 *
 		 * @fires input
-		 * @param {object | string} value
+		 * @param {object | string} value Selected value payload.
 		 */
 		updateValue(value) {
 			if (typeof this.modelValue === 'undefined') {
@@ -1266,7 +1266,7 @@ export default {
 		/**
 		 * Toggle the visibility of the dropdown menu.
 		 *
-		 * @param  {Event} event
+		 * @param  {Event} event Toggle trigger event.
 		 * @return {void}
 		 */
 		toggleDropdown(event) {
@@ -1304,7 +1304,7 @@ export default {
 		/**
 		 * Check if the given option is currently selected.
 		 *
-		 * @param  {object | string}  option
+		 * @param  {object | string}  option Option to evaluate.
 		 * @return {boolean} True when selected | False otherwise
 		 */
 		isOptionSelected(option) {
@@ -1314,7 +1314,7 @@ export default {
 		/**
 		 *  Can the current option be removed via the dropdown?
 		 *
-		 * @param {object | string} option
+		 * @param {object | string} option Option to evaluate.
 		 * @return {boolean}
 		 */
 		isOptionDeselectable(option) {
@@ -1325,7 +1325,7 @@ export default {
 		 * Check if the option at the given index should display a
 		 * keyboard focus border.
 		 *
-		 * @param  {number} index
+		 * @param  {number} index Option index.
 		 * @return {boolean}
 		 */
 		hasKeyboardFocusBorder(index) {
@@ -1338,8 +1338,8 @@ export default {
 		/**
 		 * Determine if two option objects are matching.
 		 *
-		 * @param {object} a
-		 * @param {object} b
+		 * @param {object} a First option.
+		 * @param {object} b Second option.
 		 * @return {boolean}
 		 */
 		optionComparator(a, b) {
@@ -1351,7 +1351,7 @@ export default {
 		 * where a reduced value matches
 		 * the passed in value.
 		 *
-		 * @param {object} value
+		 * @param {object} value Reduced value to match.
 		 * @return {*}
 		 */
 		findOptionFromReducedValue(value) {
@@ -1413,7 +1413,7 @@ export default {
 		 * Determine if an option exists
 		 * within this.optionList array.
 		 *
-		 * @param  {Object || String} option
+		 * @param  {Object || String} option Option to find.
 		 * @return {boolean}
 		 */
 		optionExists(option) {
@@ -1424,7 +1424,7 @@ export default {
 		 * Determine the `aria-selected` value
 		 * of an option
 		 *
-		 * @param  {object | string} option
+		 * @param  {object | string} option Option to evaluate.
 		 * @return {null|string}
 		 */
 		optionAriaSelected(option) {
@@ -1438,7 +1438,7 @@ export default {
 		 * Ensures that options are always
 		 * passed as objects to scoped slots.
 		 *
-		 * @param {object | string} option
+		 * @param {object | string} option Option to normalize.
 		 * @return {object}
 		 */
 		normalizeOptionForSlot(option) {
@@ -1449,7 +1449,7 @@ export default {
 		 * If push-tags is true, push the
 		 * given option to `this.pushedTags`.
 		 *
-		 * @param  {Object || String} option
+		 * @param  {Object || String} option Option to append.
 		 * @return {void}
 		 */
 		pushTag(option) {
@@ -1530,8 +1530,8 @@ export default {
 		/**
 		 * Event-Handler for option mousemove
 		 *
-		 * @param {object | string} option
-		 * @param {number} index
+		 * @param {object | string} option Hovered option.
+		 * @param {number} index Hovered option index.
 		 * @return {void}
 		 */
 		onMouseMove(option, index) {
@@ -1545,7 +1545,7 @@ export default {
 		/**
 		 * Search <input> KeyBoardEvent handler.
 		 *
-		 * @param {KeyboardEvent} e
+		 * @param {KeyboardEvent} e Keyboard event.
 		 * @return {Function}
 		 */
 		onSearchKeyDown(e) {
@@ -1600,7 +1600,7 @@ export default {
 		/**
 		 * TODO: Probably want to add a mapKeyPress method just like we have for keydown.
 		 *
-		 * @param {KeyboardEvent} e
+		 * @param {KeyboardEvent} e Keyboard event.
 		 */
 		onSearchKeyPress(e) {
 			if (!this.open && e.keyCode === 32) {
