@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       mutableLoading: false,
-    }
+    };
   },
 
   watch: {
@@ -25,10 +25,10 @@ export default {
      * that accepts a boolean parameter to toggle the
      * loading state.
      *
-     * @emits search
+     * @fires 'search'
      */
     search() {
-      this.$emit('search', this.search, this.toggleLoading)
+      this.$emit("search", this.search, this.toggleLoading);
     },
 
     /**
@@ -37,7 +37,7 @@ export default {
      * @param val
      */
     loading(val) {
-      this.mutableLoading = val
+      this.mutableLoading = val;
     },
   },
 
@@ -47,13 +47,13 @@ export default {
      * value. If no value is provided, this.loading
      * will be set to the opposite of it's current value.
      * @param toggle Boolean
-     * @returns {*}
+     * @return {*}
      */
     toggleLoading(toggle = null) {
       if (toggle == null) {
-        return (this.mutableLoading = !this.mutableLoading)
+        return (this.mutableLoading = !this.mutableLoading);
       }
-      return (this.mutableLoading = toggle)
+      return (this.mutableLoading = toggle);
     },
   },
-}
+};

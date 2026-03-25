@@ -1,49 +1,50 @@
 export default {
   release: {
-    branch: 'main',
+    branch: "master",
   },
   plugins: [
-    '@semantic-release/npm',
+    "@semantic-release/npm",
     [
-      '@semantic-release/commit-analyzer',
+      "@semantic-release/commit-analyzer",
       {
-        preset: 'angular',
-        releaseRules: [{ type: 'enh', release: 'minor' }],
+        preset: "angular",
+        releaseRules: [{ type: "enh", release: "minor" }],
       },
     ],
     [
-      '@semantic-release/release-notes-generator',
+      "@semantic-release/release-notes-generator",
       {
-        preset: 'angular',
+        preset: "angular",
         presetConfig: {
           types: [
             // Default types
-            { type: 'feat', section: 'Features' },
-            { type: 'fix', section: 'Bug Fixes' },
-            { type: 'perf', section: 'Bug Fixes' },
-            { type: 'chore', hidden: true },
-            { type: 'docs', hidden: true },
-            { type: 'style', hidden: true },
-            { type: 'refactor', hidden: true },
-            { type: 'test', hidden: true },
+            { type: "feat", section: "Features" },
+            { type: "fix", section: "Bug Fixes" },
+            { type: "chore", hidden: true },
+            { type: "docs", hidden: true },
+            { type: "style", hidden: true },
+            { type: "refactor", hidden: true },
+            { type: "perf", hidden: true },
+            { type: "test", hidden: true },
             // Custom types
-            { type: 'enh', section: 'Enhancements' },
+            { type: "enh", section: "Enhancements" },
           ],
         },
       },
     ],
     [
-      '@semantic-release/github',
+      "@semantic-release/github",
       {
-        assets: ['dist/**'],
+        assets: ["dist/**"],
       },
     ],
     [
-      '@semantic-release/git',
+      "@semantic-release/git",
       {
-        assets: ['package.json'],
-        message: 'chore(release): v${nextRelease.version}',
+        assets: ["package.json"],
+        // eslint-disable-next-line no-template-curly-in-string
+        message: "chore(release): v${nextRelease.version}",
       },
     ],
   ],
-}
+};

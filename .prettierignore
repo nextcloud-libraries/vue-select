@@ -1,5 +1,10 @@
 node_modules
+package-lock.json
+
+.github/
 coverage
-yarn.lock
 dist
-dist/*
+dev/*.html
+docs/
+
+*.md

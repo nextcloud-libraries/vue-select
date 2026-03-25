@@ -1,7 +1,3 @@
-<style>
-@import '../css/vue-select.css';
-</style>
-
 <template>
   <div
     :id="`v-select-${uid}`"
@@ -33,7 +29,7 @@
             </slot>
             <button
               v-if="multiple"
-              ref="deselectButtons"
+              :ref="(el) => (deselectButtons[index] = el)"
               :disabled="disabled"
               type="button"
               class="vs__deselect"
@@ -105,7 +101,7 @@
         class="vs__dropdown-menu"
         role="listbox"
         :aria-label="ariaLabelListbox"
-        :aria-multiselectable="multiple"
+        :aria-multiselectable="multiple ? 'true' : null"
         tabindex="-1"
         @mousedown.prevent="onMousedown"
         @mouseup="onMouseUp"
@@ -153,13 +149,13 @@
 </template>
 
 <script>
-import pointerScroll from '../mixins/pointerScroll.js'
-import typeAheadPointer from '../mixins/typeAheadPointer.js'
-import ajax from '../mixins/ajax.js'
-import childComponents from './childComponents.js'
-import appendToBody from '../directives/appendToBody.js'
-import sortAndStringify from '../utility/sortAndStringify.js'
-import uniqueId from '../utility/uniqueId.js'
+import pointerScroll from "../mixins/pointerScroll.js";
+import typeAheadPointer from "../mixins/typeAheadPointer.js";
+import ajax from "../mixins/ajax.js";
+import childComponents from "./childComponents.js";
+import appendToBody from "../directives/appendToBody.js";
+import sortAndStringify from "../utility/sortAndStringify.js";
+import uniqueId from "../utility/uniqueId.js";
 
 /**
  * @name VueSelect
@@ -176,10 +172,10 @@ export default {
      * Contains the currently selected value. Very similar to a
      * `value` attribute on an <input>. You can listen for changes
      * with the 'input' event.
-     * @type {Object||String||null}
+     * @type {object | string | Array | null}
      */
     // eslint-disable-next-line vue/require-default-prop,vue/require-prop-types
-    value: {},
+    modelValue: {},
 
     /**
      * An object with any custom components that you'd like to overwrite
@@ -203,13 +199,13 @@ export default {
     options: {
       type: Array,
       default() {
-        return []
+        return [];
       },
     },
 
     /**
      * Sets the maximum number of options to display in the dropdown list
-     * @type {Number}
+     * @type {number}
      */
     limit: {
       type: Number,
@@ -218,7 +214,7 @@ export default {
 
     /**
      * Disable the entire component.
-     * @type {Boolean}
+     * @type {boolean}
      */
     disabled: {
       type: Boolean,
@@ -227,7 +223,7 @@ export default {
 
     /**
      * Can the user clear the selected property.
-     * @type {Boolean}
+     * @type {boolean}
      */
     clearable: {
       type: Boolean,
@@ -237,7 +233,7 @@ export default {
     /**
      * Can the user deselect an option by clicking it from
      * within the dropdown.
-     * @type {Boolean}
+     * @type {boolean}
      */
     deselectFromDropdown: {
       type: Boolean,
@@ -246,7 +242,7 @@ export default {
 
     /**
      * Enable/disable filtering the options.
-     * @type {Boolean}
+     * @type {boolean}
      */
     searchable: {
       type: Boolean,
@@ -255,7 +251,7 @@ export default {
 
     /**
      * Equivalent to the `multiple` attribute on a `<select>` input.
-     * @type {Boolean}
+     * @type {boolean}
      */
     multiple: {
       type: Boolean,
@@ -264,25 +260,25 @@ export default {
 
     /**
      * Equivalent to the `placeholder` attribute on an `<input>`.
-     * @type {String}
+     * @type {string}
      */
     placeholder: {
       type: String,
-      default: '',
+      default: "",
     },
 
     /**
      * Sets a Vue transition property on the `.vs__dropdown-menu`.
-     * @type {String}
+     * @type {string}
      */
     transition: {
       type: String,
-      default: 'vs__fade',
+      default: "vs__fade",
     },
 
     /**
      * Enables/disables clearing the search text when an option is selected.
-     * @type {Boolean}
+     * @type {boolean}
      */
     clearSearchOnSelect: {
       type: Boolean,
@@ -292,7 +288,7 @@ export default {
     /**
      * Close a dropdown when an option is chosen. Set to false to keep the dropdown
      * open (useful when combined with multi-select, for example)
-     * @type {Boolean}
+     * @type {boolean}
      */
     closeOnSelect: {
       type: Boolean,
@@ -302,41 +298,41 @@ export default {
     /**
      * Tells vue-select what key to use when generating option
      * labels when each `option` is an object.
-     * @type {String}
+     * @type {string}
      */
     label: {
       type: String,
-      default: 'label',
+      default: "label",
     },
 
     /**
      * Allows to customize the `aria-label` set on the comobobox for searching options.
-     * @type {String}
+     * @type {string}
      * @default 'Search for options'
      */
     ariaLabelCombobox: {
       type: String,
-      default: 'Search for options',
+      default: "Search for options",
     },
 
     /**
      * Allows to customize the `aria-label` set on the listbox element.
-     * @type {String}
+     * @type {string}
      * @default 'Options'
      */
     ariaLabelListbox: {
       type: String,
-      default: 'Options',
+      default: "Options",
     },
 
     /**
      * Allows to customize the `aria-label` set on the clear-selected button
-     * @type {String}
+     * @type {string}
      * @default 'Clear selected'
      */
     ariaLabelClearSelected: {
       type: String,
-      default: 'Clear selected',
+      default: "Clear selected",
     },
 
     /**
@@ -352,11 +348,11 @@ export default {
     /**
      * Value of the 'autocomplete' field of the input
      * element.
-     * @type {String}
+     * @type {string}
      */
     autocomplete: {
       type: String,
-      default: 'off',
+      default: "off",
     },
 
     /**
@@ -377,8 +373,8 @@ export default {
      *
      * @type {Function}
      * @since 3.3.0
-     * @param {Object|String} option
-     * @return {Boolean}
+     * @param {object | string} option
+     * @return {boolean}
      */
     selectable: {
       type: Function,
@@ -396,22 +392,22 @@ export default {
      *
      * @type {Function}
      * @param  {Object || String} option
-     * @return {String}
+     * @return {string}
      */
     getOptionLabel: {
       type: Function,
       default(option) {
-        if (typeof option === 'object') {
-          if (!option.hasOwnProperty(this.label)) {
+        if (typeof option === "object") {
+          if (!Object.hasOwn(option, this.label)) {
             return console.warn(
               `[vue-select warn]: Label key "option.${this.label}" does not` +
                 ` exist in options object ${JSON.stringify(option)}.\n` +
-                'https://vue-select.org/api/props.html#getoptionlabel'
-            )
+                "https://vue-select.org/api/props.html#getoptionlabel",
+            );
           }
-          return option[this.label]
+          return option[this.label];
         }
-        return option
+        return option;
       },
     },
 
@@ -429,26 +425,26 @@ export default {
      *
      * @type {Function}
      * @param  {Object || String} option
-     * @return {String}
+     * @return {string}
      */
     getOptionKey: {
       type: Function,
       default(option) {
-        if (typeof option !== 'object') {
-          return option
+        if (typeof option !== "object") {
+          return option;
         }
 
         try {
-          return option.hasOwnProperty('id')
+          return Object.hasOwn(option, "id")
             ? option.id
-            : sortAndStringify(option)
+            : sortAndStringify(option);
         } catch (e) {
           const warning =
             `[vue-select warn]: Could not stringify this option ` +
             `to generate unique key. Please provide'getOptionKey' prop ` +
             `to return a unique key for each option.\n` +
-            'https://vue-select.org/api/props.html#getoptionkey'
-          return console.warn(warning, option, e)
+            "https://vue-select.org/api/props.html#getoptionkey";
+          return console.warn(warning, option, e);
         }
       },
     },
@@ -459,16 +455,16 @@ export default {
      */
     onTab: {
       type: Function,
-      default: function () {
+      default() {
         if (this.selectOnTab && !this.isComposing) {
-          this.typeAheadSelect()
+          this.typeAheadSelect();
         }
       },
     },
 
     /**
      * Enable/disable creating options from searchEl.
-     * @type {Boolean}
+     * @type {boolean}
      */
     taggable: {
       type: Boolean,
@@ -477,7 +473,7 @@ export default {
 
     /**
      * Set the tabindex for the input field.
-     * @type {Number}
+     * @type {number}
      */
     tabindex: {
       type: Number,
@@ -487,7 +483,7 @@ export default {
     /**
      * When true, newly created tags will be added to
      * the options list.
-     * @type {Boolean}
+     * @type {boolean}
      */
     pushTags: {
       type: Boolean,
@@ -498,7 +494,7 @@ export default {
      * When true, existing options will be filtered
      * by the search text. Should not be used in conjunction
      * with taggable.
-     * @type {Boolean}
+     * @type {boolean}
      */
     filterable: {
       type: Boolean,
@@ -511,18 +507,18 @@ export default {
      * if the option should be displayed.
      * @type   {Function}
      * @param  {Object || String} option
-     * @param  {String} label
-     * @param  {String} search
-     * @return {Boolean}
+     * @param  {string} label
+     * @param  {string} search
+     * @return {boolean}
      */
     filterBy: {
       type: Function,
       default(option, label, search) {
         return (
-          (label || '')
+          (label || "")
             .toLocaleLowerCase()
             .indexOf(search.toLocaleLowerCase()) > -1
-        )
+        );
       },
     },
 
@@ -533,41 +529,40 @@ export default {
      * this.filterBy.
      * @type   {Function}
      * @param  {Array} list of options
-     * @param  {String} search text
-     * @param  {Object} vSelect instance
-     * @return {Boolean}
+     * @param  {string} search text
+     * @param  {object} vSelect instance
+     * @return {boolean}
      */
     filter: {
       type: Function,
       default(options, search) {
         return options.filter((option) => {
-          let label = this.getOptionLabel(option)
-          if (typeof label === 'number') {
-            label = label.toString()
+          let label = this.getOptionLabel(option);
+          if (typeof label === "number") {
+            label = label.toString();
           }
-          return this.filterBy(option, label, search)
-        })
+          return this.filterBy(option, label, search);
+        });
       },
     },
 
     /**
      * User defined function for adding Options
      * @type {Function}
-     * @throws {Error} throw error to omit an option
      */
     createOption: {
       type: Function,
       default(option) {
-        return typeof this.optionList[0] === 'object'
+        return typeof this.optionList[0] === "object"
           ? { [this.label]: option }
-          : option
+          : option;
       },
     },
 
     /**
      * If false, the focused dropdown option will not be reset when filtered
      * options change.
-     * @type {Boolean}
+     * @type {boolean}
      */
     resetFocusOnOptionsChange: {
       type: Boolean,
@@ -579,32 +574,32 @@ export default {
      * a `boolean` or `function` that returns a `boolean`. If defined as a function,
      * it will receive the params listed below.
      *
-     * @since 3.4 - Type changed to {Boolean|Function}
+     * @since 3.4 - Type changed to {boolean | Function}
      *
-     * @type {Boolean|Function}
+     * @type {boolean | Function}
      * @param {Array} newOptions
      * @param {Array} oldOptions
      * @param {Array} selectedValue
      */
     resetOnOptionsChange: {
       default: false,
-      validator: (value) => ['function', 'boolean'].includes(typeof value),
+      validator: (value) => ["function", "boolean"].includes(typeof value),
     },
 
     /**
      * If search text should clear on blur
-     * @return {Boolean} True when single and clearSearchOnSelect
+     * @return {boolean} True when single and clearSearchOnSelect
      */
     clearSearchOnBlur: {
       type: Function,
-      default: function ({ clearSearchOnSelect, multiple }) {
-        return clearSearchOnSelect && !multiple
+      default({ clearSearchOnSelect, multiple }) {
+        return clearSearchOnSelect && !multiple;
       },
     },
 
     /**
      * Disable the dropdown entirely.
-     * @type {Boolean}
+     * @type {boolean}
      */
     noDrop: {
       type: Boolean,
@@ -613,7 +608,7 @@ export default {
 
     /**
      * Sets the id of the input element.
-     * @type {String}
+     * @type {string}
      * @default {null}
      */
     // eslint-disable-next-line vue/require-default-prop
@@ -624,17 +619,17 @@ export default {
     /**
      * Sets RTL support. Accepts 'ltr', 'rtl', 'auto'.
      * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir
-     * @type {String}
+     * @type {string}
      * @default 'auto'
      */
     dir: {
       type: String,
-      default: 'auto',
+      default: "auto",
     },
 
     /**
      * When true, hitting the 'tab' key will select the current select value
-     * @type {Boolean}
+     * @type {boolean}
      * @deprecated since 3.3 - use selectOnKeyCodes instead
      */
     selectOnTab: {
@@ -661,11 +656,11 @@ export default {
      * Must be a valid CSS selector string.
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector
-     * @type {String}
+     * @type {string}
      */
     searchInputQuerySelector: {
       type: String,
-      default: '[type=search]',
+      default: "[type=search]",
     },
 
     /**
@@ -677,9 +672,9 @@ export default {
     mapKeydown: {
       type: Function,
       /**
-       * @param map {Object}
+       * @param map {object}
        * @param vm {VueSelect}
-       * @return {Object}
+       * @return {object}
        */
       default: (map, vm) => map,
     },
@@ -688,7 +683,7 @@ export default {
      * Append the dropdown element to the end of the body
      * and size/position it dynamically. Use it if you have
      * overflow or z-index issues.
-     * @type {Boolean}
+     * @type {boolean}
      */
     appendToBody: {
       type: Boolean,
@@ -711,15 +706,18 @@ export default {
       /**
        * @param dropdownList {HTMLUListElement}
        * @param component {Vue} current instance of vue select
+       * @param width.width
        * @param width {string} calculated width in pixels of the dropdown menu
        * @param top {string} absolute position top value in pixels relative to the document
        * @param left {string} absolute position left value in pixels relative to the document
-       * @return {function|void}
+       * @param width.top
+       * @param width.left
+       * @return {Function | void}
        */
       default(dropdownList, component, { width, top, left }) {
-        dropdownList.style.top = top
-        dropdownList.style.left = left
-        dropdownList.style.width = width
+        dropdownList.style.top = top;
+        dropdownList.style.left = left;
+        dropdownList.style.width = width;
       },
     },
 
@@ -733,7 +731,7 @@ export default {
     dropdownShouldOpen: {
       type: Function,
       default({ noDrop, open, mutableLoading }) {
-        return noDrop ? false : open && !mutableLoading
+        return noDrop ? false : open && !mutableLoading;
       },
     },
 
@@ -756,29 +754,49 @@ export default {
     },
   },
 
+  emits: [
+    "open",
+    "close",
+    "update:modelValue",
+    "search",
+    "search:compositionstart",
+    "search:compositionend",
+    "search:keydown",
+    "search:blur",
+    "search:focus",
+    "search:input",
+    "option:created",
+    "option:selecting",
+    "option:selected",
+    "option:deselecting",
+    "option:deselected",
+  ],
+
   data() {
     return {
-      search: '',
+      search: "",
       open: false,
       isComposing: false,
       isKeyboardNavigation: false,
       pushedTags: [],
       // eslint-disable-next-line vue/no-reserved-keys
-      _value: [], // Internal value managed by Vue Select if no `value` prop is passed
-    }
+      _value: [], // Internal value managed by Vue Select if no `modelValue` prop is passed
+      deselectButtons: [],
+    };
   },
 
   computed: {
+    isReducingValues() {
+      return this.$props.reduce !== this.$options.props.reduce.default;
+    },
+
     /**
      * Determine if the component needs to
      * track the state of values internally.
      * @return {boolean}
      */
     isTrackingValues() {
-      return (
-        typeof this.value === 'undefined' ||
-        this.$options.propsData.hasOwnProperty('reduce')
-      )
+      return typeof this.modelValue === "undefined" || this.isReducingValues;
     },
 
     /**
@@ -786,17 +804,17 @@ export default {
      * @return {Array}
      */
     selectedValue() {
-      let value = this.value
+      let value = this.modelValue;
       if (this.isTrackingValues) {
         // Vue select has to manage value internally
-        value = this.$data._value
+        value = this.$data._value;
       }
 
-      if (value !== undefined && value !== null && value !== '') {
-        return [].concat(value)
+      if (value !== undefined && value !== null && value !== "") {
+        return [].concat(value);
       }
 
-      return []
+      return [];
     },
 
     /**
@@ -807,24 +825,24 @@ export default {
      * @return {Array}
      */
     optionList() {
-      return this.options.concat(this.pushTags ? this.pushedTags : [])
+      return this.options.concat(this.pushTags ? this.pushedTags : []);
     },
 
     /**
      * Find the search input DOM element.
-     * @returns {HTMLInputElement}
+     * @return {HTMLInputElement}
      */
     searchEl() {
-      return !!this.$scopedSlots['search']
+      return this.$slots.search
         ? this.$refs.selectedOptions.querySelector(
-            this.searchInputQuerySelector
+            this.searchInputQuerySelector,
           )
-        : this.$refs.search
+        : this.$refs.search;
     },
 
     /**
-     * The object to be bound to the $slots.search scoped slot.
-     * @returns {Object}
+     * The object to be bound to the $slots.search slot.
+     * @return {object}
      */
     scope() {
       const listSlot = {
@@ -832,7 +850,7 @@ export default {
         loading: this.loading,
         searching: this.searching,
         filteredOptions: this.filteredOptions,
-      }
+      };
       return {
         search: {
           attributes: {
@@ -841,19 +859,19 @@ export default {
             placeholder: this.searchPlaceholder,
             tabindex: this.tabindex,
             readonly: !this.searchable,
-            role: 'combobox',
-            'aria-autocomplete': 'list',
-            'aria-label': this.ariaLabelCombobox,
-            'aria-controls': `vs-${this.uid}__listbox`,
-            'aria-owns': `vs-${this.uid}__listbox`,
-            'aria-expanded': this.dropdownOpen.toString(),
-            ref: 'search',
-            type: 'search',
+            role: "combobox",
+            "aria-autocomplete": "list",
+            "aria-label": this.ariaLabelCombobox,
+            "aria-controls": `vs-${this.uid}__listbox`,
+            "aria-owns": `vs-${this.uid}__listbox`,
+            "aria-expanded": this.dropdownOpen.toString(),
+            ref: "search",
+            type: "search",
             autocomplete: this.autocomplete,
             value: this.search,
             ...(this.dropdownOpen && this.filteredOptions[this.typeAheadPointer]
               ? {
-                  'aria-activedescendant': `vs-${this.uid}__option-${this.typeAheadPointer}`,
+                  "aria-activedescendant": `vs-${this.uid}__option-${this.typeAheadPointer}`,
                 }
               : {}),
           },
@@ -877,16 +895,16 @@ export default {
         },
         openIndicator: {
           attributes: {
-            ref: 'openIndicator',
-            role: 'presentation',
-            class: 'vs__open-indicator',
+            ref: "openIndicator",
+            role: "presentation",
+            class: "vs__open-indicator",
           },
         },
         listHeader: listSlot,
         listFooter: listSlot,
         header: { ...listSlot, deselect: this.deselect },
         footer: { ...listSlot, deselect: this.deselect },
-      }
+      };
     },
 
     /**
@@ -894,59 +912,59 @@ export default {
      * that will be used throughout the component. The
      * `component` prop can be used to overwrite the defaults.
      *
-     * @return {Object}
+     * @return {object}
      */
     childComponents() {
       return {
         ...childComponents,
         ...this.components,
-      }
+      };
     },
 
     /**
      * Holds the current state of the component.
-     * @return {Object}
+     * @return {object}
      */
     stateClasses() {
       return {
-        'vs--open': this.dropdownOpen,
-        'vs--single': !this.multiple,
-        'vs--multiple': this.multiple,
-        'vs--searching': this.searching && !this.noDrop,
-        'vs--searchable': this.searchable && !this.noDrop,
-        'vs--unsearchable': !this.searchable,
-        'vs--loading': this.mutableLoading,
-        'vs--disabled': this.disabled,
-      }
+        "vs--open": this.dropdownOpen,
+        "vs--single": !this.multiple,
+        "vs--multiple": this.multiple,
+        "vs--searching": this.searching && !this.noDrop,
+        "vs--searchable": this.searchable && !this.noDrop,
+        "vs--unsearchable": !this.searchable,
+        "vs--loading": this.mutableLoading,
+        "vs--disabled": this.disabled,
+      };
     },
 
     /**
      * Return the current state of the
      * search input
-     * @return {Boolean} True if non empty value
+     * @return {boolean} True if non empty value
      */
     searching() {
-      return !!this.search
+      return !!this.search;
     },
 
     /**
      * Return the current state of the
      * dropdown menu.
-     * @return {Boolean} True if open
+     * @return {boolean} True if open
      */
     dropdownOpen() {
-      return this.dropdownShouldOpen(this)
+      return this.dropdownShouldOpen(this);
     },
 
     /**
      * Return the placeholder string if it's set
      * & there is no value selected.
-     * @return {String} Placeholder text
+     * @return {string} Placeholder text
      */
     searchPlaceholder() {
       return this.isValueEmpty && this.placeholder
         ? this.placeholder
-        : undefined
+        : undefined;
     },
 
     /**
@@ -955,54 +973,54 @@ export default {
      * true, the search text will be prepended
      * if it doesn't already exist.
      *
-     * @return {array}
+     * @return {Array}
      */
     filteredOptions() {
       const limitOptions = (options) => {
         if (this.limit !== null) {
-          return options.slice(0, this.limit)
+          return options.slice(0, this.limit);
         }
-        return options
-      }
+        return options;
+      };
 
-      const optionList = [].concat(this.optionList)
+      const optionList = [].concat(this.optionList);
 
       if (!this.filterable && !this.taggable) {
-        return limitOptions(optionList)
+        return limitOptions(optionList);
       }
 
-      let options = this.search.length
+      const options = this.search.length
         ? this.filter(optionList, this.search, this)
-        : optionList
+        : optionList;
       if (this.taggable && this.search.length) {
         try {
-          const createdOption = this.createOption(this.search)
+          const createdOption = this.createOption(this.search);
           if (!this.optionExists(createdOption)) {
-            options.unshift(createdOption)
+            options.unshift(createdOption);
           }
         } catch (e) {
           // omit option on error
         }
       }
-      return limitOptions(options)
+      return limitOptions(options);
     },
 
     /**
      * Check if there aren't any options selected.
-     * @return {Boolean}
+     * @return {boolean}
      */
     isValueEmpty() {
-      return this.selectedValue.length === 0
+      return this.selectedValue.length === 0;
     },
 
     /**
      * Determines if the clear button should be displayed.
-     * @return {Boolean}
+     * @return {boolean}
      */
     showClearButton() {
       return (
         !this.multiple && this.clearable && !this.open && !this.isValueEmpty
-      )
+      );
     },
   },
 
@@ -1012,24 +1030,26 @@ export default {
      * when options change.
      * Make sure selected option
      * is correct.
+     * @param newOptions
+     * @param oldOptions
      * @return {[type]} [description]
      */
     options(newOptions, oldOptions) {
-      let shouldReset = () =>
-        typeof this.resetOnOptionsChange === 'function'
+      const shouldReset = () =>
+        typeof this.resetOnOptionsChange === "function"
           ? this.resetOnOptionsChange(
               newOptions,
               oldOptions,
-              this.selectedValue
+              this.selectedValue,
             )
-          : this.resetOnOptionsChange
+          : this.resetOnOptionsChange;
 
       if (!this.taggable && shouldReset()) {
-        this.clearSelection()
+        this.clearSelection();
       }
 
-      if (this.value && this.isTrackingValues) {
-        this.setInternalValueFromOptions(this.value)
+      if (this.modelValue && this.isTrackingValues) {
+        this.setInternalValueFromOptions(this.modelValue);
       }
     },
 
@@ -1037,11 +1057,11 @@ export default {
      * Make sure to update internal
      * value if prop changes outside
      */
-    value: {
+    modelValue: {
       immediate: true,
       handler(val) {
         if (this.isTrackingValues) {
-          this.setInternalValueFromOptions(val)
+          this.setInternalValueFromOptions(val);
         }
       },
     },
@@ -1052,92 +1072,92 @@ export default {
      * @return {void}
      */
     multiple() {
-      this.clearSelection()
+      this.clearSelection();
     },
 
     open(isOpen) {
-      this.$emit(isOpen ? 'open' : 'close')
+      this.$emit(isOpen ? "open" : "close");
     },
 
     search(search) {
       if (search.length) {
-        this.open = true
+        this.open = true;
       }
     },
   },
 
   created() {
-    this.mutableLoading = this.loading
-
-    this.$on('option:created', this.pushTag)
+    this.mutableLoading = this.loading;
   },
 
   methods: {
     /**
      * Make sure tracked value is
      * one option if possible.
-     * @param  {Object|String} value
+     * @param  {object | string} value
      * @return {void}
      */
     setInternalValueFromOptions(value) {
       if (Array.isArray(value)) {
         this.$data._value = value.map((val) =>
-          this.findOptionFromReducedValue(val)
-        )
+          this.findOptionFromReducedValue(val),
+        );
       } else {
-        this.$data._value = this.findOptionFromReducedValue(value)
+        this.$data._value = this.findOptionFromReducedValue(value);
       }
     },
 
     /**
      * Select or deselect a given option.
      * Allow deselect if clearable or if not the only selected option.
-     * @param  {Object|String} option
+     * @param  {object | string} option
      * @return {void}
      */
     select(option) {
-      this.$emit('option:selecting', option)
+      this.$emit("option:selecting", option);
       if (!this.isOptionSelected(option)) {
         if (this.taggable && !this.optionExists(option)) {
-          this.$emit('option:created', option)
+          /* @TODO: could we use v-model instead of push-tags? */
+          this.$emit("option:created", option);
+          this.pushTag(option);
         }
         if (this.multiple) {
-          option = this.selectedValue.concat(option)
+          option = this.selectedValue.concat(option);
         }
-        this.updateValue(option)
-        this.$emit('option:selected', option)
+        this.updateValue(option);
+        this.$emit("option:selected", option);
       } else if (
         this.deselectFromDropdown &&
         (this.clearable || (this.multiple && this.selectedValue.length > 1))
       ) {
-        this.deselect(option)
+        this.deselect(option);
       }
-      this.onAfterSelect(option)
+      this.onAfterSelect(option);
     },
 
     /**
      * De-select a given option.
-     * @param  {Object|String} option
+     * @param  {object | string} option
      * @return {void}
      */
     deselect(option) {
-      this.$emit('option:deselecting', option)
+      this.$emit("option:deselecting", option);
       this.updateValue(
         this.selectedValue.filter((val) => {
-          return !this.optionComparator(val, option)
-        })
-      )
-      this.$emit('option:deselected', option)
+          return !this.optionComparator(val, option);
+        }),
+      );
+      this.$emit("option:deselected", option);
     },
 
     /**
      * De-select a given option on keyboard input.
-     * @param  {Object|String} option
-     * @param  {Number} index
+     * @param  {object | string} option
+     * @param  {number} index
      * @return {void}
      */
     keyboardDeselect(option, index) {
-      this.deselect(option)
+      this.deselect(option);
       /**
        * The index of the next deselect is not yet at the same index as the
        * removed deselect element because Vue updates asynchronously
@@ -1145,13 +1165,13 @@ export default {
        * $nextTick cannot be used as the tests will fail even after using
        * $nextTick in the tests as well
        */
-      const nextDeselect = this.$refs.deselectButtons?.[index + 1]
-      const prevDeselect = this.$refs.deselectButtons?.[index - 1]
-      const deselectToFocus = nextDeselect ?? prevDeselect
+      const nextDeselect = this.deselectButtons?.[index + 1];
+      const prevDeselect = this.deselectButtons?.[index - 1];
+      const deselectToFocus = nextDeselect ?? prevDeselect;
       if (deselectToFocus) {
-        deselectToFocus.focus()
+        deselectToFocus.focus();
       } else {
-        this.searchEl.focus()
+        this.searchEl.focus();
       }
     },
 
@@ -1160,25 +1180,25 @@ export default {
      * @return {void}
      */
     clearSelection() {
-      this.updateValue(this.multiple ? [] : null)
-      this.searchEl.focus()
+      this.updateValue(this.multiple ? [] : null);
+      this.searchEl.focus();
     },
 
     /**
      * Called from this.select after each selection.
-     * @param  {Object|String} option
+     * @param  {object | string} option
      * @return {void}
      */
     onAfterSelect(option) {
       if (this.closeOnSelect) {
-        this.open = !this.open
+        this.open = !this.open;
       }
 
       if (this.clearSearchOnSelect) {
-        this.search = ''
+        this.search = "";
       }
       if (this.noDrop && this.multiple) {
-        this.$nextTick(() => this.$refs.search.focus())
+        this.$nextTick(() => this.$refs.search.focus());
       }
     },
 
@@ -1187,24 +1207,24 @@ export default {
      * state when required, and triggers the
      * input event.
      *
-     * @emits input
+     * @fires input
      * @param value
      */
     updateValue(value) {
-      if (typeof this.value === 'undefined') {
+      if (typeof this.modelValue === "undefined") {
         // Vue select has to manage value
-        this.$data._value = value
+        this.$data._value = value;
       }
 
       if (value !== null) {
         if (Array.isArray(value)) {
-          value = value.map((val) => this.reduce(val))
+          value = value.map((val) => this.reduce(val));
         } else {
-          value = this.reduce(value)
+          value = this.reduce(value);
         }
       }
 
-      this.$emit('input', value)
+      this.$emit("update:modelValue", value);
     },
 
     /**
@@ -1213,17 +1233,17 @@ export default {
      * @return {void}
      */
     toggleDropdown(event) {
-      const targetIsNotSearch = event.target !== this.searchEl
+      const targetIsNotSearch = event.target !== this.searchEl;
       if (targetIsNotSearch) {
-        event.preventDefault()
+        event.preventDefault();
       }
 
       //  don't react to click on deselect/clear buttons,
       //  they dropdown state will be set in their click handlers
       const ignoredButtons = [
-        ...(this.$refs['deselectButtons'] || []),
-        ...([this.$refs['clearButton']] || []),
-      ]
+        ...(this.deselectButtons || []),
+        ...([this.$refs.clearButton] || []),
+      ];
 
       if (
         this.searchEl === undefined ||
@@ -1231,47 +1251,49 @@ export default {
           .filter(Boolean)
           .some((ref) => ref.contains(event.target) || ref === event.target)
       ) {
-        event.preventDefault()
-        return
+        event.preventDefault();
+        return;
       }
 
       if (this.open && targetIsNotSearch) {
-        this.searchEl.blur()
+        this.open = false;
+        this.searchEl.blur();
       } else if (!this.disabled) {
-        this.open = true
-        this.searchEl.focus()
+        this.open = true;
+        this.searchEl.focus();
       }
     },
 
     /**
      * Check if the given option is currently selected.
-     * @param  {Object|String}  option
-     * @return {Boolean}        True when selected | False otherwise
+     * @param  {object | string}  option
+     * @return {boolean}        True when selected | False otherwise
      */
     isOptionSelected(option) {
       return this.selectedValue.some((value) =>
-        this.optionComparator(value, option)
-      )
+        this.optionComparator(value, option),
+      );
     },
 
     /**
      *  Can the current option be removed via the dropdown?
+     * @param option
      */
     isOptionDeselectable(option) {
-      return this.isOptionSelected(option) && this.deselectFromDropdown
+      return this.isOptionSelected(option) && this.deselectFromDropdown;
     },
 
     /**
      * Check if the option at the given index should display a
      * keyboard focus border.
-     * @param  {Number} index
-     * @return {Boolean}
+     * @param  {number} index
+     * @return {boolean}
      */
     hasKeyboardFocusBorder(index) {
       if (this.keyboardFocusBorder && this.isKeyboardNavigation) {
-        return index === this.typeAheadPointer
+        return index === this.typeAheadPointer;
       }
-      return false
+      return false;
     },
 
     /**
@@ -1279,10 +1301,10 @@ export default {
      *
      * @param a {Object}
      * @param b {Object}
-     * @returns {boolean}
+     * @return {boolean}
      */
     optionComparator(a, b) {
-      return this.getOptionKey(a) === this.getOptionKey(b)
+      return this.getOptionKey(a) === this.getOptionKey(b);
     },
 
     /**
@@ -1291,16 +1313,16 @@ export default {
      * the passed in value.
      *
      * @param value {Object}
-     * @returns {*}
+     * @return {*}
      */
     findOptionFromReducedValue(value) {
       const predicate = (option) =>
-        JSON.stringify(this.reduce(option)) === JSON.stringify(value)
+        JSON.stringify(this.reduce(option)) === JSON.stringify(value);
 
-      const matches = [...this.options, ...this.pushedTags].filter(predicate)
+      const matches = [...this.options, ...this.pushedTags].filter(predicate);
 
       if (matches.length === 1) {
-        return matches[0]
+        return matches[0];
       }
 
       /**
@@ -1311,19 +1333,19 @@ export default {
        */
       return (
         matches.find((match) =>
-          this.optionComparator(match, this.$data._value)
+          this.optionComparator(match, this.$data._value),
         ) || value
-      )
+      );
     },
 
     /**
      * 'Private' function to close the search options
-     * @emits  {search:blur}
-     * @returns {void}
+     * @fires  {search:blur}
+     * @return {void}
      */
     closeSearchOptions() {
-      this.open = false
-      this.$emit('search:blur')
+      this.open = false;
+      this.$emit("search:blur");
     },
 
     /**
@@ -1338,13 +1360,13 @@ export default {
         this.selectedValue.length &&
         this.clearable
       ) {
-        let value = null
+        let value = null;
         if (this.multiple) {
           value = [
             ...this.selectedValue.slice(0, this.selectedValue.length - 1),
-          ]
+          ];
         }
-        this.updateValue(value)
+        this.updateValue(value);
       }
     },
 
@@ -1357,22 +1379,22 @@ export default {
      */
     optionExists(option) {
       return this.optionList.some((_option) =>
-        this.optionComparator(_option, option)
-      )
+        this.optionComparator(_option, option),
+      );
     },
 
     /**
      * Determine the `aria-selected` value
      * of an option
      *
-     * @param  {Object|String} option
+     * @param  {object | string} option
      * @return {null|string}
      */
     optionAriaSelected(option) {
       if (!this.selectable(option)) {
-        return null
+        return null;
       }
-      return String(this.isOptionSelected(option))
+      return String(this.isOptionSelected(option));
     },
 
     /**
@@ -1382,7 +1404,7 @@ export default {
      * @return {*}
      */
     normalizeOptionForSlot(option) {
-      return typeof option === 'object' ? option : { [this.label]: option }
+      return typeof option === "object" ? option : { [this.label]: option };
     },
 
     /**
@@ -1393,7 +1415,7 @@ export default {
      * @return {void}
      */
     pushTag(option) {
-      this.pushedTags.push(option)
+      this.pushedTags.push(option);
     },
 
     /**
@@ -1403,43 +1425,42 @@ export default {
      */
     onEscape() {
       if (!this.search.length) {
-        this.open = false
+        this.open = false;
       } else {
-        this.search = ''
+        this.search = "";
       }
     },
 
     /**
      * Close the dropdown on blur.
-     * @emits  {search:blur}
+     * @fires  {search:blur}
      * @return {void}
      */
     onSearchBlur() {
       if (this.mousedown && !this.searching) {
-        this.mousedown = false
+        this.mousedown = false;
       } else {
-        const { clearSearchOnSelect, multiple } = this
+        const { clearSearchOnSelect, multiple } = this;
         if (this.clearSearchOnBlur({ clearSearchOnSelect, multiple })) {
-          this.search = ''
+          this.search = "";
         }
-        this.closeSearchOptions()
-        return
+        this.closeSearchOptions();
+        return;
       }
       // Fixed bug where no-options message could not be closed
       if (this.search.length === 0 && this.options.length === 0) {
-        this.closeSearchOptions()
-        return
+        this.closeSearchOptions();
       }
     },
 
     /**
      * Open the dropdown on focus.
-     * @emits  {search:focus}
+     * @fires  {search:focus}
      * @return {void}
      */
     onSearchFocus() {
-      this.open = true
-      this.$emit('search:focus')
+      this.open = true;
+      this.$emit("search:focus");
     },
 
     /**
@@ -1451,7 +1472,7 @@ export default {
      * @return {void}
      */
     onMousedown() {
-      this.mousedown = true
+      this.mousedown = true;
     },
 
     /**
@@ -1460,21 +1481,21 @@ export default {
      * @return {void}
      */
     onMouseUp() {
-      this.mousedown = false
+      this.mousedown = false;
     },
 
     /**
      * Event-Handler for option mousemove
-     * @param {Object|String} option
-     * @param {Number} index
+     * @param {object | string} option
+     * @param {number} index
      * @return {void}
      */
     onMouseMove(option, index) {
-      this.isKeyboardNavigation = false
+      this.isKeyboardNavigation = false;
       if (!this.selectable(option)) {
-        return
+        return;
       }
-      this.typeAheadPointer = index
+      this.typeAheadPointer = index;
     },
 
     /**
@@ -1484,13 +1505,13 @@ export default {
      */
     onSearchKeyDown(e) {
       const preventAndSelect = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         if (!this.open) {
-          this.open = true
-          return
+          this.open = true;
+          return;
         }
-        return !this.isComposing && this.typeAheadSelect()
-      }
+        return !this.isComposing && this.typeAheadSelect();
+      };
 
       const defaults = {
         //  backspace
@@ -1501,34 +1522,34 @@ export default {
         27: (e) => this.onEscape(),
         //  up.prevent
         38: (e) => {
-          e.preventDefault()
-          this.isKeyboardNavigation = true
+          e.preventDefault();
+          this.isKeyboardNavigation = true;
           if (!this.open) {
-            this.open = true
-            return
+            this.open = true;
+            return;
           }
-          return this.typeAheadUp()
+          return this.typeAheadUp();
         },
         //  down.prevent
         40: (e) => {
-          e.preventDefault()
-          this.isKeyboardNavigation = true
+          e.preventDefault();
+          this.isKeyboardNavigation = true;
           if (!this.open) {
-            this.open = true
-            return
+            this.open = true;
+            return;
           }
-          return this.typeAheadDown()
+          return this.typeAheadDown();
         },
-      }
+      };
 
       this.selectOnKeyCodes.forEach(
-        (keyCode) => (defaults[keyCode] = preventAndSelect)
-      )
+        (keyCode) => (defaults[keyCode] = preventAndSelect),
+      );
 
-      const handlers = this.mapKeydown(defaults, this)
+      const handlers = this.mapKeydown(defaults, this);
 
-      if (typeof handlers[e.keyCode] === 'function') {
-        return handlers[e.keyCode](e)
+      if (typeof handlers[e.keyCode] === "function") {
+        return handlers[e.keyCode](e);
       }
     },
 
@@ -1538,10 +1559,14 @@ export default {
      */
     onSearchKeyPress(e) {
       if (!this.open && e.keyCode === 32) {
-        e.preventDefault()
-        this.open = true
+        e.preventDefault();
+        this.open = true;
       }
     },
   },
-}
+};
 </script>
+
+<style>
+@import "../css/vue-select.css";
+</style>

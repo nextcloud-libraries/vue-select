@@ -2,29 +2,29 @@ export default {
   data() {
     return {
       typeAheadPointer: -1,
-    }
+    };
   },
 
   watch: {
     filteredOptions() {
       if (!this.resetFocusOnOptionsChange) {
-        return
+        return;
       }
       for (let i = 0; i < this.filteredOptions.length; i++) {
         if (this.selectable(this.filteredOptions[i])) {
-          this.typeAheadPointer = i
-          break
+          this.typeAheadPointer = i;
+          break;
         }
       }
     },
     open(open) {
       if (open) {
-        this.typeAheadToLastSelected()
+        this.typeAheadToLastSelected();
       }
     },
     selectedValue() {
       if (this.open) {
-        this.typeAheadToLastSelected()
+        this.typeAheadToLastSelected();
       }
     },
   },
@@ -38,8 +38,8 @@ export default {
     typeAheadUp() {
       for (let i = this.typeAheadPointer - 1; i >= 0; i--) {
         if (this.selectable(this.filteredOptions[i])) {
-          this.typeAheadPointer = i
-          break
+          this.typeAheadPointer = i;
+          break;
         }
       }
     },
@@ -56,8 +56,8 @@ export default {
         i++
       ) {
         if (this.selectable(this.filteredOptions[i])) {
-          this.typeAheadPointer = i
-          break
+          this.typeAheadPointer = i;
+          break;
         }
       }
     },
@@ -68,10 +68,10 @@ export default {
      * @return {void}
      */
     typeAheadSelect() {
-      const typeAheadOption = this.filteredOptions[this.typeAheadPointer]
+      const typeAheadOption = this.filteredOptions[this.typeAheadPointer];
 
       if (typeAheadOption && this.selectable(typeAheadOption)) {
-        this.select(typeAheadOption)
+        this.select(typeAheadOption);
       }
     },
 
@@ -82,13 +82,13 @@ export default {
       const indexOfLastSelected =
         this.selectedValue.length !== 0
           ? this.filteredOptions.indexOf(
-              this.selectedValue[this.selectedValue.length - 1]
+              this.selectedValue[this.selectedValue.length - 1],
             )
-          : -1
+          : -1;
 
       if (indexOfLastSelected !== -1) {
-        this.typeAheadPointer = indexOfLastSelected
+        this.typeAheadPointer = indexOfLastSelected;
       }
     },
   },
-}
+};
