@@ -31,7 +31,7 @@
     "build:preview": "cd docs && npm run build",
     "lint": "eslint",
     "lint:fix": "npm run lint -- --fix",
-    "semantic-release": "semantic-release",
+    "prerelease:format-changelog": "node build/format-changelog.mjs",
     "serve": "vite dev --open dev/dev.html",
     "serve:docs": "cd docs && npm run serve",
     "test": "vitest run",

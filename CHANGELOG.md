@@ -1,13 +1,30 @@
+<!--
+  - SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
 # Changelog
 
+All notable changes to this project will be documented in this file.
+
+## [4.0.0-beta.0](https://github.com/nextcloud-libraries/vue-select/compare/v3.26.0...v4.0.0-beta.0) (2026-03-262)
+### 🚀 Enhancements
+- Migrated to Vue 3 🚀 ([\#25](https://github.com/nextcloud-libraries/vue-select/pull/25))
+
+### Other Changes
+* refactor: migrate to ESLint v9 [\#42](https://github.com/nextcloud-libraries/vue-select/pull/42) \([susnux](https://github.com/susnux)\)
+* ci: use common ci tools from organization [\#41](https://github.com/nextcloud-libraries/vue-select/pull/41) \([susnux](https://github.com/susnux)\)
+* ci: add dependabot [\#43](https://github.com/nextcloud-libraries/vue-select/pull/43) \([susnux](https://github.com/susnux)\)
+* ci: add `node` build workflow [\#59](https://github.com/nextcloud-libraries/vue-select/pull/59) \([skjnldsv](https://github.com/skjnldsv)\)
+* ci: add `dependabot-approve-merge` workflow [\#56](https://github.com/nextcloud-libraries/vue-select/pull/56) \([skjnldsv](https://github.com/skjnldsv)\)
+* Updated dependencies
+
 ## [3.26.0](https://github.com/nextcloud-libraries/vue-select/compare/v3.25.1...v3.26.0) (2025-09-02)
-
-
-### Features
-
+### 🚀 Enhancements
 * omit an option by throwing an event ([4d8f668](https://github.com/nextcloud-libraries/vue-select/commit/4d8f668f37f1248acb4971bb6c92a300560d1052))
 
+### 🐛 Fixed bugs
+* add aria-controls ([#1802](https://github.com/sagalbot/vue-select/pull/1802))
 
-### Bug Fixes
-
-* **1798:** add aria-controls ([#1802](https://github.com/nextcloud-libraries/vue-select/issues/1802)) ([db9e899](https://github.com/nextcloud-libraries/vue-select/commit/db9e8999f809798dc08ccc38176726c8af5e7081))
+## Older releases
+See [the Github Releases page](https://github.com/nextcloud-libraries/vue-select/releases) for older changelog entries.
