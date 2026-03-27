@@ -18,7 +18,7 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
-    "./dist/index.css": "./dist/index.css"
+    "./styles.css": "./dist/index.css"
   },
   "main": "dist/index.js",
   "directories": {
