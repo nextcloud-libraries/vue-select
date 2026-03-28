@@ -1,11 +1,11 @@
 import { createLibConfig } from '@nextcloud/vite-config'
+import { resolve } from 'node:path'
 
 export default createLibConfig(
 	{
-		index: `${import.meta.dirname}/src/index.js`,
+		index: resolve(import.meta.dirname, '/src/index.js'),
 	},
 	{
-		libraryFormats: ['cjs', 'es'],
 		thirdPartyLicense: false,
 		config: {
 			test: {

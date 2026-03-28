@@ -14,13 +14,9 @@
   ],
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    },
+    ".": "./dist/index.mjs",
     "./styles.css": "./dist/index.css"
   },
-  "main": "dist/index.js",
   "directories": {
     "doc": "docs",
     "test": "tests"
