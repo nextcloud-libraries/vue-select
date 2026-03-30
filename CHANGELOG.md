@@ -7,7 +7,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [4.0.0-beta.0](https://github.com/nextcloud-libraries/vue-select/compare/v3.26.0...v4.0.0-beta.0) (2026-03-262)
+## [4.0.0-beta.1](https://github.com/nextcloud-libraries/vue-select/compare/v3.26.0...v4.0.0-beta.1) (2026-03-30)
+
+### Other Changes
+* fix(exports): add CSS file to package.json exports map [\#63](https://github.com/nextcloud-libraries/vue-select/pull/63) \([pringelmann](https://github.com/pringelmann)\)
+* chore: drop common js from bundle [\#65](https://github.com/nextcloud-libraries/vue-select/pull/65) \([susnux](https://github.com/susnux)\)
+
+
+## [4.0.0-beta.0](https://github.com/nextcloud-libraries/vue-select/compare/v3.26.0...v4.0.0-beta.0) (2026-03-26)
 ### 🚀 Enhancements
 - Migrated to Vue 3 🚀 ([\#25](https://github.com/nextcloud-libraries/vue-select/pull/25))
 
