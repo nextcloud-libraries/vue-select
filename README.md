@@ -1,106 +1,73 @@
+<!--
+  - SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: MIT
+-->
+
 # @nextcloud/vue-select
-![Current Release](https://img.shields.io/github/release/nextcloud-deps/vue-select?style=flat-square) ![Release Date](https://img.shields.io/github/release-date/nextcloud-deps/vue-select?style=flat-square) ![Bundle Size](https://flat.badgen.net/bundlephobia/min/@nextcloud/vue-select) ![Monthly Downloads](https://img.shields.io/npm/dm/@nextcloud/vue-select?style=flat-square) ![MIT License](https://img.shields.io/github/license/sagalbot/vue-select.svg?style=flat-square)
 
-> **Everything you wish the HTML `<select>` element could do, wrapped up into a lightweight, zero
-> dependency, extensible Vue component.**
+[![npm last version](https://img.shields.io/npm/v/@nextcloud/vue-select.svg?style=flat-square)](https://www.npmjs.com/package/@nextcloud/vue-select)
+[![REUSE status](https://api.reuse.software/badge/github.com/nextcloud-libraries/vue-select)](https://api.reuse.software/info/github.com/nextcloud-libraries/vue-select)
+[![MIT License](https://img.shields.io/github/license/nextcloud-libraries/vue-select?style=flat-square)](https://github.com/nextcloud-libraries/vue-select/blob/main/LICENSE.md)
 
-Vue Select is a feature rich select/dropdown/typeahead component. It provides a default
-template that fits most use cases for a filterable select dropdown. The component is designed to be as
-lightweight as possible, while maintaining high standards for accessibility,
-developer experience, and customization.
+Lightweight, accessible select/dropdown/typeahead component for Vue 3.
+
+This package was originally forked from [vue-select](https://github.com/sagalbot/vue-select) to implement accessibility improvements and is actively maintained by Nextcloud.
 
 - Tagging
 - Filtering / Searching
-- Vuex Support
 - AJAX Support
 - SSR Support
 - Accessible
-- ~20kb Total / ~5kb CSS / ~15kb JS
 - Select Single/Multiple Options
-- Customizable with slots and SCSS variables
+- Customizable with slots and CSS variables
 - Zero dependencies
-
-## Project status
-
-This package was originally forked from [vue-select](https://github.com/sagalbot/vue-select) to implement required accessibility related improvements.
-And now is kept activly maintained by Nextcloud.
 
 ## Documentation
 
-Complete documentation and examples available at https://vue-select.org.
+For props, slots, and events refer to the upstream [vue-select documentation](https://vue-select.org).
+Note that this fork may diverge — CSS theming uses custom properties instead of SCSS.
 
-- **[API Documentation](https://vue-select.org)**
-- **[Vue 2 CodePen Template](https://codepen.io/pen?template=VwdrdzG)**
-- **[Vue 3 CodePen Template](https://codepen.io/pen?template=NpwrQO)**
+## Compatibility
 
-## Get started
+| Version | Vue  |
+|---------|------|
+| 4.x     | ^3.0 |
+| 3.x     | ^2.6 |
 
-**Vue 3 / Vue Select 4.x-beta**
-
-> Vue 3 support is on the `beta` channel: `vue-select@beta`, and will become the new default when `v4` is released. See [#1579](https://github.com/sagalbot/vue-select/issues/1597) for more details!
-
-Install:
+## Install
 
 ```bash
-yarn add vue-select@beta
-
-# or use npm
-
-npm install vue-select@beta
+npm i @nextcloud/vue-select
 ```
 
-Then, import and register the component:
+## Usage
+
+Import and register the component:
 
 ```js
-# main.ts or main.js
-
-import { createApp } from "vue";
-import App from "./App.vue";
-
-import { VueSelect } from "vue-select";
-
-createApp(App)
-    .component("v-select", VueSelect)
-    .mount("#app");
+import { VueSelect } from '@nextcloud/vue-select'
 ```
 
-The component itself does not include any CSS. You'll need to include it separately in your Component.vue:
+The component does not include CSS by default. Import the styles separately:
+
 ```vue
 <style>
-@import "vue-select/dist/vue-select.css";
+@import "@nextcloud/vue-select/styles.css";
 </style>
 ```
 
-**Vue 2 / Vue Select 3.x**
+All styling is done via CSS custom properties (`--vs-*`), making it easy to theme without a preprocessor.
 
-Install:
+## Contributing
 
-```bash
-yarn add vue-select
+1. Check or create an issue and discuss the change
+2. Fork the repository and create a new branch
+3. Make your changes and add tests where possible
+4. Follow [Conventional Commits](https://www.conventionalcommits.org) for commit messages
+5. Submit a pull request
 
-# or use npm
-
-npm install vue-select
-```
-
-Then, import and register the component:
-
-```js
-import Vue from "vue";
-import vSelect from "vue-select";
-
-Vue.component("v-select", vSelect);
-```
-
-The component itself does not include any CSS. You'll need to include it separately:
-
-```js
-import "vue-select/dist/vue-select.css";
-```
-
-You can also include vue-select directly in the browser. Check out the
-[documentation for loading from CDN.](https://vue-select.org/guide/install.html#in-the-browser).
+Please read the [Code of Conduct](https://nextcloud.com/community/code-of-conduct/).
 
 ## License
 
-[MIT](https://github.com/nextcloud-deps/vue-select/blob/master/LICENSE.md)
+[MIT](https://github.com/nextcloud-libraries/vue-select/blob/main/LICENSE.md)
