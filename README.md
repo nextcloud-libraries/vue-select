@@ -48,15 +48,7 @@ Import and register the component:
 import { VueSelect } from '@nextcloud/vue-select'
 ```
 
-The component does not include CSS by default. Import the styles separately:
-
-```vue
-<style>
-@import "@nextcloud/vue-select/styles.css";
-</style>
-```
-
-All styling is done via CSS custom properties (`--vs-*`), making it easy to theme without a preprocessor.
+CSS is included automatically via the JS import. All styling is done via CSS custom properties (`--vs-*`), making it easy to theme without a preprocessor.
 
 ## Contributing
 

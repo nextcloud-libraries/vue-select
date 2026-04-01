@@ -12,20 +12,15 @@
   "contributors": [
     "Christopher Ng <chrng8@gmail.com>"
   ],
-  "sideEffects": [
-    "*.css"
-  ],
   "type": "module",
   "exports": {
-    ".": "./dist/index.mjs",
-    "./styles.css": "./dist/index.css"
+    ".": {
+      "import": "./dist/index.mjs"
+    }
   },
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "directories": {
-    "doc": "docs",
-    "test": "tests"
-  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "vite --mode production build",
     "build:dev": "vite --mode development build",
@@ -67,7 +62,7 @@
         "maxSize": "55 KB"
       },
       {
-        "path": "./dist/index.css",
+        "path": "./dist/assets/*.css",
         "compression": "none",
         "maxSize": "8 KB"
       }
