@@ -77,7 +77,7 @@
   "devDependencies": {
     "@nextcloud/eslint-config": "^9.0.0-rc.8",
     "@nextcloud/vite-config": "^2.5.2",
-    "@vitest/coverage-v8": "^4.1.1",
+    "@vitest/coverage-v8": "^4.1.2",
     "@vue/test-utils": "^2.4.6",
     "@vue/vue3-jest": "^29.2.6",
     "autoprefixer": "^10.4.27",
