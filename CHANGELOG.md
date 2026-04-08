@@ -1,30 +1,34 @@
 <!--
   - SPDX-FileCopyrightText: 2026 Nextcloud GmbH and Nextcloud contributors
-  - SPDX-License-Identifier: MIT
+  - SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 # Changelog
 
 All notable changes to this project will be documented in this file.
 
-## [4.0.0-beta.1](https://github.com/nextcloud-libraries/vue-select/compare/v3.26.0...v4.0.0-beta.1) (2026-03-30)
+## [4.0.0](https://github.com/nextcloud-libraries/vue-select/compare/v3.26.0...v4.0.0) (2026-04-01)
+
+### ⚠️ Breaking Changes
+* Vue 3 only
+* ESM only (dropped CommonJS bundle)
+* SCSS removed. Use CSS custom properties (`--vs-*`) for theming
+* CSS is now inlined, no separate CSS import needed
 
 ### Other Changes
-* fix(exports): add CSS file to package.json exports map [\#63](https://github.com/nextcloud-libraries/vue-select/pull/63) \([pringelmann](https://github.com/pringelmann)\)
-* chore: drop common js from bundle [\#65](https://github.com/nextcloud-libraries/vue-select/pull/65) \([susnux](https://github.com/susnux)\)
-
-
-## [4.0.0-beta.0](https://github.com/nextcloud-libraries/vue-select/compare/v3.26.0...v4.0.0-beta.0) (2026-03-26)
-### 🚀 Enhancements
-- Migrated to Vue 3 🚀 ([\#25](https://github.com/nextcloud-libraries/vue-select/pull/25))
-
-### Other Changes
-* refactor: migrate to ESLint v9 [\#42](https://github.com/nextcloud-libraries/vue-select/pull/42) \([susnux](https://github.com/susnux)\)
+* chore: migrate to vue 3 [\#25](https://github.com/nextcloud-libraries/vue-select/pull/25) \([raimund-schluessler](https://github.com/raimund-schluessler)\)
 * ci: use common ci tools from organization [\#41](https://github.com/nextcloud-libraries/vue-select/pull/41) \([susnux](https://github.com/susnux)\)
-* ci: add dependabot [\#43](https://github.com/nextcloud-libraries/vue-select/pull/43) \([susnux](https://github.com/susnux)\)
+* refactor: migrate to ESLint v9 [\#42](https://github.com/nextcloud-libraries/vue-select/pull/42) \([susnux](https://github.com/susnux)\)
 * ci: add `node` build workflow [\#59](https://github.com/nextcloud-libraries/vue-select/pull/59) \([skjnldsv](https://github.com/skjnldsv)\)
 * ci: add `dependabot-approve-merge` workflow [\#56](https://github.com/nextcloud-libraries/vue-select/pull/56) \([skjnldsv](https://github.com/skjnldsv)\)
-* Updated dependencies
+* chore: prepare v4.0.0-beta.0 and add common release scripts [\#62](https://github.com/nextcloud-libraries/vue-select/pull/62) \([susnux](https://github.com/susnux)\)
+* fix(exports): add CSS file to package.json exports map [\#63](https://github.com/nextcloud-libraries/vue-select/pull/63) \([pringelmann](https://github.com/pringelmann)\)
+* chore: drop common js from bundle [\#65](https://github.com/nextcloud-libraries/vue-select/pull/65) \([susnux](https://github.com/susnux)\)
+* chore: prepare v4.0.0-beta.1 [\#66](https://github.com/nextcloud-libraries/vue-select/pull/66) \([pringelmann](https://github.com/pringelmann)\)
+* chore: prep 4.0.0 stable release [\#67](https://github.com/nextcloud-libraries/vue-select/pull/67) \([pringelmann](https://github.com/pringelmann)\)
+
+
+*For pre-release changelogs, see [4.0.0-beta.0](https://github.com/nextcloud-libraries/vue-select/releases/tag/v4.0.0-beta.0) and [4.0.0-beta.1](https://github.com/nextcloud-libraries/vue-select/releases/tag/v4.0.0-beta.1).*
 
 ## [3.26.0](https://github.com/nextcloud-libraries/vue-select/compare/v3.25.1...v3.26.0) (2025-09-02)
 ### 🚀 Enhancements
