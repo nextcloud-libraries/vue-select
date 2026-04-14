@@ -55,7 +55,7 @@ describe('Moving the Typeahead Pointer', () => {
 			},
 		})
 
-		Select.get('input').trigger('focus')
+		Select.vm.open = true
 		await nextTick()
 
 		expect(Select.vm.typeAheadPointer).toEqual(2)
@@ -74,7 +74,7 @@ describe('Moving the Typeahead Pointer', () => {
 			},
 		})
 
-		Select.get('input').trigger('focus')
+		Select.vm.open = true
 		await nextTick()
 
 		expect(Select.vm.typeAheadPointer).toEqual(2)
