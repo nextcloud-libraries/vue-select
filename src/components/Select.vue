@@ -60,16 +60,14 @@
 					<component :is="childComponents.Deselect" />
 				</button>
 
-				<!-- tabindex -1 is used to remove it from the tab sequence as tabbing to the input combobox opens the dropdown -->
+				<!-- Decorative: keyboard users reach the combobox input directly, which already exposes the open/close state. -->
 				<button
 					v-if="!noDrop"
 					ref="openIndicatorButton"
 					class="vs__open-indicator-button"
 					type="button"
 					tabindex="-1"
-					:aria-labelledby="`vs-${uid}__listbox`"
-					:aria-controls="`vs-${uid}__listbox`"
-					:aria-expanded="dropdownOpen.toString()"
+					aria-hidden="true"
 					@mousedown="toggleDropdown">
 					<slot name="open-indicator" v-bind="scope.openIndicator">
 						<component
@@ -1494,13 +1492,14 @@ export default {
 		},
 
 		/**
-		 * Open the dropdown on focus.
+		 * Do NOT open the dropdown here: auto-opening on focus violates
+		 * WCAG 3.2.1 (On Focus). Keyboard users open via
+		 * Space/Enter/ArrowDown/ArrowUp; mouse users click.
 		 *
 		 * @fires  {search:focus}
 		 * @return {void}
 		 */
 		onSearchFocus() {
-			this.open = true
 			this.$emit('search:focus')
 		},
 

@@ -7,6 +7,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+### 🐛 Fixed bugs
+* fix(a11y): do not auto-open the dropdown on search input focus (WCAG 3.2.1 *On Focus*). Keyboard users still open via Space/Enter/ArrowDown/ArrowUp; mouse users still open by clicking.
+* fix(a11y): hide the decorative open-indicator button from the accessibility tree (`aria-hidden="true"`, no `aria-labelledby`/`aria-controls`/`aria-expanded`). WCAG 4.1.2 *Name, Role, Value*.
+
+### ⚠️ Behavior changes
+* Focusing the combobox no longer opens the dropdown. Consumers that relied on this side-effect should open the dropdown explicitly (e.g. via `ref.open = true`) or migrate to a keyboard/click gesture.
+* The open-indicator button no longer exposes its listbox state to assistive technology. Any code querying those ARIA attributes on `.vs__open-indicator-button` will need to update.
+
 ## [4.0.0](https://github.com/nextcloud-libraries/vue-select/compare/v3.26.0...v4.0.0) (2026-04-01)
 
 ### ⚠️ Breaking Changes

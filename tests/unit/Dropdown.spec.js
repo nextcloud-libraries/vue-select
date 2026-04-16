@@ -164,16 +164,6 @@ describe('Toggling Dropdown', () => {
 		expect(spy).toHaveBeenCalled()
 	})
 
-	it('will open the dropdown and emit the search:focus event from onSearchFocus', () => {
-		spy = vi.spyOn(VueSelect.methods, 'onSearchFocus')
-		const Select = selectWithProps()
-
-		Select.vm.onSearchFocus()
-
-		expect(Select.vm.open).toEqual(true)
-		expect(spy).toHaveBeenCalled()
-	})
-
 	it('will close the dropdown on escape, if search is empty', () => {
 		const Select = selectWithProps()
 

@@ -82,6 +82,22 @@ describe('Open Indicator', () => {
 		expect(button.attributes('tabindex')).toEqual('-1')
 	})
 
+	it('is hidden from the accessibility tree via aria-hidden', () => {
+		const Select = mountDefault()
+		const button = Select.get({ ref: 'openIndicatorButton' })
+
+		expect(button.attributes('aria-hidden')).toEqual('true')
+	})
+
+	it('exposes no aria-labelledby, aria-controls, or aria-expanded so screen readers ignore it', () => {
+		const Select = mountDefault()
+		const button = Select.get({ ref: 'openIndicatorButton' })
+
+		expect(button.attributes('aria-labelledby')).toBeUndefined()
+		expect(button.attributes('aria-controls')).toBeUndefined()
+		expect(button.attributes('aria-expanded')).toBeUndefined()
+	})
+
 	it('toggle with mouse', async () => {
 		const Select = mountDefault()
 		const button = Select.get({ ref: 'openIndicatorButton' })
@@ -90,6 +106,26 @@ describe('Open Indicator', () => {
 		expect(Select.vm.open).toEqual(true)
 		await button.trigger('mousedown')
 		expect(Select.vm.open).toEqual(false)
+	})
+})
+
+describe('Focus behavior', () => {
+	it('focusing the search input does not auto-open the dropdown (WCAG 3.2.1)', async () => {
+		const Select = mountDefault()
+
+		Select.vm.onSearchFocus()
+		await nextTick()
+
+		expect(Select.vm.open).toEqual(false)
+	})
+
+	it('still emits the search:focus event when the search input is focused', async () => {
+		const Select = mountDefault()
+
+		Select.vm.onSearchFocus()
+		await nextTick()
+
+		expect(Select.emitted('search:focus')).toBeTruthy()
 	})
 })
 
