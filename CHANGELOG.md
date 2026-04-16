@@ -7,7 +7,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## [4.1.0](https://github.com/nextcloud-libraries/vue-select/compare/v4.0.0...v4.1.0) (2026-04-16)
 
 ### 🐛 Fixed bugs
 * fix(a11y): do not auto-open the dropdown on search input focus (WCAG 3.2.1 *On Focus*). Keyboard users still open via Space/Enter/ArrowDown/ArrowUp; mouse users still open by clicking.
