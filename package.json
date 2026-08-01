@@ -39,7 +39,7 @@
     "@nextcloud/vite-config": "^2.5.4",
     "@vitest/coverage-v8": "^4.1.9",
     "@vue/test-utils": "^2.4.11",
-    "autoprefixer": "^10.5.2",
+    "autoprefixer": "^10.5.4",
     "bundlewatch": "^0.4.2",
     "cssnano": "^8.0.2",
     "eslint": "^10.7.0",
