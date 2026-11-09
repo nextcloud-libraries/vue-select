@@ -22,6 +22,28 @@ describe('VS - Selecting Values', () => {
 		}
 	})
 
+	it('ignores a pending option click when disabled before mouseup', async () => {
+		const select = mount(VueSelect, {
+			props: { modelValue: 'Apple', options: ['Apple', 'Orange'] },
+		})
+		const search = select.get('.vs__search')
+		await search.trigger('keydown.enter')
+		const orange = select.findAll('[role="option"]')[1]
+		await orange.trigger('mousedown')
+		await select.setProps({ disabled: true })
+		await search.trigger('blur')
+		await orange.trigger('mouseup')
+		await orange.trigger('click')
+
+		expect(select.emitted('update:modelValue')).toBeUndefined()
+		expect(select.emitted('option:selecting')).toBeUndefined()
+
+		await select.setProps({ disabled: false })
+		await orange.trigger('click')
+		expect(select.emitted('update:modelValue')).toEqual([['Orange']])
+		select.unmount()
+	})
+
 	it('can accept an array with pre-selected values', () => {
 		const Select = shallowMount(VueSelect, {
 			props: defaultProps,
